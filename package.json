@@ -1,1 +1,23 @@
-
+{
+  "name": "projectcatwalk",
+  "version": "1.0.0",
+  "description": "projectcatwalk",
+  "main": "index.js",
+  "scripts": {
+    "test": /*put test script here*/
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trobor/projectCatwalk.git"
+  },
+  "keywords": [
+    "project",
+    "catwalk"
+  ],
+  "author": "Ryan, Tish, Teo, Mark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trobor/projectCatwalk/issues"
+  },
+  "homepage": "https://github.com/trobor/projectCatwalk#readme"
+}
