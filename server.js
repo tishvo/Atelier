@@ -12,6 +12,8 @@ app.get('/', function(req, res) {
 })
 
 
-app.listen(8080, () => {
-  console.log('listening on port 4400');
+let port = 8080
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
 });
