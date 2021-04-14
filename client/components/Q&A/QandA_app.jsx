@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import QandA_app from './components/Q&A/QandA_app.jsx';
 
-class App extends React.Component {
+class QandA_app extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,11 +11,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>HELLO</div>
-        <QandA_app />
+        <div>this is the QandA app</div>
       </div>
     )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+export default QandA_app;
