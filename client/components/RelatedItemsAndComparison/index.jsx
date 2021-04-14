@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
+import RelatedProducts from './subcomponents/RelatedProducts.jsx'
+import YourOutfit from './subcomponents/YourOutfit.jsx'
+
 class RelatedItemsAndComparison extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,10 @@ class RelatedItemsAndComparison extends React.Component {
   render() {
     return (
       <div>
-        <div>Related Items And Comparison View</div>
+        <div>
+          <RelatedProducts />
+          <YourOutfit />
+        </div>
       </div>
     )
   }
