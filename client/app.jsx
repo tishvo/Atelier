@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import QandA_app from './components/Q&A/QandA_app.jsx';
-import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
+import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class App extends React.Component {
         <div>HELLO</div>
         <RelatedItemsAndComparison />
         <QandA_app />
+        <ReviewsAndRatings />
       </div>
     )
   }
