@@ -5,15 +5,15 @@ class ReviewsAndRatings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      apiData:
+
     };
   }
 
   render() {
 
-    componentDidMount() {
-      axios.get()
-    }
+    // componentDidMount() {
+    //   axios.get()
+    // }
 
     return (
       <div> Reviews and Ratings
