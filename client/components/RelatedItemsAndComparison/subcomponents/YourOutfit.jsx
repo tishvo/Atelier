@@ -13,6 +13,7 @@ class YourOutfit extends React.Component {
     return (
       <div>
         <div>Your Outfit Carousel (User generated)</div>
+        <YOCard/>
       </div>
     )
   }

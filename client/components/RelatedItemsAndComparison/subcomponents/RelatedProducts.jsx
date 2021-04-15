@@ -13,6 +13,7 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <div>Related Products Carousel (auto-generated)</div>
+        <RPCard />
       </div>
     )
   }
