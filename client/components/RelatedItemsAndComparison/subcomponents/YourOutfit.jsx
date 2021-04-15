@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import YOCard from './YOCard.jsx'
+
 class YourOutfit extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class YourOutfit extends React.Component {
   render() {
     return (
       <div>
-        <div>Your Outfit Carousel</div>
+        <div>Your Outfit Carousel (User generated)</div>
       </div>
     )
   }
