@@ -13,9 +13,9 @@ class ReviewTile extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=19089', {headers: { 'Authorization': `${API}` }})
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=19090', {headers: { 'Authorization': API }})
     .then ((response) => {
-      console.log(response);
+      console.log('response: ', response);
       this.setState({
         data: response
       })
@@ -26,7 +26,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-
+    console.log(this.state.data);
     return (
       <div>
         <p>This is where the reviews will live</p>
