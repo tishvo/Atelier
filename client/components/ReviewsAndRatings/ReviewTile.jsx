@@ -1,7 +1,7 @@
 import React from 'react';
 import dummyReviewData from './dummyReviewData.js';
 import axios from 'axios';
-import API from './config.js';
+import { API } from './config.js';
 
 class ReviewTile extends React.Component {
   constructor(props) {
