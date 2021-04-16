@@ -1,0 +1,11 @@
+#af-style-thumbnail {
+  width: 100px;
+  height: 100px;
+  border-radius:50%
+}
+
+#af-main-image {
+  width: 30%;
+  height: 30%;
+
+}

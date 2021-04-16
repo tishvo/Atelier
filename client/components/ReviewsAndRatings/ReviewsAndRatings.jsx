@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import ReviewsList from './ReviewsList.jsx';
+
 
 class ReviewsAndRatings extends React.Component {
   constructor(props) {
@@ -17,13 +19,7 @@ class ReviewsAndRatings extends React.Component {
 
     return (
       <div> Reviews and Ratings
-        <form>
-          <select>Make a choice, yo! :
-            <option>Relevant</option>
-            <option>Newest</option>
-            <option>Helpful</option>
-          </select>
-        </form>
+        <ReviewsList />
       </div>
     );
   }
