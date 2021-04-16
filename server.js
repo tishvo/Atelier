@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-<<<<<<< HEAD
-=======
 const axios = require('axios');
->>>>>>> a8182380d15cc2e2eaac73e75418c46e01ccdd50
 require('dotenv').config();
 
 const app = express();
@@ -13,11 +10,6 @@ console.log(process.env.GITHUB_API_KEY);
 app.use(bodyparser.json());
 app.use(express.static(__dirname + '/public'));
 
-<<<<<<< HEAD
-// initial load of the page
-app.get('/', function(req, res) {
-  res.end();
-=======
 //const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe';
 
 
@@ -38,7 +30,6 @@ app.get('/products',  function(req, res) {
       .catch((error) => {
         console.log('error in Overview axios get request, error:', error)
       })
->>>>>>> a8182380d15cc2e2eaac73e75418c46e01ccdd50
 })
 
 
