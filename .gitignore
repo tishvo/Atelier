@@ -1,9 +1,6 @@
 config.js
 node_modules
-<<<<<<< HEAD
 .env
 
 public/bundle.js
-=======
-.env
->>>>>>> a8182380d15cc2e2eaac73e75418c46e01ccdd50
+

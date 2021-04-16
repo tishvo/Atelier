@@ -40,10 +40,7 @@
     "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-=======
     "react-icons": "^4.2.0",
->>>>>>> a8182380d15cc2e2eaac73e75418c46e01ccdd50
     "react-test-renderer": "^17.0.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.6.0"
