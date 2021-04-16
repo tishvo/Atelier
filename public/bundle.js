@@ -381,7 +381,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar dummyReviewData = [{\n  \
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var PAT = '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';\nmodule.exports = PAT;\n\n//# sourceURL=webpack:///./config.js?");
+eval("var PAT = '';\nmodule.exports = PAT;\n\n//# sourceURL=webpack:///./config.js?");
 
 /***/ }),
 
