@@ -370,7 +370,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar dummyReviewData = [{\n  \
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar PAT = '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';\n/* harmony default export */ __webpack_exports__[\"default\"] = (PAT);\n\n//# sourceURL=webpack:///./config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar PAT = '';\n/* harmony default export */ __webpack_exports__[\"default\"] = (PAT);\n\n//# sourceURL=webpack:///./config.js?");
 
 /***/ }),
 
