@@ -39,6 +39,7 @@ class Overview extends React.Component {
       .then((response) => {
         console.log('got our styles array for current product! response: ', response.data.results)
         console.log('first item in styles', response.data.results[0])
+
         this.setState({
           stylesArray: response.data.results,
           imageGalleryDisplay: response.data.results[0].photos[0]['url']

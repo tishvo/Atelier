@@ -4,6 +4,13 @@
   border-radius:50%
 }
 
+#af-style-selector {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(4, 1fr);
+
+}
+
 #af-main-image {
   width: 30%;
   height: 30%;

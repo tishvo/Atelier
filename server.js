@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+require('dotenv').config();
 
 const app = express();
+
+console.log(process.env.GITHUB_API_KEY);
 
 app.use(bodyparser.json());
 app.use(express.static(__dirname + '/public'));
