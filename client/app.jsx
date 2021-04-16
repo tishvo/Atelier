@@ -18,9 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this is PAT,', PAT)
     let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products';
-
     axios.get(url, {
       headers: {
         'Authorization': `${PAT}`
@@ -31,7 +29,7 @@ class App extends React.Component {
         console.log('first item', response.data[0].description)
         this.setState({
           data: response.data,
-          currentItem: response.data[0]
+          currentItem: response.data[3]
         })
 
       })
@@ -41,25 +39,20 @@ class App extends React.Component {
   }
 
   render() {
-
+     console.log('this is the data', this.state.data)
     if (this.state.data) {
       return (
         <div>
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
+          <RelatedItemsAndComparison />
+          <QandA_app />
+          <ReviewsAndRatings />
         </div>
       )
     } else {
       return null;
     }
-    return (
-      <div>
-        <div>HELLO</div>
-        <RelatedItemsAndComparison />
-        <QandA_app />
-        <ReviewsAndRatings />
-      </div>
-    )
   }
 
 }
