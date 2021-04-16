@@ -18,15 +18,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products';
-    axios.get(url, {
-      headers: {
-        'Authorization': `${PAT}`
-      }
-    })
+    axios.get('/products')
       .then((response) => {
         console.log('got our data! In our then statement. response: ', response)
         console.log('first item', response.data[0].description)
+
         this.setState({
           data: response.data,
           currentItem: response.data[3]

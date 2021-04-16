@@ -1,9 +1,12 @@
 import React from 'react';
+import StarRating from './StarRating.jsx';
 
 const ReviewTile = (props) => {
   return (
     <div>
-      this is a barebones review tile
+      <StarRating />
     </div>
   )
 }
+
+export default ReviewTile;
