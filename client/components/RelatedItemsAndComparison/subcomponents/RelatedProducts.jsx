@@ -10,7 +10,8 @@ class RelatedProducts extends React.Component {
     super(props);
 
     this.state = {
-      currentImageIndex: 0
+      currentImageIndex: 0,
+      relatedProducts: []
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -20,8 +21,33 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props.data inside of Related Products: ', this.props.data)
-    console.log('props.currentItem inside of Related Products: ', this.props.currentItem)
+    // console.log('data found in RelatedProducts:', this.props.data)
+    // console.log('currentItem in RelatedProducts', this.props.currentItem)
+    // console.log('currentItem ID in RelatedProducts', this.props.currentItem['id'])
+    var itemId = this.props.currentItem['id'];
+    // url where current item's related products are located
+    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${itemId}/related`;
+
+    // get those items
+    axios.get(url, {
+      headers: {
+        'Authorization': `${PAT}`
+      }
+    })
+      .then(res => {
+        console.log('related items array in RelatedProducts: ', res.data)
+        console.log('first item in RelatedProducts array: ', res.data[0])
+        this.setState({
+          relatedProducts: res.data
+        }, () => {
+          // console.log(this.state);
+
+        })
+      })
+      .catch(err => {
+        console.log('/RELATED GET ERROR: ', err)
+      })
+
   }
   // Arrow Functionality
   previousSlide () {
@@ -60,8 +86,8 @@ class RelatedProducts extends React.Component {
           glyph="&#9664;" />
 
         {console.log('data found in RP Carousel Component', this.props.data)}
-        {this.props.data.map( item =>
-          <RPCard itemData={item} /> )}
+        {this.state.relatedProducts.map( relatedItem =>
+          <RPCard itemId={relatedItem} /> )}
 
         <Arrow
           direction="right"
