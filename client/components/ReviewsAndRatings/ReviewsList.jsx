@@ -3,8 +3,9 @@ import dummyReviewData from './dummyReviewData.js';
 import axios from 'axios';
 //import { API } from './config.js';
 import SortingOptions from './SortingOptions.jsx';
+import ReviewTile from './ReviewTile.jsx';
 
-class ReviewTile extends React.Component {
+class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,24 +18,14 @@ class ReviewTile extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=19090', {headers: { 'Authorization': API }})
-  //   .then ((response) => {
-  //     console.log('response: ', response);
-  //     this.setState({
-  //       data: response
-  //     })
-  //   })
-  //   .catch((error) => {
-  //     console.log('this is the error: ', error)
-  //   })
-  // }
+
 
   render() {
     console.log(this.state.data);
     return (
       <div>
         <SortingOptions />
+        <ReviewTile />
         <form>
           <button>
             More Reviews
@@ -48,4 +39,4 @@ class ReviewTile extends React.Component {
   }
 };
 
-export default ReviewTile;
+export default ReviewList;
