@@ -34,7 +34,7 @@ class App extends React.Component {
 
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in app.jsx axios get request, error:', error)
       })
   }
 

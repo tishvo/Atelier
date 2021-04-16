@@ -25,9 +25,9 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('data found in Overview.jsx:', this.props.data)
-    console.log('currentItem found in Overview.jsx:', this.props.currentItem)
-    console.log('currentItem ID found in Overview.jsx:', this.props.currentItem['id'])
+    // console.log('data found in Overview.jsx:', this.props.data)
+    // console.log('currentItem found in Overview.jsx:', this.props.currentItem)
+    // console.log('currentItem ID found in Overview.jsx:', this.props.currentItem['id'])
     var itemId = this.props.currentItem['id'];
     let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${itemId}/styles`;
 
