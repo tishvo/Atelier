@@ -3,9 +3,7 @@ import axios from 'axios';
 
 import RPCard from './RPCard.jsx';
 import Arrow from './Arrow.jsx';
-
-const imgUrl = 'https://play-lh.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s180-rw';
-const imgUrls = [];
+import PAT from '../../../../config.js'
 
 class RelatedProducts extends React.Component {
   constructor(props) {
@@ -14,10 +12,18 @@ class RelatedProducts extends React.Component {
     this.state = {
       currentImageIndex: 0
     };
+
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
+
   }
 
+  componentDidMount() {
+    console.log('props.data inside of Related Products: ', this.props.data)
+    console.log('props.currentItem inside of Related Products: ', this.props.currentItem)
+  }
+  // Arrow Functionality
   previousSlide () {
     console.log('clicked previous slide');
     const lastIndex = imgUrls.length - 1;
@@ -29,7 +35,7 @@ class RelatedProducts extends React.Component {
       currentImageIndex: index
     });
   }
-
+  // Arrow Functionality
   nextSlide () {
     console.log('clicked next slide');
     const lastIndex = imgUrls.length - 1;
@@ -53,7 +59,9 @@ class RelatedProducts extends React.Component {
           clickFunction={ this.previousSlide }
           glyph="&#9664;" />
 
-        <RPCard url={ imgUrl } />
+        {console.log('data found in RP Carousel Component', this.props.data)}
+        {this.props.data.map( item =>
+          <RPCard itemData={item} /> )}
 
         <Arrow
           direction="right"

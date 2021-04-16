@@ -17,7 +17,7 @@ class RelatedItemsAndComparison extends React.Component {
     return (
       <div>
         <div>
-          <RelatedProducts />
+          <RelatedProducts data={this.props.data} currentItem={this.props.currentItem}/>
           <YourOutfit />
         </div>
       </div>

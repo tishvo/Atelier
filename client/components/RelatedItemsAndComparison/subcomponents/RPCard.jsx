@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 
-
 class RPCard extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +12,6 @@ class RPCard extends React.Component {
       backgroundPosition: 'center'
     };
   }
-
-
 
   render() {
     return (

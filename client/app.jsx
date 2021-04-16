@@ -45,7 +45,7 @@ class App extends React.Component {
         <div>
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
-          <RelatedItemsAndComparison />
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} />
         </div>
       )
     } else {
