@@ -6,7 +6,7 @@ class ImageGallery extends React.Component {
   }
 
   render () {
-    return (<div>pretty pictures go here</div>)
+    return (<img id="af-main-image" src={this.props.images} />)
   }
 }
 

@@ -7,7 +7,12 @@ class StyleSelector extends React.Component {
   }
 
   render () {
-    return (<div> Select a style
+    return (<div>
+      <span>
+      {this.props.styles.map((style, index) =>
+      <StyleSelectorOption photoId={style.style_id} image={style.photos[0].thumbnail_url} index={index} key={index} click={this.props.click}/>
+      )}
+      </span>
 
     </div>)
   }
