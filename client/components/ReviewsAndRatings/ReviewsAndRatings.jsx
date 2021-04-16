@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
 
 
+
+
 class ReviewsAndRatings extends React.Component {
   constructor(props) {
     super(props);
@@ -13,9 +15,7 @@ class ReviewsAndRatings extends React.Component {
 
   render() {
 
-    // componentDidMount() {
-    //   axios.get()
-    // }
+
 
     return (
       <div> Reviews and Ratings
