@@ -1,2 +1,6 @@
 node_modules
+<<<<<<< HEAD
+client/components/ReviewsAndRatings/config.js
+=======
 config.js
+>>>>>>> 8be606d159d15dc649ec8c503bdf15b196ecab5a
