@@ -9,7 +9,7 @@ class RPCard extends React.Component {
 
     this.styles = {
       backgroundImage: `url(${this.props.url})`,
-      backgroundSize: 'cover',
+      backgroundSize: '50%',
       backgroundPosition: 'center'
     };
   }
@@ -20,7 +20,13 @@ class RPCard extends React.Component {
     return (
       <div
         style={this.styles}>
-        { console.log(this.styles) }
+        Preview Image
+        Product Category
+        Product Name
+        Price
+        <div>
+          star rating
+        </div>
       </div>
     )
   }
