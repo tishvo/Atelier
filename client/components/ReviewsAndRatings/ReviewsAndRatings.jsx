@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ReviewList from './ReviewTile.jsx';
+import ReviewsList from './ReviewsList.jsx';
 
 
 class ReviewsAndRatings extends React.Component {
@@ -19,14 +19,7 @@ class ReviewsAndRatings extends React.Component {
 
     return (
       <div> Reviews and Ratings
-        <ReviewList />
-        <form>
-          <select>Make a choice, yo! :
-            <option>Relevant</option>
-            <option>Newest</option>
-            <option>Helpful</option>
-          </select>
-        </form>
+        <ReviewsList />
       </div>
     );
   }
