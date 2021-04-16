@@ -9,7 +9,7 @@ console.log(process.env.GITHUB_API_KEY);
 app.use(bodyparser.json());
 app.use(express.static(__dirname + '/public'));
 
-
+// initial load of the page
 app.get('/', function(req, res) {
   res.end();
 })
