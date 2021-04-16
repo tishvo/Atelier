@@ -6,7 +6,12 @@ class StyleSelectorOption extends React.Component {
   }
 
   render () {
-    return (<div> !O!</div>)
+    return (
+      <img id='af-style-thumbnail' src={this.props.image} onClick={ () => {
+        return this.props.click(this.props.index)
+      }
+      }></img>
+    )
   }
 }
 

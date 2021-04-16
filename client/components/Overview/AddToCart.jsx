@@ -6,7 +6,7 @@ class AddToCard extends React.Component {
   }
 
   render () {
-    return (<div> !O!</div>)
+    return (<div> Add to Cart</div>)
   }
 }
 
