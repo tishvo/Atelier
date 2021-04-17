@@ -6,14 +6,12 @@ class StyleSelector extends React.Component {
     super(props)
   }
 
-  render () {
-    return (<div>
-      <span>
+  render() {
+    return (<div id="af-style-selector">
       {this.props.styles.map((style, index) =>
-      <StyleSelectorOption photoId={style.style_id} image={style.photos[0].thumbnail_url} index={index} key={index} click={this.props.click}/>
-      )}
-      </span>
+        <StyleSelectorOption photoId={style.style_id} image={style.photos[0].thumbnail_url} index={index} key={index} click={this.props.click} />
 
+      )}
     </div>)
   }
 }
