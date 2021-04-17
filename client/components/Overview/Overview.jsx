@@ -15,45 +15,53 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       stylesArray: null,
-      imageGalleryDisplay: null
+      images: null,
+      currentImageIndex: null
     }
 
     this.changeDisplayImage = this.changeDisplayImage.bind(this);
+    this.nextImage = this.nextImage.bind(this);
+    this.prevImage = this.prevImage.bind(this);
   }
 
   componentDidMount() {
-
     var itemId = this.props.currentItem['id'];
-    console.log('itemId:', itemId)
-
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-
-        console.log('first item in styles', response.data.results[0])
-
         this.setState({
           stylesArray: response.data.results,
-          imageGalleryDisplay: response.data.results[0].photos
+          images: response.data.results[0].photos,
+          currentImage: response.data.results[0].photos[0]['url'],
+          currentImageIndex: 0
         })
-
-
       })
       .catch((error) => {
         console.log('error in OVERVIEW axios get request, error:', error)
       })
-
   }
 
   changeDisplayImage(index) {
-    //console.log('this is stylesArray: ', this)
     var styles = this.state.stylesArray
     this.setState({
-      imageGalleryDisplay: styles[index].photos
+      images: styles[index].photos,
+      currentImageIndex: 0
     })
+  }
 
+  nextImage(index) {
+    this.setState({
+      currentImage: this.state.images[(index + 1)]['url'],
+      currentImageIndex: (index + 1)
+    })
+  }
+
+  prevImage(index) {
+    this.setState({
+      currentImage: this.state.images[(index - 1)]['url'],
+      currentImageIndex: (index - 1)
+    })
   }
 
 
@@ -65,7 +73,7 @@ class Overview extends React.Component {
         <div>
           <div id="front-page">
             <div id="image-gallery">
-              <ImageGallery images={this.state.imageGalleryDisplay} />
+              <ImageGallery images={this.state.images} currentImage={this.state.currentImage} currentIndex={this.state.currentImageIndex} next={this.nextImage} prev={this.prevImage}/>
             </div>
             <div id="right-side">
               <ProductInfoHead name={this.props.currentItem.name} /><br />

@@ -20,14 +20,10 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
-        console.log('got our data! In our then statement. response: ', response)
-        console.log('first item', response.data[0].description)
-
         this.setState({
           data: response.data,
-          currentItem: response.data[0]
+          currentItem: response.data[2]
         })
-
       })
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
@@ -35,7 +31,6 @@ class App extends React.Component {
   }
 
   render() {
-     console.log('this is the data', this.state.data)
     if (this.state.data) {
       return (
         <div>
@@ -50,7 +45,6 @@ class App extends React.Component {
       return null;
     }
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
