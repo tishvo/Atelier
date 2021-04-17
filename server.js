@@ -5,8 +5,6 @@ require('dotenv').config();
 
 const app = express();
 
-console.log(process.env.GITHUB_API_KEY);
-
 app.use(bodyparser.json());
 app.use(express.static(__dirname + '/public'));
 
@@ -31,6 +29,13 @@ app.get('/products',  function(req, res) {
         console.log('error in Overview axios get request, error:', error)
       })
 })
+
+app.get('/products/:product_id/related', function(req, res) {
+
+})
+
+
+
 
 
 let port = 8080
