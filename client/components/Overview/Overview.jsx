@@ -36,7 +36,7 @@ class Overview extends React.Component {
 
         this.setState({
           stylesArray: response.data.results,
-          imageGalleryDisplay: response.data.results[0].photos[0]['url']
+          imageGalleryDisplay: response.data.results[0].photos
         })
 
 
@@ -51,7 +51,7 @@ class Overview extends React.Component {
     //console.log('this is stylesArray: ', this)
     var styles = this.state.stylesArray
     this.setState({
-      imageGalleryDisplay: styles[index].photos[0]['url']
+      imageGalleryDisplay: styles[index].photos
     })
 
   }

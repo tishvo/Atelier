@@ -22,11 +22,10 @@ app.get('/products',  function(req, res) {
     })
       .then((response) => {
         console.log('got our data! In our then statement. response: ', response.data)
-        //console.log('first item', response.data[0].description)
         res.status(202).send(response.data);
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in initial /products get request, error:')
       })
 })
 
@@ -39,14 +38,10 @@ app.get('/products/:productId/styles',  function(req, res) {
       }
     })
       .then((response) => {
-        console.log('got data in /styles ', response.data)
-        //console.log('first item', response.data[0].description)
-
         res.status(202).send(response.data);
-
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in /products/:productId/styles axios get request, error:')
       })
 })
 
