@@ -11,17 +11,8 @@ module.exports = {
         test: /.jsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader"
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: 'style-loader',
-            options: { injectType: 'singletonStyleTag' },
-          },
-          'css-loader',
-        ],
       }
+
     ]
   }
 }
