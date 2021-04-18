@@ -1,14 +1,10 @@
 import React from 'react';
-
+import StyleSelector from './StyleSelector.jsx'
 
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props)
-
   }
-
-
-
 
   render() {
 

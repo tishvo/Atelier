@@ -9,8 +9,6 @@ import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
 import PAT from '../../../config.js';
 
-// RANDOM FASHION PHOTO GENERATOR: https://source.unsplash.com/1600x900/?fashion
-
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -30,11 +28,15 @@ class Overview extends React.Component {
     var itemId = this.props.currentItem['id'];
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
+        console.log('this is styles data for current product: ', response.data.results)
         this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,
           currentImage: response.data.results[0].photos[0]['url'],
-          currentImageIndex: 0
+          currentImageIndex: 0,
+          styleName: response.data.results[0].name,
+          slogan: response.data.results[0].slogan
+
         })
       })
       .catch((error) => {
@@ -43,10 +45,11 @@ class Overview extends React.Component {
   }
 
   changeDisplayImage(index) {
-    var styles = this.state.stylesArray
+    var styles = this.state.stylesArray;
     this.setState({
       images: styles[index].photos,
-      currentImageIndex: 0
+      // currentImageIndex: 0,
+      styleName: styles[index].name
     })
   }
 
@@ -64,31 +67,31 @@ class Overview extends React.Component {
     })
   }
 
-
   render() {
 
     if (this.state.stylesArray) {
 
       return (
-        <div>
-          <div id="front-page">
-            <div id="image-gallery">
-              <ImageGallery images={this.state.images} currentImage={this.state.currentImage} currentIndex={this.state.currentImageIndex} next={this.nextImage} prev={this.prevImage}/>
-            </div>
-            <div id="right-side">
-              <ProductInfoHead name={this.props.currentItem.name} /><br />
+        <div id="af-overview-container">
+
+          <div id="af-landing-box">
+            <ImageGallery images={this.state.images} currentImage={this.state.currentImage} currentIndex={this.state.currentImageIndex} next={this.nextImage} prev={this.prevImage} />
+
+            <div id="af-right-side">
+              <ProductInfoHead name={this.props.currentItem.name} styleName={this.state.styleName} slogan={this.state.slogan}/><br />
               <StyleSelector styles={this.state.stylesArray} click={this.changeDisplayImage} /><br />
               <AddToCart /><br />
               <ProductInfoShare />
             </div>
-          </div>
-          <span id="product-description"><ProductInfoDescription description={this.props.currentItem.description} /></span>
+
+          </div><br />
+
+          <span id="af-product-description"><ProductInfoDescription description={this.props.currentItem.description} /></span>
 
         </div>)
     } else {
-      return null
+      return null;
     }
-
   }
 }
 

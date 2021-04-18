@@ -21,7 +21,6 @@ app.get('/products',  function(req, res) {
       }
     })
       .then((response) => {
-        console.log('got our data! In our then statement. response: ', response.data)
         res.status(202).send(response.data);
       })
       .catch((error) => {

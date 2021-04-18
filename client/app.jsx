@@ -20,9 +20,10 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
+        console.log('this is initial product data: ', response.data)
         this.setState({
           data: response.data,
-          currentItem: response.data[2]
+          currentItem: response.data[0]
         })
       })
       .catch((error) => {
