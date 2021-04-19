@@ -35,7 +35,7 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('gt our reviews data: ', response);
+
             this.setState({
               numberOfReviews: response.data.results.length
             });
@@ -43,24 +43,19 @@ class App extends React.Component {
           .catch((error) => {
             console.log('error getting our response from styles get: ', error)
           })
-        //console.log('after reviews get request');
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('check from inside meta reveiew data');
-            console.log('response ratings', response.data.ratings);
 
             var rateObj = response.data.ratings;
             var result = 0;
             var numRating = 0;
-            console.log('result: ', result);
-            console.log('rateObj: ', this.state.ratingObj);
+
             for (var key in rateObj) {
-              console.log('numKey');
+
               result = result + Number(key)*Number(rateObj[key]);
               numRating = numRating + Number(rateObj[key]);
             }
-            console.log('result: ', result);
-            console.log('numRating: ', numRating);
+
             var currRating = result/numRating;
 
             this.setState({
@@ -77,25 +72,21 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
-    // get the reviews by id
-    //console.log('this is a check of itemid: ', this.state.currentItemId)
-
-
 
   }
 
 
 
   render() {
-    //  console.log('this is the data', this.state.data)
-    if (this.state.data) {
+
+    if (this.state.averageStars) {
       return (
         <div>
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
           <RelatedItemsAndComparison />
           <QandA_app currentItem={this.state.currentItem}/>
-          <ReviewsAndRatings />
+          <ReviewsAndRatings stars={this.state.averageStars} item={this.state.currentItemId}/>
         </div>
       )
     } else {
