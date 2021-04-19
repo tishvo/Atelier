@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import RPCard from './RPCard.jsx';
 import Arrow from './Arrow.jsx';
-import PAT from '../../../../config.js'
 
 class RelatedProducts extends React.Component {
   constructor(props) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import PAT from '../../../../config.js';
 
 class RPCard extends React.Component {
   constructor(props) {
