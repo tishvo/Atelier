@@ -35,9 +35,10 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-
+            console.log('reviews response data: ', response.data.results);
             this.setState({
-              numberOfReviews: response.data.results.length
+              numberOfReviews: response.data.results.length,
+              arrOfReviews: response.data.results
             });
           })
           .catch((error) => {
@@ -86,7 +87,7 @@ class App extends React.Component {
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
           <RelatedItemsAndComparison />
           <QandA_app currentItem={this.state.currentItem}/>
-          <ReviewsAndRatings stars={this.state.averageStars} item={this.state.currentItemId}/>
+          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} arrOfReveiws={this.state.arrOfReviews}/>
         </div>
       )
     } else {
