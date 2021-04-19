@@ -9,15 +9,15 @@ class ReviewsAndRatings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stars: this.props.stars
+
     };
   }
 
   render() {
-    console.log('rnr state check: stars: ', this.state.stars);
+
     return (
-      <div> Reviews and Ratings
-        <ReviewsList />
+      <div>
+        <ReviewsList stars={this.props.stars} itemId={this.props.itemId} reviewData={this.props.reviewData} numReviews={this.props.numReviews}/>
       </div>
     );
   }

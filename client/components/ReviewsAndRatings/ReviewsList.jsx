@@ -24,8 +24,8 @@ class ReviewList extends React.Component {
     //console.log(this.state.data);
     return (
       <div>
-        <SortingOptions />
-        <ReviewTile />
+        <SortingOptions numReviews={this.props.numReviews}/>
+        <ReviewTile stars={this.props.stars} itemId={this.props.itemId} reviewData={this.props.reviewData} />
         <form>
           <button>
             More Reviews
