@@ -19,6 +19,32 @@ class ReviewList extends React.Component {
 
     };
     this.handleSortingChange = this.handleSortingChange.bind(this);
+    this.currReviewResize = this.currReviewResize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    var fill = this.props.reviewData.slice(0, this.state.visibleReviewVal);
+    this.setState({
+      currReviews: fill
+    });
+  }
+
+  //make the current array of reviews contain the reviews to be shown
+  currReviewResize() {
+    console.log('this');
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    console.log('first: ', this.state.visibleReviewVal);
+    this.setState({
+      visibleReviewVal: this.state.visibleReviewVal += 2,
+      currReviews: this.props.reviewData.slice(0, this.state.visibleReviewVal)
+    })
+    console.log('second: ', this.state.visibleReviewVal);
+
   }
 
   //function that will be passed down to SortingOptions that will change sorting order of the currReviews
@@ -29,11 +55,17 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    console.log('currentOrder: ', this.state.currentOrder);
+
+    console.log('ReviewList reviewData: ', this.props.reviewData);
+    console.log('ReviewList currReviews: ', this.state.currReviews);
+    //console.log('cutting down reviewlist: ', this.props.reviewData.slice(0, 2));
+
+
+
     return (
       <div>
         <div>
-
+          {/* Sorting Dropdown Menu */}
           {this.props.numReviews} reviews, sorted by
           <select onChange={this.handleSortingChange}>
             <option value='relevant'>Relevant</option>
@@ -42,13 +74,13 @@ class ReviewList extends React.Component {
           </select>
 
         </div>
-        {this.props.reviewData.map((item, index) => {
+        {this.state.currReviews.map((item, index) => {
           return (
             <ReviewTile key={index} stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
           )
         })}
         <form>
-          <button>
+          <button onClick={this.handleClick}>
             More Reviews
           </button>
           <button>
