@@ -35,10 +35,10 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-            console.log('reviews response data: ', response.data.results);
+            //console.log('reviews response data: ', response.data.results);
             this.setState({
               numberOfReviews: response.data.results.length,
-              arrOfReviews: response.data.results
+              reviewData: response.data.results
             });
           })
           .catch((error) => {
@@ -62,7 +62,7 @@ class App extends React.Component {
             this.setState({
               averageStars: currRating
             })
-            console.log('state check of averageStars: ', this.state.averageStars)
+            //console.log('state check of averageStars: ', this.state.averageStars)
           })
 
           .catch((error) => {
@@ -87,7 +87,7 @@ class App extends React.Component {
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
           <RelatedItemsAndComparison />
           <QandA_app currentItem={this.state.currentItem}/>
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} arrOfReveiws={this.state.arrOfReviews}/>
+          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews}/>
         </div>
       )
     } else {
