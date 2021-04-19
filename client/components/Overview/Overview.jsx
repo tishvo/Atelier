@@ -25,20 +25,15 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('data found in Overview.jsx:', this.props.data)
-    console.log('currentItem found in Overview.jsx:', this.props.currentItem)
-    console.log('currentItem ID found in Overview.jsx:', this.props.currentItem['id'])
-    var itemId = this.props.currentItem['id'];
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${itemId}/styles`;
 
-    axios.get(url, {
-      headers: {
-        'Authorization': `${PAT}`
-      }
-    })
+    var itemId = this.props.currentItem['id'];
+    console.log('itemId:', itemId)
+
+    axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('got our styles array for current product! response: ', response.data.results)
+
         console.log('first item in styles', response.data.results[0])
+
         this.setState({
           stylesArray: response.data.results,
           imageGalleryDisplay: response.data.results[0].photos[0]['url']
@@ -47,7 +42,7 @@ class Overview extends React.Component {
 
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in OVERVIEW axios get request, error:', error)
       })
 
   }

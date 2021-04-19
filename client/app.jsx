@@ -24,12 +24,12 @@ class App extends React.Component {
 
         this.setState({
           data: response.data,
-          currentItem: response.data[3]
+          currentItem: response.data[0]
         })
 
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in app.jsx axios get request, error:', error)
       })
   }
 
