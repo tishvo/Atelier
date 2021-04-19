@@ -5,7 +5,7 @@ const ReviewTile = (props) => {
   return (
     <div>
       <StarRating />
-      <p>Review Body: {props.reviewData[0].body}</p>
+      <p>Review Body:{props.reviewData[0].body}</p>
     </div>
   )
 }
