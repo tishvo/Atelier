@@ -9,14 +9,12 @@ class ReviewsAndRatings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      stars: this.props.stars
     };
   }
 
   render() {
-
-
-
+    console.log('rnr state check: stars: ', this.state.stars);
     return (
       <div> Reviews and Ratings
         <ReviewsList />
