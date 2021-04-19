@@ -7,7 +7,7 @@ import ProductInfoShare from './ProductInfoShare.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
-import PAT from '../../../config.js';
+// import PAT from '../../../config.js';
 
 // RANDOM FASHION PHOTO GENERATOR: https://source.unsplash.com/1600x900/?fashion
 
