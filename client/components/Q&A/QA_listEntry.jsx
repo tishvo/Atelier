@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 
 class QA_listEntry extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class QA_listEntry extends React.Component {
       <div>
       <p>Q: {this.props.item.question_body}</p>
       <div>{this.state.answers.map(answer =>
-        <div><p>A: {answer.body}</p> by {answer.answerer_name}, {answer.date}</div>
+        <div><p>A: {answer.body}</p> by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}</div>
         )}</div>
       </div>
     )
