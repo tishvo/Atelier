@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+
 const axios = require('axios');
 require('dotenv').config();
 
@@ -10,7 +11,6 @@ app.use(express.static(__dirname + '/public'));
 
 //const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe';
 
-
 app.get('/products',  function(req, res) {
   let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products';
     axios.get(url, {
@@ -20,6 +20,24 @@ app.get('/products',  function(req, res) {
     })
       .then((response) => {
         console.log('got our data! In our then statement. response: ', response.data)
+        //console.log('first item', response.data[0].description)
+        res.status(202).send(response.data);
+      })
+      .catch((error) => {
+        console.log('error in Overview axios get request, error:', error)
+      })
+})
+
+app.get('/products/:productId/styles',  function(req, res) {
+    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.productId}/styles`
+
+    axios.get(url, {
+      headers: {
+        'Authorization': process.env.GITHUB_API_KEY
+      }
+    })
+      .then((response) => {
+        console.log('got data in /styles ', response.data)
         //console.log('first item', response.data[0].description)
 
         res.status(202).send(response.data);
