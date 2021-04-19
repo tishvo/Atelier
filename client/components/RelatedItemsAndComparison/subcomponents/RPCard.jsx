@@ -16,12 +16,14 @@ class RPCard extends React.Component {
       'borderStyle': 'solid',
       'width': '30%'
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
   }
+
   componentDidMount() {
-    console.log('RPCARD IS BEING RENDERED');
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
-      // console.log('got data for RP Card: ', res.data)
+
       this.setState({
         itemData: res.data
       })
@@ -33,8 +35,6 @@ class RPCard extends React.Component {
     axios.get(`/products/${this.props.itemId}/styles`)
     .then(res => {
 
-      console.log('RPCARD first item in styles', res.data.results[0])
-
       this.setState({
         allStyles: res.data.results,
         stylePreview: res.data.results[0].photos[0]['thumbnail_url']
@@ -45,6 +45,13 @@ class RPCard extends React.Component {
       console.log('error in RPCARD /styles request, error:', error)
     })
   }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.itemId !== prevProps.itemId) { this.componentDidMount(); }
+  }
+
+
+
   render() {
     return (
       <div className='rr-column-container' style={this.styles}>
