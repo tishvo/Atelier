@@ -17,7 +17,7 @@ class App extends React.Component {
       currentRatingMeta: {}
 
     }
-
+    this.relatedClick = this.relatedClick.bind(this);
   }
 
   componentDidMount() {
@@ -84,7 +84,12 @@ class App extends React.Component {
 
   }
 
-
+  relatedClick(e) {
+    console.log('the click worked', e)
+    this.setState({
+      currentItem: e
+    })
+  }
 
   render() {
     //  console.log('this is the data', this.state.data)
@@ -93,7 +98,7 @@ class App extends React.Component {
         <div>
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
-          <RelatedItemsAndComparison />
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
           <QandA_app currentItem={this.state.currentItem}/>
           <ReviewsAndRatings />
         </div>
