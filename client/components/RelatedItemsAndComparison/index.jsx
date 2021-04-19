@@ -11,6 +11,9 @@ class RelatedItemsAndComparison extends React.Component {
     super(props);
 
   }
+  componentDidUpdate(prevProps) {
+    if(this.props.currentItem !== prevProps.currentItem) { this.render(); }
+  }
 
   render() {
     return (

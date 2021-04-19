@@ -15,14 +15,16 @@ class RelatedProducts extends React.Component {
       visibleRelated: [],
       firstCard: 0,
       lastCard: 3,
+      lastIndex: 0
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
   }
-  updatePage(e) {
-    console.log('card was clicked: ', e)
+
+  componentDidUpdate(prevProps) {
+    if(this.props.currentItem !== prevProps.currentItem) { this.componentDidMount(); }
   }
 
   componentDidMount() {
@@ -33,6 +35,7 @@ class RelatedProducts extends React.Component {
 
         this.setState({
           allRelated: res.data,
+          lastIndex: res.data.length,
           currentProduct: this.props.currentItem
         }, () => {
           // console.log(this.state);
@@ -79,10 +82,47 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
+    if (this.state.firstCard === 0) {
+      return (
+        <div>
+          <h2>Related Products: </h2>
+          <div className='rr-row-container' >
+
+            {this.state.visibleRelated.map( (relatedItem, index) =>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+            )}
+
+            <Arrow
+              direction="right"
+              clickFunction={ this.nextSlide }
+              glyph="&#9654;" />
+          </div>
+        </div>
+      )
+    } else if (this.state.lastCard === this.state.lastIndex) {
+      return (
+        <div>
+          <h2>Related Products: </h2>
+          <div className='rr-row-container' >
+
+            <Arrow
+              direction="left"
+              clickFunction={ this.previousSlide }
+              glyph="&#9664;" />
+
+            {this.state.visibleRelated.map( (relatedItem, index) =>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+            )}
+
+          </div>
+        </div>
+      )
+    }
     return (
       <div>
         <h2>Related Products: </h2>
         <div className='rr-row-container' >
+
           <Arrow
             direction="left"
             clickFunction={ this.previousSlide }
@@ -98,7 +138,6 @@ class RelatedProducts extends React.Component {
             glyph="&#9654;" />
         </div>
       </div>
-
     )
   }
 }
