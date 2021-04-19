@@ -7,7 +7,7 @@ import ProductInfoShare from './ProductInfoShare.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
-import PAT from '../../../config.js';
+
 
 class Overview extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Overview extends React.Component {
     // get the styles by id
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('this is styles data for current product: ', response.data.results)
+
         this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,

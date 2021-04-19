@@ -26,6 +26,7 @@ app.get('/products', function (req, res) {
     .catch((error) => {
       console.log('error in initial /products get request, error:')
     })
+
 })
 
 app.get('/products/:productId/styles', function (req, res) {
@@ -43,6 +44,7 @@ app.get('/products/:productId/styles', function (req, res) {
     .catch((error) => {
       console.log('error in /products/:productId/styles axios get request, error:')
     })
+
 })
 
 app.get('/reviews/:productId', function (req, res) {
@@ -60,6 +62,24 @@ app.get('/reviews/:productId', function (req, res) {
     .catch((error) => {
       console.log('error in /products/:productId/revoews axios get request, error:', error)
     })
+})
+
+app.get('/questions/:productId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${req.params.productId}`;
+
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+    .then((response) => {
+      res.status(202).send(response.data);
+
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
 })
 
 
