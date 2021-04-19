@@ -23,11 +23,13 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
+        console.log('this is our initial project data:', response.data)
 
         this.setState({
           data: response.data,
           currentItem: response.data[0],
-          currentItemId: response.data[0].id
+          currentItemId: response.data[0].id,
+          averageStars: null
         })
       })
       .then(() => {
@@ -64,7 +66,7 @@ class App extends React.Component {
             this.setState({
               averageStars: currRating
             })
-            console.log('state check of averageStars: ', this.state.averageStars)
+             console.log('state check of averageStars: ', this.state.averageStars)
           })
 
           .catch((error) => {
@@ -83,13 +85,13 @@ class App extends React.Component {
 
 
   render() {
-  if (this.state.data) {
+  if (this.state.averageStars) {
       return (
         <div>
           <div>HELLO</div>
-          < Overview data={this.state.data} currentItem={this.state.currentItem} />
+          < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison />
-          <QandA_app currentItem={this.state.currentItem}/>
+          {/* <QandA_app currentItem={this.state.currentItem}/> */}
           <ReviewsAndRatings />
         </div>
       )

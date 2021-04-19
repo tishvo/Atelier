@@ -36,11 +36,13 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+
     var itemId = this.props.currentItem['id'];
 
     // get the styles by id
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
+        console.log('this is the styles data: ', response.data.results)
 
         this.setState({
           stylesArray: response.data.results,
@@ -56,15 +58,6 @@ class Overview extends React.Component {
       .catch((error) => {
         console.log('error in OVERVIEW axios get request, error:', error)
       })
-
-      // // get the reviews by id
-      // axios.get(`/reviews/${itemId}`)
-      //   .then((response) => {
-      //     console.log('gt our reviews data: ', response)
-      //   })
-      //   .catch((error) => {
-      //     console.log('error getting our response from styles get: ', error)
-      //   })
   }
 
   changeDisplayImage(index) {
@@ -136,6 +129,7 @@ class Overview extends React.Component {
               <div id="af-right-side"
                 styles={this.state.css_display}>
                 <ProductInfoHead
+                  stars={this.props.stars}
                   name={this.props.currentItem.name}
                   styleName={this.state.styleName}
                   slogan={this.props.currentItem.slogan}
