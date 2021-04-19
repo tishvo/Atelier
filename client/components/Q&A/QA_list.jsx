@@ -10,11 +10,11 @@ class QA_list extends React.Component {
 
   render() {
     return (
-      <div>
-        <QA_listEntry />
-        <QA_listEntry />
+      <div className="qaList">
+        {this.props.qa.map(item =>
+          <QA_listEntry item={item}/>
+          )}
       </div>
-
     )
   }
 }

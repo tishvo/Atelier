@@ -7,7 +7,7 @@ import ProductInfoShare from './ProductInfoShare.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
-import PAT from '../../../config.js';
+
 
 // RANDOM FASHION PHOTO GENERATOR: https://source.unsplash.com/1600x900/?fashion
 
@@ -27,12 +27,11 @@ class Overview extends React.Component {
   componentDidMount() {
 
     var itemId = this.props.currentItem['id'];
-    console.log('itemId:', itemId)
 
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
 
-        console.log('first item in styles', response.data.results[0])
+        //console.log('first item in styles', response.data.results[0])
 
         this.setState({
           stylesArray: response.data.results,
