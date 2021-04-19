@@ -16,3 +16,18 @@
   height: 30%;
 
 }
+
+.rr-row-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.rr-column-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-thumbnail {
+  width: 100px;
+  height: 100px;
+}

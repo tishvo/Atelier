@@ -48,9 +48,9 @@ app.get('/products/:productId/styles',  function(req, res) {
       })
 })
 
-// Riegel
-app.get('/products/:product_id/related', function(req, res) {
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}/related`;
+// RR GET request for related item id's
+app.get('/products/:productId/related', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.productId}/related`;
 
   axios.get(url, {
     headers: {
@@ -67,9 +67,9 @@ app.get('/products/:product_id/related', function(req, res) {
 
 })
 
-
-app.get('/products/:product_id', function(req, res) {
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}`;
+// RR GET request for item id product info
+app.get('/products/:productId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.productId}`;
 
   axios.get(url, {
     headers: {

@@ -18,7 +18,7 @@ class RelatedProducts extends React.Component {
     this.previousSlide = this.previousSlide.bind(this);
 
   }
-
+  //
   componentDidMount() {
 
     var itemId = this.props.currentItem['id'];
@@ -41,7 +41,7 @@ class RelatedProducts extends React.Component {
   // Arrow Functionality
   previousSlide () {
     console.log('clicked previous slide');
-    const lastIndex = imgUrls.length - 1;
+    const lastIndex = this.state.relatedProducts.length - 1;
     const { currentImageIndex } = this.state;
     const shouldResetIndex = currentImageIndex === 0;
     const index =  shouldResetIndex ? lastIndex : currentImageIndex - 1;
@@ -53,7 +53,7 @@ class RelatedProducts extends React.Component {
   // Arrow Functionality
   nextSlide () {
     console.log('clicked next slide');
-    const lastIndex = imgUrls.length - 1;
+    const lastIndex = this.state.relatedProducts.length - 1;
     const { currentImageIndex } = this.state;
     const shouldResetIndex = currentImageIndex === lastIndex;
     const index =  shouldResetIndex ? 0 : currentImageIndex + 1;
@@ -66,24 +66,22 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div>
-        <div>Related Products Carousel (auto-generated)</div>
+        <h2>Related Products: </h2>
+        <div className='rr-row-container' >
+          <Arrow
+            direction="left"
+            clickFunction={ this.previousSlide }
+            glyph="&#9664;" />
 
-        <div>
-        <Arrow
-          direction="left"
-          clickFunction={ this.previousSlide }
-          glyph="&#9664;" />
+          {console.log('data found in RP Carousel Component', this.props.data)}
+          {this.state.relatedProducts.map( (relatedItem, index) =>
+            <RPCard itemId={relatedItem} key={index}/> )}
 
-        {console.log('data found in RP Carousel Component', this.props.data)}
-        {this.state.relatedProducts.map( relatedItem =>
-          <RPCard itemId={relatedItem} /> )}
-
-        <Arrow
-          direction="right"
-          clickFunction={ this.nextSlide }
-          glyph="&#9654;" />
+          <Arrow
+            direction="right"
+            clickFunction={ this.nextSlide }
+            glyph="&#9654;" />
         </div>
-
       </div>
 
     )
