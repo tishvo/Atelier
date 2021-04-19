@@ -31,3 +31,9 @@
   width: 100px;
   height: 100px;
 }
+
+.qaList {
+  height: 200px;
+  overflow: scroll;
+  border-style: solid;
+}

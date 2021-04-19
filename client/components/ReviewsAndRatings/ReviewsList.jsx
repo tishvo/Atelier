@@ -21,7 +21,7 @@ class ReviewList extends React.Component {
 
 
   render() {
-    console.log(this.state.data);
+    //console.log(this.state.data);
     return (
       <div>
         <SortingOptions />
