@@ -25,7 +25,11 @@ class ReviewList extends React.Component {
     return (
       <div>
         <SortingOptions numReviews={this.props.numReviews}/>
-        <ReviewTile stars={this.props.stars} itemId={this.props.itemId} reviewData={this.props.reviewData} />
+        {this.props.reviewData.map((item, index) => {
+          return (
+            <ReviewTile stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
+          )
+        })}
         <form>
           <button>
             More Reviews
