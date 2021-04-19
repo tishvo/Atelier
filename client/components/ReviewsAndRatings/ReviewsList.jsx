@@ -12,20 +12,19 @@ class ReviewList extends React.Component {
 
       currentId: '',
       currReviews: [],
-      visibleReviewVal: 0,
+      visibleReviewVal: 2,
       totalReviews: 0,
       moreReviewsVis: true,
-      currentOrder: ''
+      currentOrder: 'relevant'
 
     };
-    this.sortReviews = this.sortReviews.bind(this);
+    this.handleSortingChange = this.handleSortingChange.bind(this);
   }
 
   //function that will be passed down to SortingOptions that will change sorting order of the currReviews
-  sortReviews(e) {
-
+  handleSortingChange(e) {
     this.setState({
-      currentOrder: newOrder
+      currentOrder: e.target.value
     });
   }
 
@@ -33,7 +32,16 @@ class ReviewList extends React.Component {
     console.log('currentOrder: ', this.state.currentOrder);
     return (
       <div>
-        <SortingOptions numReviews={this.props.numReviews} changeOrder={this.sortReviews}/>
+        <div>
+
+          {this.props.numReviews} reviews, sorted by
+          <select onChange={this.handleSortingChange}>
+            <option value='relevant'>Relevant</option>
+            <option value='helpful'>Helpful</option>
+            <option value='newest'>Newest</option>
+          </select>
+
+        </div>
         {this.props.reviewData.map((item, index) => {
           return (
             <ReviewTile key={index} stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
