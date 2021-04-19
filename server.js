@@ -45,22 +45,23 @@ app.get('/products/:productId/styles',  function(req, res) {
       })
 })
 
-// app.get('/reviews/?product_id=:productId', function(req, res) {
-//   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=${req.params.productId}`;
+app.get('/questions/:productId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${req.params.productId}`;
 
-//   axios.get(url, {
-//     headers: {
-//       'Authorization': process.env.GITHUB_API_KEY
-//     }
-//   })
-//   .then((response) => {
-//     //console.log('return of the current productid review data: ', response);
-//     res.status(202).send(response);
-//   })
-//   .catch((error) => {
-//     console.log('error in Review axios get request, error: ', error);
-//   })
-// })
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+    .then((response) => {
+      res.status(202).send(response.data);
+
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+})
 
 app.get('/reviews/meta/:productId', function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta/?product_id=${req.params.productId}`;
