@@ -23,12 +23,22 @@ class App extends React.Component {
         console.log('this is initial product data: ', response.data)
         this.setState({
           data: response.data,
-          currentItem: response.data[0]
+          currentItem: response.data[2]
         })
       })
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
+
+let itemId = '19089'
+        // get the reviews by id
+        axios.get(`/reviews/${itemId}`)
+        .then((response) => {
+          console.log('gt our reviews data: ', response)
+        })
+        .catch((error) => {
+          console.log('error getting our response from styles get: ', error)
+        })
   }
 
   render() {
