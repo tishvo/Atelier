@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Overview from './components/Overview/Overview.jsx'
-// import PAT from '../config.js';
 import QandA_app from './components/Q&A/QandA_app.jsx';
 import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
@@ -23,19 +22,18 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
-        // console.log('got our data! In our then statement. response: ', response)
-        // console.log('first item', response.data[0].description)
+        console.log('this is our initial project data:', response.data)
 
         this.setState({
           data: response.data,
           currentItem: response.data[0],
-          currentItemId: response.data[0].id
+          currentItemId: response.data[0].id,
+          averageStars: null
         })
       })
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('gt our reviews data: ', response);
             this.setState({
               numberOfReviews: response.data.results.length
             });
@@ -43,10 +41,8 @@ class App extends React.Component {
           .catch((error) => {
             console.log('error getting our response from styles get: ', error)
           })
-        //console.log('after reviews get request');
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('check from inside meta reveiew data');
             console.log('response ratings', response.data.ratings);
 
             var rateObj = response.data.ratings;
@@ -66,7 +62,7 @@ class App extends React.Component {
             this.setState({
               averageStars: currRating
             })
-            console.log('state check of averageStars: ', this.state.averageStars)
+             console.log('state check of averageStars: ', this.state.averageStars)
           })
 
           .catch((error) => {
@@ -77,8 +73,6 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
-    // get the reviews by id
-    //console.log('this is a check of itemid: ', this.state.currentItemId)
 
 
 
@@ -92,12 +86,11 @@ class App extends React.Component {
   }
 
   render() {
-    //  console.log('this is the data', this.state.data)
-    if (this.state.data) {
+  if (this.state.averageStars) {
       return (
         <div>
           <div>HELLO</div>
-          < Overview data={this.state.data} currentItem={this.state.currentItem} />
+          < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
           <QandA_app currentItem={this.state.currentItem}/>
           <ReviewsAndRatings />
@@ -107,7 +100,6 @@ class App extends React.Component {
       return null;
     }
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
