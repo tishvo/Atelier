@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Overview from './components/Overview/Overview.jsx'
+<<<<<<< HEAD
 // import PAT from '../config.js';
+=======
+>>>>>>> 1e09c54c48d96e946b75e08350d957a12fac28d5
 import QandA_app from './components/Q&A/QandA_app.jsx';
 import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
