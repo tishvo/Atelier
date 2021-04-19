@@ -75,6 +75,7 @@
 
 }
 
+
 #af-front-page-container {
   display: inline-block;
   width: 100%;
@@ -125,8 +126,21 @@
 }
 
 
-<<<<<<< HEAD
-=======
+
+.rr-row-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.rr-column-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-thumbnail {
+  width: 100px;
+  height: 100px;
+
 }
 
 .qaList {
@@ -134,4 +148,4 @@
   overflow: scroll;
   border-style: solid;
 }
->>>>>>> 978755a3a50119e63ee397c3b919891b197ca67e
+

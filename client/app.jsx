@@ -17,7 +17,7 @@ class App extends React.Component {
       currentRatingMeta: {}
 
     }
-
+    this.relatedClick = this.relatedClick.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +82,12 @@ class App extends React.Component {
 
   }
 
-
+  relatedClick(e) {
+    console.log('the click worked', e)
+    this.setState({
+      currentItem: e
+    })
+  }
 
   render() {
   if (this.state.averageStars) {
@@ -90,8 +95,8 @@ class App extends React.Component {
         <div>
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
-          <RelatedItemsAndComparison />
-          {/* <QandA_app currentItem={this.state.currentItem}/> */}
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
+          <QandA_app currentItem={this.state.currentItem}/>
           <ReviewsAndRatings />
         </div>
       )
