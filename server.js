@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 //const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe';
 
 app.get('/products',  function(req, res) {
-  let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products';
+  let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/';
     axios.get(url, {
       headers: {
         'Authorization': process.env.GITHUB_API_KEY
@@ -44,15 +44,47 @@ app.get('/products/:productId/styles',  function(req, res) {
 
       })
       .catch((error) => {
-        console.log('error in Overview axios get request, error:', error)
+        console.log('error in Overview styles get request, error:', error)
       })
 })
 
+// Riegel
 app.get('/products/:product_id/related', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}/related`;
+
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+  .then(response => {
+    console.log('got data in server /related request: ', response.data)
+    res.status(202).send(response.data);
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
 
 })
 
 
+app.get('/products/:product_id', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}`;
+
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+  .then(response => {
+    // console.log('getting data for RP Card: ', res.data)
+
+    res.status(202).send(response.data);
+  })
+  .catch(err => {
+    console.log('RP CARD DATA GET ERROR: ', err)
+  })
+})
 
 
 

@@ -17,14 +17,9 @@ class RPCard extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${this.props.itemId}`, {
-      headers: {
-        'Authorization': `${PAT}`
-      }
-    })
+    axios.get(`/products/${this.props.itemId}`)
     .then(res => {
-      // console.log('getting data for RP Card: ', res.data)
-
+      console.log('got data for RP Card: ', res.data)
       this.setState({
         itemData: res.data
       })

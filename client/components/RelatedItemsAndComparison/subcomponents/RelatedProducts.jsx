@@ -21,19 +21,10 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('data found in RelatedProducts:', this.props.data)
-    // console.log('currentItem in RelatedProducts', this.props.currentItem)
-    // console.log('currentItem ID in RelatedProducts', this.props.currentItem['id'])
-    var itemId = this.props.currentItem['id'];
-    // url where current item's related products are located
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${itemId}/related`;
 
+    var itemId = this.props.currentItem['id'];
     // get those items
-    axios.get(url, {
-      headers: {
-        'Authorization': `${PAT}`
-      }
-    })
+    axios.get(`/products/${itemId}/related`)
       .then(res => {
         console.log('related items array in RelatedProducts: ', res.data)
         console.log('first item in RelatedProducts array: ', res.data[0])
@@ -41,7 +32,6 @@ class RelatedProducts extends React.Component {
           relatedProducts: res.data
         }, () => {
           // console.log(this.state);
-
         })
       })
       .catch(err => {
