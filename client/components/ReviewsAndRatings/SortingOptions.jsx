@@ -5,9 +5,9 @@ const SortingOptions = (props) => {
     <div>
       {props.numReviews} reviews, sorted by
       <select>
-        <option>Relevant</option>
-        <option>Helpful</option>
-        <option>Recent</option>
+        <option value='relevant'>Relevant</option>
+        <option value='helpful'>Helpful</option>
+        <option value='recent'>Recent</option>
       </select>
     </div>
   )
