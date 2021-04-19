@@ -48,12 +48,8 @@ class App extends React.Component {
           .then((response) => {
             //console.log('check from inside meta reveiew data');
             console.log('response ratings', response.data.ratings);
-            this.setState({
-              ratingObj: response.data.ratings
-            });
-          })
-          .then(() => {
-            var rateObj = this.state.ratingObj;
+
+            var rateObj = response.data.ratings;
             var result = 0;
             var numRating = 0;
             console.log('result: ', result);
