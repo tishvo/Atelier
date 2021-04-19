@@ -37,6 +37,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
 
+
     var itemId = this.props.currentItem['id'];
 
     // get the styles by id
@@ -58,6 +59,12 @@ class Overview extends React.Component {
       .catch((error) => {
         console.log('error in OVERVIEW axios get request, error:', error)
       })
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
+      this.componentDidMount()
+    }
   }
 
   changeDisplayImage(index) {

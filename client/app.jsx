@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Overview from './components/Overview/Overview.jsx'
-// import PAT from '../config.js';
 import QandA_app from './components/Q&A/QandA_app.jsx';
 import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
@@ -35,7 +34,6 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('gt our reviews data: ', response);
             this.setState({
               numberOfReviews: response.data.results.length
             });
@@ -43,10 +41,8 @@ class App extends React.Component {
           .catch((error) => {
             console.log('error getting our response from styles get: ', error)
           })
-        //console.log('after reviews get request');
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
-            //console.log('check from inside meta reveiew data');
             console.log('response ratings', response.data.ratings);
 
             var rateObj = response.data.ratings;
@@ -96,7 +92,7 @@ class App extends React.Component {
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
-          <QandA_app currentItem={this.state.currentItem}/>
+          {/* <QandA_app currentItem={this.state.currentItem}/> */}
           <ReviewsAndRatings />
         </div>
       )
