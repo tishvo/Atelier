@@ -54,7 +54,9 @@ class RPCard extends React.Component {
 
   render() {
     return (
-      <div className='rr-column-container' style={this.styles}>
+      <div className='rr-column-container' style={this.styles} onClick={ () => {
+        return this.props.click(this.state.itemData)
+      }}>
         <span>
           {this.state.itemData.name}
         </span>
@@ -64,7 +66,7 @@ class RPCard extends React.Component {
         <span>
           {this.state.itemData.default_price}
         </span>
-        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`}></img>
+        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} ></img>
         <div>
           star rating
         </div>

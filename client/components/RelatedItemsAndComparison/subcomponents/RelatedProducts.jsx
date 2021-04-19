@@ -21,6 +21,9 @@ class RelatedProducts extends React.Component {
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
   }
+  updatePage(e) {
+    console.log('card was clicked: ', e)
+  }
 
   componentDidMount() {
     var itemId = this.props.currentItem['id'];
@@ -86,7 +89,7 @@ class RelatedProducts extends React.Component {
             glyph="&#9664;" />
 
           {this.state.visibleRelated.map( (relatedItem, index) =>
-            <RPCard itemId={relatedItem} key={index}/>
+            <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
           )}
 
           <Arrow
