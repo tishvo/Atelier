@@ -48,7 +48,7 @@ let itemId = '19089'
           <div>HELLO</div>
           < Overview data={this.state.data} currentItem={this.state.currentItem} />
           <RelatedItemsAndComparison />
-          <QandA_app currentItem={this.state.currentItem}/>
+          {/* <QandA_app currentItem={this.state.currentItem}/> */}
           <ReviewsAndRatings />
         </div>
       )
