@@ -3,7 +3,7 @@ import StarRating from './StarRating.jsx';
 import moment from 'moment';
 
 const ReviewTile = (props) => {
-  console.log('Review Tile reviewData: ', props.reviewData);
+  //console.log('Review Tile reviewData: ', props.reviewData);
   return (
     <div>
       <StarRating stars={props.reviewData.rating}/>

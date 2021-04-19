@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
 
 const StarRating = (props) => {
-  console.log('StarRating rating props: ', props.stars);
+  //console.log('StarRating rating props: ', props.stars);
   var strStars = '' + props.stars;
   //console.log('string stars: ', strStars);
   var starObj = {
