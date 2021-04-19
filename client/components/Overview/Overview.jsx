@@ -27,12 +27,11 @@ class Overview extends React.Component {
   componentDidMount() {
 
     var itemId = this.props.currentItem['id'];
-    console.log('itemId:', itemId)
 
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
 
-        console.log('first item in styles', response.data.results[0])
+        //console.log('first item in styles', response.data.results[0])
 
         this.setState({
           stylesArray: response.data.results,

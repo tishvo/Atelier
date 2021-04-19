@@ -16,3 +16,9 @@
   height: 30%;
 
 }
+
+.qaList {
+  height: 200px;
+  overflow: scroll;
+  border-style: solid;
+}
