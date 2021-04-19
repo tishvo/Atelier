@@ -12,29 +12,87 @@ class App extends React.Component {
 
     this.state = {
       data: null,
-      currentItem: null
+      currentItem: null,
+      currentRatingMeta: {}
+
     }
+
   }
 
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
-        console.log('got our data! In our then statement. response: ', response)
-        console.log('first item', response.data[0].description)
+        //console.log('got our data! In our then statement. response: ', response)
+        //console.log('first item', response.data[0].description)
 
         this.setState({
           data: response.data,
-          currentItem: response.data[0]
+          currentItem: response.data[0],
+          currentItemId: response.data[0].id
         })
-
       })
+      .then(() => {
+        axios.get(`/reviews/${this.state.currentItemId}`)
+          .then((response) => {
+            //console.log('gt our reviews data: ', response);
+            this.setState({
+              numberOfReviews: response.data.results.length
+            });
+          })
+          .catch((error) => {
+            console.log('error getting our response from styles get: ', error)
+          })
+        //console.log('after reviews get request');
+        axios.get(`/reviews/meta/${this.state.currentItemId}`)
+          .then((response) => {
+            //console.log('check from inside meta reveiew data');
+            console.log('response ratings', response.data.ratings);
+            this.setState({
+              ratingObj: response.data.ratings
+            });
+          })
+          .then(() => {
+            var rateObj = this.state.ratingObj;
+            var result = 0;
+            var numRating = 0;
+            console.log('result: ', result);
+            console.log('rateObj: ', this.state.ratingObj);
+            for (var key in rateObj) {
+              console.log('numKey');
+              result = result + Number(key)*Number(rateObj[key]);
+              numRating = numRating + Number(rateObj[key]);
+            }
+            console.log('result: ', result);
+            console.log('numRating: ', numRating);
+            var currRating = result/numRating;
+
+            this.setState({
+              averageStars: currRating
+            })
+            console.log('state check of averageStars: ', this.state.averageStars)
+          })
+
+          .catch((error) => {
+            console.log('error inside averageStar making: ', error)
+          })
+      })
+
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
+    // get the reviews by id
+    //console.log('this is a check of itemid: ', this.state.currentItemId)
+
+
+
   }
 
+
+
   render() {
-     console.log('this is the data', this.state.data)
+    //console.log('this is the data', this.state.data);
+    //console.log('this is the id number: ', this.state.currentItemId);
+
     if (this.state.data) {
       return (
         <div>
