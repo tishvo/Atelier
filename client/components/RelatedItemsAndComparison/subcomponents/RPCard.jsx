@@ -18,6 +18,7 @@ class RPCard extends React.Component {
     };
   }
   componentDidMount() {
+    console.log('RPCARD IS BEING RENDERED');
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
       // console.log('got data for RP Card: ', res.data)
@@ -38,7 +39,6 @@ class RPCard extends React.Component {
         allStyles: res.data.results,
         stylePreview: res.data.results[0].photos[0]['thumbnail_url']
       })
-
 
     })
     .catch((error) => {

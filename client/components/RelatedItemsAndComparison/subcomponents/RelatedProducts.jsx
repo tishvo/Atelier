@@ -9,8 +9,12 @@ class RelatedProducts extends React.Component {
     super(props);
 
     this.state = {
-      currentImageIndex: 0,
-      relatedProducts: []
+      currentProduct: {},
+
+      allRelated: [],
+      visibleRelated: [],
+      firstCard: 0,
+      lastCard: 2
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -18,19 +22,23 @@ class RelatedProducts extends React.Component {
     this.previousSlide = this.previousSlide.bind(this);
 
   }
-  //
-  componentDidMount() {
 
+  componentDidMount() {
+    console.log('current item in RP: ', this.props.currentItem)
     var itemId = this.props.currentItem['id'];
     // get those items
     axios.get(`/products/${itemId}/related`)
       .then(res => {
-        console.log('related items array in RelatedProducts: ', res.data)
-        console.log('first item in RelatedProducts array: ', res.data[0])
+        // console.log('related items array in RelatedProducts: ', res.data)
+        // console.log('first item in RelatedProducts array: ', res.data[0])
         this.setState({
-          relatedProducts: res.data
+          allRelated: res.data,
+          currentProduct: this.props.currentItem
         }, () => {
           // console.log(this.state);
+          this.setState({
+            visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+          })
         })
       })
       .catch(err => {
@@ -41,26 +49,36 @@ class RelatedProducts extends React.Component {
   // Arrow Functionality
   previousSlide () {
     console.log('clicked previous slide');
-    const lastIndex = this.state.relatedProducts.length - 1;
-    const { currentImageIndex } = this.state;
-    const shouldResetIndex = currentImageIndex === 0;
-    const index =  shouldResetIndex ? lastIndex : currentImageIndex - 1;
-
-    this.setState({
-      currentImageIndex: index
-    });
+    const lastIndex = this.state.allRelated.length - 1;
+    if (this.state.firstCard > 0) {
+      this.setState({
+        firstCard: this.state.firstCard -1,
+        lastCard: this.state.lastCard -1,
+        visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+      }, () => {
+        console.log(this.state.firstCard);
+        this.setState({
+          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+        });
+      });
+    }
   }
   // Arrow Functionality
   nextSlide () {
     console.log('clicked next slide');
-    const lastIndex = this.state.relatedProducts.length - 1;
-    const { currentImageIndex } = this.state;
-    const shouldResetIndex = currentImageIndex === lastIndex;
-    const index =  shouldResetIndex ? 0 : currentImageIndex + 1;
-
-    this.setState({
-      currentImageIndex: index
-    });
+    const lastIndex = this.state.allRelated.length - 1;
+    if (this.state.lastCard <= lastIndex) {
+      this.setState({
+        firstCard: this.state.firstCard +1,
+        lastCard: this.state.lastCard +1,
+      }, () => {
+        console.log(this.state.firstCard);
+        console.log(this.state.visibleRelated);
+        this.setState({
+          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+        });
+      });
+    }
   }
 
   render() {
@@ -73,8 +91,7 @@ class RelatedProducts extends React.Component {
             clickFunction={ this.previousSlide }
             glyph="&#9664;" />
 
-          {console.log('data found in RP Carousel Component', this.props.data)}
-          {this.state.relatedProducts.map( (relatedItem, index) =>
+          {this.state.visibleRelated.map( (relatedItem, index) =>
             <RPCard itemId={relatedItem} key={index}/> )}
 
           <Arrow
