@@ -66,7 +66,7 @@ class App extends React.Component {
           })
 
           .catch((error) => {
-            console.log('error inside averageStar making: ', error)
+            console.log('error inside reviews meta get: ', error)
           })
       })
 
@@ -79,7 +79,7 @@ class App extends React.Component {
 
 
   render() {
-
+    console.log('averageStars val: ', this.state.averageStars);
     if (this.state.averageStars) {
       return (
         <div>
