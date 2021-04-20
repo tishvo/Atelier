@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 class RPCard extends React.Component {
@@ -18,15 +18,27 @@ class RPCard extends React.Component {
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.useEffect = this.useEffect.bind(this);
+  }
+  useEffect() {
+    let isMounted = true; // note this mounted flag
+    componentDidMount();
+    return () => {
+      isMounted = false;
+    }; // use effect cleanup to set flag false, if unmounted
   }
 
   componentDidMount() {
+    let isMounted = true;
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
 
-      this.setState({
-        itemData: res.data
-      })
+      if (isMounted) {
+        this.setState({
+          itemData: res.data
+        })
+      }
+
     })
     .catch(err => {
       console.log('RP CARD DATA GET ERROR: ', err)
@@ -47,7 +59,14 @@ class RPCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+
+    let isMounted = true;
+
     if(this.props.itemId !== prevProps.itemId) { this.componentDidMount(); }
+
+    return () => {
+      isMounted = false
+    }
   }
 
 

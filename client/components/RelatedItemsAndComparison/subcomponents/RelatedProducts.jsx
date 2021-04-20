@@ -36,7 +36,9 @@ class RelatedProducts extends React.Component {
         this.setState({
           allRelated: res.data,
           lastIndex: res.data.length,
-          currentProduct: this.props.currentItem
+          currentProduct: this.props.currentItem,
+          firstCard: 0,
+          lastCard: 3
         }, () => {
           // console.log(this.state);
           this.setState({
