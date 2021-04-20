@@ -113,7 +113,7 @@ class RelatedProducts extends React.Component {
               glyph="&#9664;" />
 
             {this.state.visibleRelated.map( (relatedItem, index) =>
-              <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
             )}
 
           </div>
@@ -131,7 +131,7 @@ class RelatedProducts extends React.Component {
             glyph="&#9664;" />
 
           {this.state.visibleRelated.map( (relatedItem, index) =>
-            <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+            <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
           )}
 
           <Arrow

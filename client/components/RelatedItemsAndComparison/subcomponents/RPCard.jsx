@@ -12,7 +12,6 @@ class RPCard extends React.Component {
       stylePreview: '',
 
       showModal: false,
-      isMounted: false
     }
 
     this.styles = {
@@ -54,6 +53,7 @@ class RPCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.currentProduct);
     if(this.props.itemId !== prevProps.itemId) { this.fetchData(); }
   }
 
@@ -67,7 +67,8 @@ class RPCard extends React.Component {
     return (
       <div className='rr-column-container' style={this.styles}>
         <button  onClick={e => { this.showModal(); }} > &#9734; </button>
-        <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={this.props.currentProduct}/>
+        <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={ () => {
+          return this.props.currentProduct } }/>
         <span>
           {this.state.itemData.name}
         </span>
