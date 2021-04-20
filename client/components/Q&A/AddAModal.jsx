@@ -6,6 +6,9 @@ class AddAModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      answer: '',
+      nickname: '',
+      email: ''
 
     }
     this.onClose = this.onClose.bind(this);
@@ -20,9 +23,16 @@ class AddAModal extends React.Component {
       return null;
     }
     return (
-      <div>
-        <div className="qModal qContent" id="qModal">hello</div>
-        <div className="qaModalToggle"><button onClick={this.onClose}>Submit</button></div>
+      <div className="qModal qContent" id="qModal">
+        <h3>Submit Your Answer</h3>
+        <h5>About the {this.props.product.name}: {this.props.question}</h5>
+        <div>Your Answer*: <input value={this.state.answer} placeholder="type here"></input></div>
+        <div>What is your nickname*? <input placeholder="Example: jack543!" value={this.state.nickname}></input></div>
+        <div>For privacy reasons, do not use your full name or email address</div>
+        <div>Your email*: <input placeholder="Example: jack@email.com" value={this.state.email}></input></div>
+        <div>For authentication reasons, you will not be emailed</div>
+
+        <div className="qaModalToggle"><button className="qaModalToggle" onClick={this.onClose}>Submit</button></div>
       </div>
     )
   }
