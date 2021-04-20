@@ -4,7 +4,6 @@ import axios from 'axios';
 import RelatedProducts from './subcomponents/RelatedProducts.jsx'
 import YourOutfit from './subcomponents/YourOutfit.jsx'
 //url for products
-var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products'
 
 
 class RelatedItemsAndComparison extends React.Component {
@@ -17,7 +16,7 @@ class RelatedItemsAndComparison extends React.Component {
     return (
       <div>
         <div>
-          <RelatedProducts />
+          <RelatedProducts data={this.props.data} currentItem={this.props.currentItem} click={this.props.click}/>
           <YourOutfit />
         </div>
       </div>

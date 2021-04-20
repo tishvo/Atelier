@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Overview from './components/Overview/Overview.jsx'
-// import PAT from '../config.js';
 import QandA_app from './components/Q&A/QandA_app.jsx';
 import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
@@ -17,25 +16,28 @@ class App extends React.Component {
       currentRatingMeta: {}
 
     }
-
+    this.relatedClick = this.relatedClick.bind(this);
   }
 
   componentDidMount() {
     axios.get('/products')
       .then((response) => {
-        // console.log('got our data! In our then statement. response: ', response)
-        // console.log('first item', response.data[0].description)
+        console.log('this is our initial project data:', response.data)
 
         this.setState({
           data: response.data,
           currentItem: response.data[0],
-          currentItemId: response.data[0].id
+          currentItemId: response.data[0].id,
+          averageStars: null
         })
       })
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
+<<<<<<< HEAD
             //console.log('reviews response data: ', response.data.results);
+=======
+>>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
             this.setState({
               numberOfReviews: response.data.results.length,
               reviewData: response.data.results
@@ -46,6 +48,10 @@ class App extends React.Component {
           })
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
+<<<<<<< HEAD
+=======
+            console.log('response ratings', response.data.ratings);
+>>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
 
             var rateObj = response.data.ratings;
             var result = 0;
@@ -62,7 +68,11 @@ class App extends React.Component {
             this.setState({
               averageStars: currRating
             })
+<<<<<<< HEAD
             //console.log('state check of averageStars: ', this.state.averageStars)
+=======
+             console.log('state check of averageStars: ', this.state.averageStars)
+>>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
           })
 
           .catch((error) => {
@@ -73,19 +83,33 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
 
   }
 
-
+  relatedClick(e) {
+    console.log('the click worked', e)
+    this.setState({
+      currentItem: e
+    })
+  }
 
   render() {
+<<<<<<< HEAD
     console.log('averageStars val: ', this.state.averageStars);
     if (this.state.averageStars) {
+=======
+  if (this.state.averageStars) {
+>>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
       return (
         <div>
           <div>HELLO</div>
-          < Overview data={this.state.data} currentItem={this.state.currentItem} />
-          <RelatedItemsAndComparison />
+          < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
           <QandA_app currentItem={this.state.currentItem}/>
           <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews}/>
         </div>
@@ -94,7 +118,6 @@ class App extends React.Component {
       return null;
     }
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
