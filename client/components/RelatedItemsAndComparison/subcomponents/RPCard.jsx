@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import ComparisonModal from './ComparisonModal/index.jsx';
 
 class RPCard extends React.Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class RPCard extends React.Component {
     this.state = {
       itemData: {},
       allStyles: [],
-      stylePreview: ''
+      stylePreview: '',
+
+      showModal: false
     }
 
     this.styles = {
@@ -69,13 +72,18 @@ class RPCard extends React.Component {
     }
   }
 
+  showModal() {
+    this.setState({
+      showModal: !this.state.showModal
+    });
 
+  };
 
   render() {
     return (
-      <div className='rr-column-container' style={this.styles} onClick={ () => {
-        return this.props.click(this.state.itemData)
-      }}>
+      <div className='rr-column-container' style={this.styles}>
+        <button  onClick={e => { this.showModal(); }} > &#9734; </button>
+        <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} />
         <span>
           {this.state.itemData.name}
         </span>
@@ -85,7 +93,8 @@ class RPCard extends React.Component {
         <span>
           {this.state.itemData.default_price}
         </span>
-        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} ></img>
+        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
+        return this.props.click(this.state.itemData) } }></img>
         <div>
           star rating
         </div>
