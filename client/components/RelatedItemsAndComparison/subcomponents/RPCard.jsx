@@ -11,7 +11,8 @@ class RPCard extends React.Component {
       allStyles: [],
       stylePreview: '',
 
-      showModal: false
+      showModal: false,
+      isMounted: false
     }
 
     this.styles = {
@@ -21,27 +22,16 @@ class RPCard extends React.Component {
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.useEffect = this.useEffect.bind(this);
-  }
-  useEffect() {
-    let isMounted = true; // note this mounted flag
-    componentDidMount();
-    return () => {
-      isMounted = false;
-    }; // use effect cleanup to set flag false, if unmounted
+    this.fetchData = this.fetchData.bind(this);
   }
 
-  componentDidMount() {
-    let isMounted = true;
+  fetchData() {
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
 
-      if (isMounted) {
-        this.setState({
-          itemData: res.data
-        })
-      }
-
+      this.setState({
+        itemData: res.data
+      })
     })
     .catch(err => {
       console.log('RP CARD DATA GET ERROR: ', err)
@@ -49,41 +39,35 @@ class RPCard extends React.Component {
 
     axios.get(`/products/${this.props.itemId}/styles`)
     .then(res => {
-
-      this.setState({
-        allStyles: res.data.results,
-        stylePreview: res.data.results[0].photos[0]['thumbnail_url']
-      })
-
+        this.setState({
+          allStyles: res.data.results,
+          stylePreview: res.data.results[0].photos[0]['thumbnail_url']
+        })
     })
     .catch((error) => {
       console.log('error in RPCARD /styles request, error:', error)
     })
   }
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
   componentDidUpdate(prevProps) {
-
-    let isMounted = true;
-
-    if(this.props.itemId !== prevProps.itemId) { this.componentDidMount(); }
-
-    return () => {
-      isMounted = false
-    }
+    if(this.props.itemId !== prevProps.itemId) { this.fetchData(); }
   }
 
   showModal() {
     this.setState({
       showModal: !this.state.showModal
     });
-
   };
 
   render() {
     return (
       <div className='rr-column-container' style={this.styles}>
         <button  onClick={e => { this.showModal(); }} > &#9734; </button>
-        <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} />
+        <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={this.props.currentProduct}/>
         <span>
           {this.state.itemData.name}
         </span>

@@ -91,7 +91,7 @@ class RelatedProducts extends React.Component {
           <div className='rr-row-container' >
 
             {this.state.visibleRelated.map( (relatedItem, index) =>
-              <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
             )}
 
             <Arrow
