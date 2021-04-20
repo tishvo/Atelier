@@ -34,6 +34,7 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
+            console.log('found our reviews data!', response.data.results)
             this.setState({
               numberOfReviews: response.data.results.length
             });
@@ -43,26 +44,25 @@ class App extends React.Component {
           })
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
-            console.log('response ratings', response.data.ratings);
-
+            // console.log('response ratings', response.data.ratings);
             var rateObj = response.data.ratings;
             var result = 0;
             var numRating = 0;
-            console.log('result: ', result);
-            console.log('rateObj: ', this.state.ratingObj);
+            // console.log('result: ', result);
+            // console.log('rateObj: ', this.state.ratingObj);
             for (var key in rateObj) {
-              console.log('numKey');
+              // console.log('numKey');
               result = result + Number(key)*Number(rateObj[key]);
               numRating = numRating + Number(rateObj[key]);
             }
-            console.log('result: ', result);
-            console.log('numRating: ', numRating);
+            // console.log('result: ', result);
+            // console.log('numRating: ', numRating);
             var currRating = result/numRating;
 
             this.setState({
               averageStars: currRating
             })
-             console.log('state check of averageStars: ', this.state.averageStars)
+            //  console.log('state check of averageStars: ', this.state.averageStars)
           })
 
           .catch((error) => {
@@ -90,9 +90,9 @@ class App extends React.Component {
       return (
         <div>
           <div>HELLO</div>
-          < Overview data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
+          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
-          <QandA_app currentItem={this.state.currentItem}/>
+          {/* <QandA_app currentItem={this.state.currentItem}/> */}
           <ReviewsAndRatings />
         </div>
       )
