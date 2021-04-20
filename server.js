@@ -141,6 +141,26 @@ app.put('/answerreport/:answerId', function(req, res) {
   })
 })
 
+//TV POST request to ask a question
+app.post('/qa/ask', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions`;
+  let data = req.body;
+  let config = {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  }
+
+  axios.post(url, data, config)
+  .then(response => {
+    console.log(response);
+    res.status(202).send('question has been created')
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
+})
+
 // RR GET request for item id product info
 app.get('/products/:productId', function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.productId}`;
