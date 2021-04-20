@@ -92,7 +92,7 @@ class App extends React.Component {
           <div>HELLO</div>
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
-          {/* <QandA_app currentItem={this.state.currentItem}/> */}
+          <QandA_app currentItem={this.state.currentItem}/>
           <ReviewsAndRatings />
         </div>
       )
