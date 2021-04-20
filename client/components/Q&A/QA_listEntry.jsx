@@ -46,7 +46,7 @@ class QA_listEntry extends React.Component {
         <div>{this.state.answers.slice(this.state.offset, this.state.limit).map(answer =>
           <div><p>A: {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}</span></div>
           )}</div>
-        <div className="lma" onClick={this.lmaClick}>Load More Answers</div>
+        <div className="lma lmalink" onClick={this.lmaClick}>Load More Answers</div>
         </div>
       )
     } else {
