@@ -7,6 +7,7 @@ import ProductInfoShare from './ProductInfoShare.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
+import SizeSelector from './SizeSelector.jsx'
 
 
 class Overview extends React.Component {
@@ -14,6 +15,7 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
+      averageStars: this.props.stars,
       stylesArray: null,
       images: null,
       reviewsArray: null,
@@ -45,6 +47,8 @@ class Overview extends React.Component {
       .then((response) => {
         console.log('this is the styles data: ', response.data.results)
 
+
+
         this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,
@@ -53,7 +57,10 @@ class Overview extends React.Component {
           styleName: response.data.results[0].name,
           currentPrice: response.data.results[0].original_price,
           currentSalePrice: response.data.results[0].sale_price,
-          selectedStyle: 0
+          selectedStyle: 0,
+          skusObject: response.data.results[0].skus,
+          numberOfReviews: this.props.numberOfReviews
+
         })
       })
       .catch((error) => {
@@ -61,21 +68,61 @@ class Overview extends React.Component {
       })
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
       this.componentDidMount()
+      axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
+        .then((response) => {
+          console.log('response ratings', response.data.ratings);
+
+          var rateObj = response.data.ratings;
+          var result = 0;
+          var numRating = 0;
+          console.log('result: ', result);
+          console.log('rateObj: ', this.state.ratingObj);
+          for (var key in rateObj) {
+            console.log('numKey');
+            result = result + Number(key) * Number(rateObj[key]);
+            numRating = numRating + Number(rateObj[key]);
+          }
+          console.log('result: ', result);
+          console.log('numRating: ', numRating);
+          var currRating = result / numRating;
+
+          this.setState({
+            averageStars: currRating
+          })
+          this.props.stars = currRating
+          console.log('state check of averageStars: ', this.state.averageStars)
+        })
+
+        .catch((error) => {
+          console.log('error inside averageStar making: ', error)
+        })
     }
+
+    if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
+      this.setState({
+        numberOfReviews: this.props.numberOfReviews
+      })
+
+    }
+
+
   }
 
   changeDisplayImage(index) {
+
     var styles = this.state.stylesArray;
+    // console.log('this is styles[index] in changeDisplayImage: ', styles[index])
     this.setState({
       images: styles[index].photos,
       // currentImageIndex: 0,
       styleName: styles[index].name,
       currentPrice: styles[index].original_price,
       currentSalePrice: styles[index].sale_price,
-      selectedStyle: index
+      selectedStyle: index,
+      skusObject: styles[index].skus
     })
   }
 
@@ -119,6 +166,7 @@ class Overview extends React.Component {
     if (this.state.stylesArray) {
       if (this.state.display_right_side) {
 
+
         return (
           <div id="af-overview-container">
 
@@ -136,7 +184,8 @@ class Overview extends React.Component {
               <div id="af-right-side"
                 styles={this.state.css_display}>
                 <ProductInfoHead
-                  stars={this.props.stars}
+                  numberOfReviews={this.state.numberOfReviews}
+                  stars={this.state.averageStars}
                   name={this.props.currentItem.name}
                   styleName={this.state.styleName}
                   slogan={this.props.currentItem.slogan}
@@ -145,18 +194,26 @@ class Overview extends React.Component {
                 /><br />
 
                 <StyleSelector
+
                   styles={this.state.stylesArray}
                   click={this.changeDisplayImage}
                   selected={this.state.selectedStyle}
                 /><br />
+                <SizeSelector
+                  skus={this.state.skusObject}
+                  productName={this.props.currentItem.name}
+                  styleName={this.state.styleName}
+                />
 
-                <AddToCart /><br />
+                {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
 
             </div><br />
 
-            <span id="af-product-description"><ProductInfoDescription description={this.props.currentItem.description} /></span>
+            <span id="af-product-description">
+              <ProductInfoDescription description={this.props.currentItem.description} />
+            </span>
 
           </div>)
       } else {
@@ -176,7 +233,9 @@ class Overview extends React.Component {
               />
             </div>
 
-            <span id="af-product-description"><ProductInfoDescription description={this.props.currentItem.description} /></span>
+            <span id="af-product-description">
+              <ProductInfoDescription description={this.props.currentItem.description} />
+            </span>
 
           </div>)
 
