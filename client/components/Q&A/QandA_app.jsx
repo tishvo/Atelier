@@ -64,7 +64,7 @@ class QandA_app extends React.Component {
       <div>
         <h1><div>Questions <span>&amp;</span> Answers</div></h1>
         <div><QA_search /></div>
-        <div><QA_list qa={this.state.defaultq4}/></div>
+        <div><QA_list qa={this.state.defaultq4} selected={this.state.selected}/></div>
         <div><button id="maq" onClick={this.maqClick}>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
         <div><AddQModal show={this.state.addQ} product={this.state.selected} onClose={this.showModal}/></div>
       </div>

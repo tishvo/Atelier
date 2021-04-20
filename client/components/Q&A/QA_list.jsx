@@ -12,7 +12,7 @@ class QA_list extends React.Component {
     return (
       <div className="qaList">
         {this.props.qa.map(item =>
-          <QA_listEntry item={item}/>
+          <QA_listEntry item={item} selected={this.props.selected}/>
           )}
       </div>
     )
