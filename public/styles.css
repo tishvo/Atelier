@@ -144,12 +144,11 @@
 }
 
 .qaList {
-  height: 200px;
+  height: 250px;
   overflow: scroll;
-<<<<<<< HEAD
 }
 
-/* lines 28-79 define Q&A modal window popup when add a Q is clicked */
+
 
 .qModal {
   width: 500px;
@@ -219,8 +218,11 @@
 .maq_hide {
   display: none;
 }
-=======
-  border-style: solid;
+
+.tv_anc {
+  font-weight: normal;
 }
 
->>>>>>> main
+.tv_underline {
+  text-decoration: underline;
+}

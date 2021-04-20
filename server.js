@@ -84,6 +84,7 @@ app.get('/products/:productId/related', function(req, res) {
 
 })
 
+//TV GET request for products questions and answers
 app.get('/questions/:productId', function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${req.params.productId}`;
 
@@ -93,8 +94,34 @@ app.get('/questions/:productId', function(req, res) {
     }
   })
   .then(response => {
-    console.log('got data in server /qa/questions request: ', response.data)
     res.status(202).send(response.data);
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
+})
+
+//TV PUT request to update usefulness of a question
+app.put('/questionshelpful/:questionId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.questionId}/helpful`;
+
+  axios({ method: 'put', url: url, headers: { 'Authorization': process.env.GITHUB_API_KEY } })
+  .then(response => {
+    res.status(204).send('put req successful')
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
+
+})
+
+//TV PUT request to update usefulness of an answer
+app.put('/answerhelpful/:answerId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answerId}/helpful`;
+
+  axios({ method: 'put', url: url, headers: { 'Authorization': process.env.GITHUB_API_KEY } })
+  .then(response => {
+    res.status(204).send('put req (a) successful')
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
