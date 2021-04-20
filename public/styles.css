@@ -1,6 +1,10 @@
+/* #af-overview-container {
+
+} */
+
 #af-style-thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius:50%
 }
 
@@ -8,18 +12,141 @@
   display: grid;
   grid-gap: 0px;
   grid-template-columns: repeat(4, 1fr);
+}
+
+#af-style-thumbnail-selected {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius:50%;
+  background-image: url('./checkmark.png');
+  background-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1
+}
+
+/* #af-front-page-container {
+  display: inline-block;
+} */
+
+#af-main-image {
+  width: 100%;
+  height: 100%;
+}
+
+#af-image-container {
+  margin-right: 10px;
+    position:relative;
+    display:inline-block;
+    height: 400px;
+    width: 400px;
+    text-align:center;
+    border:1px solid black;
+    transition-duration: 1s;
 
 }
 
-#af-main-image {
-  width: 30%;
-  height: 30%;
+#af-image-prev {
+  position:absolute;
+    bottom:10px;
+    left:10px;
+    width:100px;
+    height:30px;
+
+}
+
+#af-image-next {
+  position:absolute;
+    bottom:10px;
+    right:10px;
+    width:100px;
+    height:30px;
+
+}
+
+#af-image-expand {
+  position:absolute;
+    top:10px;
+    right:10px;
+    width:100px;
+    height:30px;
+
+}
+
+
+#af-front-page-container {
+  display: inline-block;
+  width: 100%;
+}
+
+#af-landing-box {
+  /* display: inline-block; */
+  float: left;
+  /* width: 400px; */
+}
+
+#af-right-side {
+  display: inline-block;
+
+  margin-left: 10px;
+}
+
+#af-product-description {
+  height: 25px;
+  padding: 100px;
+  border: 1px solid black;
+  float: left;
+}
+
+#af-strikethrough {
+  text-decoration: line-through;
+}
+
+#af-fb-share {
+  content: url('./images/facebook-share.png');
+  width: 10%;
+  height: 10%;
+
+}
+
+#af-twitter-share {
+  content: url('./images/twitter-share.png');
+  width: 10%;
+  height: 10%;
+
+}
+
+#af-pinterest-share {
+  content: url('./images/pinterest-share.png');
+  width: 10%;
+  height: 10%;
+
+}
+
+
+
+.rr-row-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.rr-column-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-thumbnail {
+  width: 100px;
+  height: 100px;
 
 }
 
 .qaList {
   height: 200px;
   overflow: scroll;
+<<<<<<< HEAD
 }
 
 /* lines 28-79 define Q&A modal window popup when add a Q is clicked */
@@ -92,3 +219,8 @@
 .maq_hide {
   display: none;
 }
+=======
+  border-style: solid;
+}
+
+>>>>>>> main
