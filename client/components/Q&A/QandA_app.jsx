@@ -16,13 +16,13 @@ class QandA_app extends React.Component {
     }
     this.render4Q = this.render4Q.bind(this);
     this.showModal = this.showModal.bind(this);
+    this.maqClick = this.maqClick.bind(this);
   }
 
   componentDidMount() {
     var productId = this.state.selected['id'];
     axios.get(`/questions/${productId}`)
     .then((response) => {
-      //console.log('tish', response.data.results)
       this.setState({
         questions: response.data.results
       })
@@ -49,6 +49,14 @@ class QandA_app extends React.Component {
     });
   }
 
+  maqClick(e) {
+    this.setState({
+      defaultq4: this.state.questions
+    })
+    var element = document.getElementById('maq');
+    element.classList.add('maq_hide');
+  }
+
 
 
   render() {
@@ -57,7 +65,7 @@ class QandA_app extends React.Component {
         <div>Questions <span>&amp;</span> Answers</div>
         <div><QA_search /></div>
         <div><QA_list qa={this.state.defaultq4}/></div>
-        <div><button>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
+        <div><button id="maq" onClick={this.maqClick}>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
         <div><AddQModal show={this.state.addQ} product={this.state.selected} onClose={this.showModal}/></div>
       </div>
     )

@@ -15,11 +15,6 @@ class QA_listEntry extends React.Component {
   }
 
 
-
-  componentDidMount() {
-
-  }
-
   lmaClick(e) {
 
     if (this.state.counter % 2 === 0) {
