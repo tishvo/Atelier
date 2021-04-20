@@ -1,6 +1,7 @@
 import React from 'react';
 import StarRating from './StarRating.jsx';
 import moment from 'moment';
+import {FaCheck} from 'react-icons/fa'
 
 class ReviewTile extends React.Component{
   constructor(props) {
@@ -8,14 +9,15 @@ class ReviewTile extends React.Component{
     this.state = {
       responseVisible: true,
       helpfulYes: this.props.reviewData.helpfulness,
-      helpfulHasBeenClicked: false
+      helpfulHasBeenClicked: false,
+      recommend: false
     };
     this.helpfulClick = this.helpfulClick.bind(this);
   }
 
   componentDidMount() {
+    //check if there is a response to a review, set responseVisible to true
     if(this.props.reviewData.response === null) {
-      console.log('CDM is NULL');
       this.setState({
         responseVisible: false
       });
@@ -24,6 +26,8 @@ class ReviewTile extends React.Component{
         responseVisible: true
       });
     }
+
+
   };
 
   helpfulClick(event) {
@@ -46,15 +50,9 @@ class ReviewTile extends React.Component{
       <div>
         <StarRating stars={this.props.reviewData.rating}/>
         <div>{this.props.reviewData.reviewer_name}, {moment(this.props.reviewData.date).format('MMM Do YYYY')}</div>
-        <p>Review Summary: {this.props.reviewData.summary}</p>
-        <p>Review Body: {this.props.reviewData.body}</p>
-        {/*
-          How do we want to handle a response? make a whole component?
-          i could handle it with state
-          have a function that check to see if reviewdata has a value.
-          if it does, show the element
-          else keep it hidden
-        */}
+        <div>Review Summary: {this.props.reviewData.summary}</div>
+        <div>Review Body: {this.props.reviewData.body}</div>
+        {}
         {this.state.responseVisible ? <p>Response: {this.props.reviewData.response}</p> : null}
         <div>Helpful?
           <div onClick={this.helpfulClick}>Yes</div>

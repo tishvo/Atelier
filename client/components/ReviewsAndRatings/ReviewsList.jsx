@@ -1,9 +1,9 @@
 import React from 'react';
 import dummyReviewData from './dummyReviewData.js';
 import axios from 'axios';
-//import { API } from './config.js';
 import SortingOptions from './SortingOptions.jsx';
 import ReviewTile from './ReviewTile.jsx';
+
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class ReviewList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    //console.log('componentDidMount');
     var fill = this.props.reviewData.slice(0, this.state.visibleReviewVal);
     this.setState({
       currReviews: fill
@@ -36,15 +36,13 @@ class ReviewList extends React.Component {
     console.log('this');
   }
 
+  //click handler for 'more reviews' button
   handleClick(event) {
     event.preventDefault();
-    console.log('first: ', this.state.visibleReviewVal);
     this.setState({
       visibleReviewVal: this.state.visibleReviewVal += 2,
       currReviews: this.props.reviewData.slice(0, this.state.visibleReviewVal)
     })
-    console.log('second: ', this.state.visibleReviewVal);
-
   }
 
   //function that will be passed down to SortingOptions that will change sorting order of the currReviews
@@ -55,12 +53,6 @@ class ReviewList extends React.Component {
   }
 
   render() {
-
-    console.log('ReviewList reviewData: ', this.props.reviewData);
-    console.log('ReviewList currReviews: ', this.state.currReviews);
-    //console.log('cutting down reviewlist: ', this.props.reviewData.slice(0, 2));
-
-
 
     return (
       <div>
