@@ -6,8 +6,11 @@ class ReviewTile extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      responseVisible: true
+      responseVisible: true,
+      helpfulYes: this.props.reviewData.helpfulness,
+      helpfulHasBeenClicked: false
     };
+    this.helpfulClick = this.helpfulClick.bind(this);
   }
 
   componentDidMount() {
@@ -16,13 +19,24 @@ class ReviewTile extends React.Component{
       this.setState({
         responseVisible: false
       });
+    } else {
+      this.setState({
+        responseVisible: true
+      });
     }
-  }
+  };
 
-  checkForResponse() {
-    if(this.props.reviewData.response === null) {
-      console.log('there is a response');
+  helpfulClick(event) {
+    event.preventDefault();
+    if (!this.state.helpfulHasBeenClicked) {
+      this.setState({
+        helpfulYes: this.state.helpfulYes + 1,
+        helpfulHasBeenClicked: true
+      })
+    } else {
+      console.log('cant add anymore');
     }
+
   }
 
   render() {
@@ -42,7 +56,12 @@ class ReviewTile extends React.Component{
           else keep it hidden
         */}
         {this.state.responseVisible ? <p>Response: {this.props.reviewData.response}</p> : null}
+        <div>Helpful?
+          <div onClick={this.helpfulClick}>Yes</div>
+          <div>({this.state.helpfulYes})   |</div>
+          <div>Report</div>
 
+        </div>
       </div>
     )
   }
