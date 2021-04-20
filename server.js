@@ -126,7 +126,19 @@ app.put('/answerhelpful/:answerId', function(req, res) {
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
   })
+})
 
+//TV PUT request to report an answer
+app.put('/answerreport/:answerId', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answerId}/report`;
+
+  axios({ method: 'put', url: url, headers: { 'Authorization': process.env.GITHUB_API_KEY } })
+  .then(response => {
+    res.status(204).send('answer has been reported successfully')
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
 })
 
 // RR GET request for item id product info
