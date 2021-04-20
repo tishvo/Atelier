@@ -20,11 +20,9 @@ class QandA_app extends React.Component {
 
   componentDidMount() {
     var productId = this.state.selected['id'];
-    // this.setState({
-    //   selectedID: productId
-    // })
     axios.get(`/questions/${productId}`)
     .then((response) => {
+      //console.log('tish', response.data.results)
       this.setState({
         questions: response.data.results
       })
@@ -51,13 +49,14 @@ class QandA_app extends React.Component {
     });
   }
 
+
+
   render() {
     return (
       <div>
         <div>Questions <span>&amp;</span> Answers</div>
         <div><QA_search /></div>
         <div><QA_list qa={this.state.defaultq4}/></div>
-        <div>Load more answers</div>
         <div><button>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
         <div><AddQModal show={this.state.addQ} product={this.state.selected} onClose={this.showModal}/></div>
       </div>

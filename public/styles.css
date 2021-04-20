@@ -20,7 +20,6 @@
 .qaList {
   height: 200px;
   overflow: scroll;
-  border-style: solid;
 }
 
 /* lines 28-79 define Q&A modal window popup when add a Q is clicked */
@@ -76,4 +75,12 @@
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
   line-height: 1;
+}
+
+.questionBody {
+  font-weight: bold;
+}
+
+.lma {
+  padding-left: 20px;
 }
