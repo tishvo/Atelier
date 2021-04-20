@@ -9,7 +9,6 @@ class AddAModal extends React.Component {
       answer: '',
       nickname: '',
       email: ''
-
     }
     this.onClose = this.onClose.bind(this);
   }
