@@ -48,10 +48,7 @@ class App extends React.Component {
           })
         axios.get(`/reviews/meta/${this.state.currentItemId}`)
           .then((response) => {
-<<<<<<< HEAD
-=======
             console.log('response ratings', response.data.ratings);
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
 
             var rateObj = response.data.ratings;
             var result = 0;
@@ -68,11 +65,7 @@ class App extends React.Component {
             this.setState({
               averageStars: currRating
             })
-<<<<<<< HEAD
-            //console.log('state check of averageStars: ', this.state.averageStars)
-=======
              console.log('state check of averageStars: ', this.state.averageStars)
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
           })
 
           .catch((error) => {
@@ -83,11 +76,8 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
 
   }
 
@@ -99,12 +89,7 @@ class App extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    console.log('averageStars val: ', this.state.averageStars);
-    if (this.state.averageStars) {
-=======
   if (this.state.averageStars) {
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
       return (
         <div>
           <div>HELLO</div>

@@ -129,13 +129,8 @@ app.get('/reviews/meta/:productId', function(req, res) {
       'Authorization': process.env.GITHUB_API_KEY
     }
   })
-<<<<<<< HEAD
-  .then((response) => {
-
-=======
   .then(response => {
     // console.log('getting data for RP Card: ', res.data)
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
     res.status(202).send(response.data);
   })
   .catch(err => {
