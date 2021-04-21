@@ -16,24 +16,9 @@ class ProductInfoHead extends React.Component {
         numberOfReviews: this.props.numberOfReviews
       })
     }
-
-
-
-
   }
 
-  // componentDidMount() {
-  //   var starArray = this.star(this.props.stars)
-  //   this.setState({
-  //     starArray: starArray
-  //   })
-  //   console.log('infoProductHead mounted, star array: ', this.state.starArray)
-  // }
-
-
   render() {
-
-
 
     // console.log('number of stars: ', this.props.stars)
     console.log('Number of reviews: ', this.state.numberOfReviews)

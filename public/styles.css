@@ -1,6 +1,8 @@
-/* #af-overview-container {
-
-} */
+#app {
+  width: 80%;
+  margin: auto;
+  max-width: 960px;
+}
 
 #af-style-thumbnail {
   width: 50px;
@@ -10,7 +12,8 @@
 
 #af-style-selector {
   display: grid;
-  grid-gap: 0px;
+  width: 50px;
+  grid-gap: 10px;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -28,7 +31,7 @@
 }
 
 /* #af-front-page-container {
-  display: inline-block;
+
 } */
 
 #af-main-image {
@@ -36,16 +39,49 @@
   height: 100%;
 }
 
-#af-image-container {
-  margin-right: 10px;
-    position:relative;
-    display:inline-block;
-    height: 400px;
-    width: 400px;
-    text-align:center;
-    border:1px solid black;
-    transition-duration: 1s;
+/* #af-nameless {
+  justify-content: center
+} */
 
+#af-overview-container {
+  /* position: absolute; */
+  display: inline;
+
+}
+
+#af-front-page-container {
+  /* display: inline-block;
+  width: 100%; */
+}
+
+ #af-landing-box {
+   /* position: relative;
+   display: inline;
+   width: 400px; */
+}
+
+#af-image-container {
+  cursor: zoom-in;
+  margin-right: 10px;
+  position:absolute;
+  /* display:inline; */
+  height: 400px;
+  width: 400px;
+  text-align:center;
+  border:1px solid black;
+  transition-duration: 1s;
+  z-index: 10;
+}
+
+#af-right-side {
+  width: 300px;
+  /* position: relative; */
+  float: right;
+  /* display: inline-block; */
+  /* overflow: hidden; */
+  margin-right: 10px;
+  /* box-sizing: border-box;
+  z-index: 0 */
 }
 
 #af-image-prev {
@@ -66,6 +102,7 @@
 
 }
 
+
 #af-image-expand {
   position:absolute;
     top:10px;
@@ -75,23 +112,7 @@
 
 }
 
-
-#af-front-page-container {
-  display: inline-block;
-  width: 100%;
-}
-
-#af-landing-box {
-  /* display: inline-block; */
-  float: left;
-  /* width: 400px; */
-}
-
-#af-right-side {
-  display: inline-block;
-
-  margin-left: 10px;
-}
+/* // */
 
 #af-product-description {
   height: 25px;
@@ -164,6 +185,9 @@
 
 
 
+/* // */
+
+
 .rr-row-container {
   display: flex;
   flex-direction: row;
@@ -186,8 +210,3 @@
   border-style: solid;
 }
 
-#app {
-  width: 80%;
-  margin: auto;
-  max-width: 960px;
-}

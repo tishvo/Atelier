@@ -80,7 +80,7 @@ class RelatedProducts extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id>
         <h2>Related Products: </h2>
         <div className='rr-row-container' >
           <Arrow

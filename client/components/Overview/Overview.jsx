@@ -100,15 +100,11 @@ class Overview extends React.Component {
           console.log('error inside averageStar making: ', error)
         })
     }
-
     if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
       this.setState({
         numberOfReviews: this.props.numberOfReviews
       })
-
     }
-
-
   }
 
   changeDisplayImage(index) {
@@ -154,9 +150,9 @@ class Overview extends React.Component {
     } else {
 
       this.setState({
-        css_width: { width: '1200px' },
+        css_width: { width: '960px' },
         expand_clicked: true,
-        display_right_side: false
+        display_right_side: true
       })
     }
   }
@@ -164,10 +160,11 @@ class Overview extends React.Component {
   render() {
 
     if (this.state.stylesArray) {
-      if (this.state.display_right_side) {
+      // if (this.state.display_right_side) {
 
 
-        return (
+      return (
+        <div id="af-nameless">
           <div id="af-overview-container">
 
             <div id="af-landing-box">
@@ -208,38 +205,36 @@ class Overview extends React.Component {
                 {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
-
             </div><br />
+          </div>
+          <p id="af-product-description">
+            <ProductInfoDescription description={this.props.currentItem.description} />
+          </p>
+        </div>)
+      // } else {
 
-            <span id="af-product-description">
-              <ProductInfoDescription description={this.props.currentItem.description} />
-            </span>
+      // return (
+      //   <div id="af-overview-container">
 
-          </div>)
-      } else {
+      //     <div id="af-landing-box">
+      //       <ImageGallery
+      //         width={this.state.css_width}
+      //         click={this.expand}
+      //         images={this.state.images}
+      //         currentImage={this.state.currentImage}
+      //         currentIndex={this.state.currentImageIndex}
+      //         next={this.nextImage}
+      //         prev={this.prevImage}
+      //       />
+      //     </div>
 
-        return (
-          <div id="af-overview-container">
+      //     <span id="af-product-description">
+      //       <ProductInfoDescription description={this.props.currentItem.description} />
+      //     </span>
 
-            <div id="af-landing-box">
-              <ImageGallery
-                width={this.state.css_width}
-                click={this.expand}
-                images={this.state.images}
-                currentImage={this.state.currentImage}
-                currentIndex={this.state.currentImageIndex}
-                next={this.nextImage}
-                prev={this.prevImage}
-              />
-            </div>
+      //   </div>)
 
-            <span id="af-product-description">
-              <ProductInfoDescription description={this.props.currentItem.description} />
-            </span>
-
-          </div>)
-
-      }
+      // }
     } else {
       return null;
     }
