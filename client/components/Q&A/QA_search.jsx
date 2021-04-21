@@ -9,6 +9,7 @@ class QA_search extends React.Component {
       search: ''
     }
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
@@ -17,11 +18,15 @@ class QA_search extends React.Component {
     })
   }
 
+  onSubmit() {
+    this.props.onSearch(this.state.search)
+  }
+
   render() {
     return (
       <div>
         <input placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="125"></input>
-        <button>search</button>
+        <button onClick={this.onSubmit}>search</button>
       </div>
     )
   }
