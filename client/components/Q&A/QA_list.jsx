@@ -11,8 +11,8 @@ class QA_list extends React.Component {
   render() {
     return (
       <div className="qaList">
-        {this.props.qa.map(item =>
-          <QA_listEntry item={item}/>
+        {this.props.qa.map((item, index) =>
+          <QA_listEntry key={index} item={item} selected={this.props.selected}/>
           )}
       </div>
     )

@@ -110,13 +110,15 @@ export default class ComparisonModal extends React.Component {
     } else {
       return (
         <div className='rr-comparison-modal' >
-          <div className="rr-modal-content">
+          <div className='qModal qContent' id='qModal'>
             <h2> Comparing </h2>
             { this.renderTable() }
-            <button
-              onClick={(e => { this.props.close(e); })}>
-              Close
-            </button>
+            <div className='qaModalToggle'>
+              <button
+                onClick={(e => { this.props.close(e); })}>
+                Close
+              </button>
+            </div>
           </div>
         </div>
         );
