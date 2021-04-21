@@ -68,17 +68,18 @@ class RPCard extends React.Component {
         <button  onClick={e => { this.showModal(); }} > &#9734; </button>
         <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={ () => {
           return this.props.currentProduct } }/>
-        <span>
-          {this.state.itemData.name}
-        </span>
+        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
+        return this.props.click(this.state.itemData) } }></img>
         <span>
           {this.state.itemData.category}
         </span>
+        <h4 onClick={ () => {
+        return this.props.click(this.state.itemData) } }>
+          {this.state.itemData.name}
+        </h4>
         <span>
           {this.state.itemData.default_price}
         </span>
-        <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
-        return this.props.click(this.state.itemData) } }></img>
         <div>
           star rating
         </div>
