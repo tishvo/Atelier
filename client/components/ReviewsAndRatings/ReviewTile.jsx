@@ -27,6 +27,10 @@ class ReviewTile extends React.Component{
       });
     }
 
+    //check if the current product is recommended, set to true if recommended
+    if(this.props.reviewData.recommend) {
+      //console.log('check');
+    }
 
   };
 
@@ -38,14 +42,14 @@ class ReviewTile extends React.Component{
         helpfulHasBeenClicked: true
       })
     } else {
-      console.log('cant add anymore');
+      //console.log('cant add anymore');
     }
 
   }
 
   render() {
-    console.log('is state changing? ', this.state.responseVisible);
-    console.log('reviewData: ', this.props.reviewData);
+    //console.log('is state changing? ', this.state.responseVisible);
+    //console.log('reviewData: ', this.props.reviewData);
     return (
       <div>
         <StarRating stars={this.props.reviewData.rating}/>

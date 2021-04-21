@@ -34,10 +34,6 @@ class App extends React.Component {
       .then(() => {
         axios.get(`/reviews/${this.state.currentItemId}`)
           .then((response) => {
-<<<<<<< HEAD
-            //console.log('reviews response data: ', response.data.results);
-=======
->>>>>>> d12c58102681bbf06c41b287b92e2521db4a8166
             this.setState({
               numberOfReviews: response.data.results.length,
               reviewData: response.data.results
@@ -81,14 +77,20 @@ class App extends React.Component {
 
   }
 
+
+
   relatedClick(e) {
     console.log('the click worked', e)
     this.setState({
-      currentItem: e
+      currentItem: e,
+      currentItemId: e.id
+
     })
   }
 
   render() {
+    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
   if (this.state.averageStars) {
       return (
         <div>
