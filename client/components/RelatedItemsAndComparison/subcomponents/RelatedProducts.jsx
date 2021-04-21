@@ -58,8 +58,7 @@ class RelatedProducts extends React.Component {
     if (this.state.firstCard > 0) {
       this.setState({
         firstCard: this.state.firstCard -1,
-        lastCard: this.state.lastCard -1,
-        visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+        lastCard: this.state.lastCard -1
       }, () => {
         this.setState({
           visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
