@@ -53,7 +53,6 @@ class RPCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.currentProduct);
     if(this.props.itemId !== prevProps.itemId) { this.fetchData(); }
   }
 
