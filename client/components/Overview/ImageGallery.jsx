@@ -1,5 +1,6 @@
 import React from 'react';
 import StyleSelector from './StyleSelector.jsx'
+import ThumbnailCarousel from './ThumbnailCarousel.jsx'
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -18,6 +19,9 @@ class ImageGallery extends React.Component {
 
     if (this.props.currentIndex === 0) {
       return (<div id="af-image-container" style={this.props.width}>
+
+        <ThumbnailCarousel />
+
         <button id="af-image-expand"
           onClick={this.props.click}>
           exp
