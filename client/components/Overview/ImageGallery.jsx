@@ -9,9 +9,15 @@ class ImageGallery extends React.Component {
     this.state = {
       widthStyle: { width: '500px' },
       expand_clicked: false,
+
     }
   }
 
+  changeThumbnails() {
+    this.setState({
+
+    })
+  }
 
 
   render() {
@@ -37,7 +43,7 @@ class ImageGallery extends React.Component {
         </div>
 
           </div>
-          <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
+          <ThumbnailCarousel width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
         </div>)
     }
     if (this.props.currentIndex === this.props.images.length - 1) {
@@ -45,7 +51,10 @@ class ImageGallery extends React.Component {
       <div>
         <div id="af-image-container" style={this.props.width}>
         <div id="af-image-expand"
-          onClick={this.props.click}></div>
+          onClick={() => {
+            this.props.click()
+            //this.changeThumbnails()
+          }}></div>
 
         <div id="af-image-prev"
           onClick={() =>
@@ -55,7 +64,7 @@ class ImageGallery extends React.Component {
         <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}>
         </img>
         </div>
-        <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
+        <ThumbnailCarousel width={this.state.thumbnailCarouselBoxWidth} images={this.props.images} select={this.props.select}/>
       </div>)
     }
     return (
@@ -77,7 +86,7 @@ class ImageGallery extends React.Component {
             this.props.next(this.props.currentIndex)
           }></div>
       </div>
-      <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
+      <ThumbnailCarousel width={this.state.thumbnailCarouselBoxWidth} images={this.props.images} select={this.props.select}/>
       </div>)
 
   }

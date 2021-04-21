@@ -29,7 +29,9 @@ class Overview extends React.Component {
       css_width: { width: '500px' },
       expand_clicked: false,
       display_right_side: true,
-      imgElementId: "af-main-image"
+      imgElementId: "af-main-image",
+      thumbnailCarouselBoxWidth: { width: '100px' },
+      thumbnailCarouselBoxMiniHeight: { height: '0px' }
     }
 
     this.changeDisplayImage = this.changeDisplayImage.bind(this);
@@ -151,16 +153,15 @@ class Overview extends React.Component {
     console.log(this.state.expand_clicked)
 
 
-
-
-
     if (this.state.expand_clicked) {
 
       this.setState({
         css_width: { width: '500px' },
         expand_clicked: false,
         display_right_side: true,
-        imgElementId: "af-main-image"
+        imgElementId: "af-main-image",
+        thumbnailCarouselBoxWidth: { width: '100px' },
+        thumbnailCarouselBoxMiniHeight: { height: '0px' }
       })
     } else {
 
@@ -168,7 +169,9 @@ class Overview extends React.Component {
         css_width: { width: '960px' },
         expand_clicked: true,
         display_right_side: true,
-        imgElementId: "af-main-image-expanded"
+        imgElementId: "af-main-image-expanded",
+        thumbnailCarouselBoxWidth: { width: '00px' },
+        thumbnailCarouselBoxMiniHeight: { height: '25px' }
 
       })
     }
@@ -186,6 +189,8 @@ class Overview extends React.Component {
 
             <div id="af-landing-box">
               <ImageGallery
+                thumbnailsWidth={this.state.thumbnailCarouselBoxWidth}
+                thumbnailsMiniHeigth={this.state.thumbnailCarouselBoxMiniHeight}
                 imgId={this.state.imgElementId}
                 width={this.state.css_width}
                 click={this.expand}

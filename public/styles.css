@@ -108,6 +108,7 @@
   height: 440px;
   overflow: scroll;
   z-index: 3;
+  transition-duration: 1s;
 }
 
 #af-thumbnail-carousel-box::-webkit-scrollbar {
@@ -126,8 +127,6 @@
   grid-gap: 15px;
   grid-template-columns: repeat(1, 1fr);
   z-index: 1;
-
-
 }
 
 #af-thumbnail-carousel-image {
