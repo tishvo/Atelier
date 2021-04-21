@@ -7,77 +7,77 @@ class ImageGallery extends React.Component {
     super(props);
 
     this.state = {
-      widthStyle: { width: '400px' },
+      widthStyle: { width: '500px' },
       expand_clicked: false,
-      display: 'true'
     }
-
-
   }
+
+
 
   render() {
 
     if (this.props.currentIndex === 0) {
-      return (<div id="af-image-container" style={this.props.width}>
+      return (
+        <div>
 
-        <ThumbnailCarousel />
 
-        <button id="af-image-expand"
-          onClick={this.props.click}>
-          exp
-        </button>
 
-        <img id="af-main-image"
-          src={this.props.images[this.props.currentIndex]['url']} >
-        </img>
+          <div id="af-image-container" style={this.props.width}>
+            <div id="af-image-expand"
+              onClick={this.props.click}></div>
 
-        <button id="af-image-next"
-          onClick={() =>
-            this.props.next(this.props.currentIndex)
-          }>
-          NEXT
-        </button>
+            <img id={this.props.imgId}
+              src={this.props.images[this.props.currentIndex]['url']} >
+            </img>
 
-      </div>)
+            <div id="af-image-next"
+              onClick={() =>
+                this.props.next(this.props.currentIndex)
+              }>
+        </div>
+
+          </div>
+          <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
+        </div>)
     }
     if (this.props.currentIndex === this.props.images.length - 1) {
-      return (<div id="af-image-container" style={this.props.width}>
-        <button id="af-image-expand"
-          onClick={this.props.click}>
-          exp
-        </button>
+      return (
+      <div>
+        <div id="af-image-container" style={this.props.width}>
+        <div id="af-image-expand"
+          onClick={this.props.click}></div>
 
-        <button id="af-image-prev"
+        <div id="af-image-prev"
           onClick={() =>
             this.props.prev(this.props.currentIndex)
-          }>
-          PREV
-        </button>
+          }></div>
 
-        <img id="af-main-image" src={this.props.images[this.props.currentIndex]['url']}>
+        <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}>
         </img>
+        </div>
+        <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
       </div>)
     }
     return (
+      <div>
       <div id="af-image-container" style={this.props.width}>
-        <button id="af-image-expand"
+        <div id="af-image-expand"
           onClick={this.props.click}
-        >exp
-        </button>
+        ></div>
 
-        <button id="af-image-prev"
+        <div id="af-image-prev"
           onClick={() =>
             this.props.prev(this.props.currentIndex)
-          }>PREV
-        </button>
+          }></div>
 
-        <img id="af-main-image" src={this.props.images[this.props.currentIndex]['url']}></img>
+        <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}></img>
 
-        <button id="af-image-next"
+        <div id="af-image-next"
           onClick={() =>
             this.props.next(this.props.currentIndex)
-          }>NEXT
-        </button>
+          }></div>
+      </div>
+      <ThumbnailCarousel images={this.props.images} select={this.props.select}/>
       </div>)
 
   }

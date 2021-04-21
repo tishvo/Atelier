@@ -7,7 +7,7 @@ class ThumbnailCarouselArrowUp extends React.Component {
 
   render () {
     return (
-<div></div>
+<div id="af-thumbnail-arrow-up" onClick={this.props.click}>UP</div>
     )
   }
 

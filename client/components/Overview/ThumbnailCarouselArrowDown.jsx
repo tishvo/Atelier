@@ -7,7 +7,7 @@ class ThumbnailCarouselArrowDown extends React.Component {
 
   render () {
     return (
-<div></div>
+<div id="af-thumbnail-arrow-down" onClick={this.props.click}>DWN</div>
     )
   }
 

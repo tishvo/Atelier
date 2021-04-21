@@ -26,8 +26,8 @@ class App extends React.Component {
 
         this.setState({
           data: response.data,
-          currentItem: response.data[0],
-          currentItemId: response.data[0].id,
+          currentItem: response.data[4],
+          currentItemId: response.data[4].id,
           averageStars: null
         })
       })
@@ -91,8 +91,8 @@ class App extends React.Component {
         <div>
           <div>HELLO</div>
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
-          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
-          <QandA_app currentItem={this.state.currentItem}/>
+          {/* <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
+          <QandA_app currentItem={this.state.currentItem}/> */}
           <ReviewsAndRatings />
         </div>
       )

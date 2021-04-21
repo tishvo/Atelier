@@ -7,7 +7,9 @@ class ThumbnailCarouselPic extends React.Component {
 
   render () {
     return (
-<div></div>
+<div id="af-thumbnail-carousel-image-box">
+  <img id="af-thumbnail-carousel-image" src={this.props.imgUrl.thumbnail_url} onClick={() => this.props.select(this.props.index)}></img>
+</div>
     )
   }
 

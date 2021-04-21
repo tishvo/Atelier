@@ -26,15 +26,17 @@ class Overview extends React.Component {
       selectedStyle: null,
       expand_clicked: false,
       css_display: null,
-      css_width: { width: '400px' },
+      css_width: { width: '500px' },
       expand_clicked: false,
-      display_right_side: true
+      display_right_side: true,
+      imgElementId: "af-main-image"
     }
 
     this.changeDisplayImage = this.changeDisplayImage.bind(this);
     this.nextImage = this.nextImage.bind(this);
     this.prevImage = this.prevImage.bind(this);
     this.expand = this.expand.bind(this);
+    this.selectImage = this.selectImage.bind(this);
   }
 
   componentDidMount() {
@@ -122,6 +124,14 @@ class Overview extends React.Component {
     })
   }
 
+  selectImage(index) {
+    this.setState({
+      currentImage: this.state.images[index]['url'],
+      currentImageIndex: index
+    })
+
+  }
+
   nextImage(index) {
     this.setState({
       currentImage: this.state.images[(index + 1)]['url'],
@@ -140,19 +150,26 @@ class Overview extends React.Component {
     console.log('expanding!')
     console.log(this.state.expand_clicked)
 
+
+
+
+
     if (this.state.expand_clicked) {
 
       this.setState({
-        css_width: { width: '400px' },
+        css_width: { width: '500px' },
         expand_clicked: false,
-        display_right_side: true
+        display_right_side: true,
+        imgElementId: "af-main-image"
       })
     } else {
 
       this.setState({
         css_width: { width: '960px' },
         expand_clicked: true,
-        display_right_side: true
+        display_right_side: true,
+        imgElementId: "af-main-image-expanded"
+
       })
     }
   }
@@ -169,6 +186,7 @@ class Overview extends React.Component {
 
             <div id="af-landing-box">
               <ImageGallery
+                imgId={this.state.imgElementId}
                 width={this.state.css_width}
                 click={this.expand}
                 images={this.state.images}
@@ -176,6 +194,7 @@ class Overview extends React.Component {
                 currentIndex={this.state.currentImageIndex}
                 next={this.nextImage}
                 prev={this.prevImage}
+                select={this.selectImage}
               />
 
               <div id="af-right-side"
@@ -207,9 +226,9 @@ class Overview extends React.Component {
               </div>
             </div><br />
           </div>
-          <p id="af-product-description">
+          <div id="af-product-description">
             <ProductInfoDescription description={this.props.currentItem.description} />
-          </p>
+          </div>
         </div>)
       // } else {
 
