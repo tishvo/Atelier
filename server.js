@@ -200,7 +200,7 @@ app.get('/products/:productId', function(req, res) {
 
 app.get('/reviews/meta/:productId', function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta/?product_id=${req.params.productId}`;
-  console.log('inside meta request, server side');
+
   axios.get(url, {
     headers: {
       'Authorization': process.env.GITHUB_API_KEY
