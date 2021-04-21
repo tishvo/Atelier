@@ -29,11 +29,12 @@ class ReviewTile extends React.Component{
 
     //check if the current product is recommended, set to true if recommended
     if(this.props.reviewData.recommend) {
-      //console.log('check');
+      console.log('is this product recommended: ', this.props.reviewData.recommend);
     }
 
   };
 
+  //only allows for one yes click, adds one to helpful
   helpfulClick(event) {
     event.preventDefault();
     if (!this.state.helpfulHasBeenClicked) {
@@ -41,10 +42,7 @@ class ReviewTile extends React.Component{
         helpfulYes: this.state.helpfulYes + 1,
         helpfulHasBeenClicked: true
       })
-    } else {
-      //console.log('cant add anymore');
     }
-
   }
 
   render() {
