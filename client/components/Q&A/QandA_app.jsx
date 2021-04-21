@@ -16,13 +16,11 @@ class QandA_app extends React.Component {
     }
     this.render4Q = this.render4Q.bind(this);
     this.showModal = this.showModal.bind(this);
+    this.maqClick = this.maqClick.bind(this);
   }
 
   componentDidMount() {
     var productId = this.state.selected['id'];
-    // this.setState({
-    //   selectedID: productId
-    // })
     axios.get(`/questions/${productId}`)
     .then((response) => {
       this.setState({
@@ -51,14 +49,23 @@ class QandA_app extends React.Component {
     });
   }
 
+  maqClick(e) {
+    this.setState({
+      defaultq4: this.state.questions
+    })
+    var element = document.getElementById('maq');
+    element.classList.add('maq_hide');
+  }
+
+
+
   render() {
     return (
       <div>
-        <div>Questions <span>&amp;</span> Answers</div>
+        <h1><div>Questions <span>&amp;</span> Answers</div></h1>
         <div><QA_search /></div>
-        <div><QA_list qa={this.state.defaultq4}/></div>
-        <div>Load more answers</div>
-        <div><button>More Answered Questions</button><button onClick={e => { this.showModal(); }}>Add A Question +</button></div>
+        <div><QA_list qa={this.state.defaultq4} selected={this.state.selected}/></div>
+        <div><button id="maq" onClick={this.maqClick}>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
         <div><AddQModal show={this.state.addQ} product={this.state.selected} onClose={this.showModal}/></div>
       </div>
     )
