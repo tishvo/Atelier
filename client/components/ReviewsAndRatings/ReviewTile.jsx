@@ -29,8 +29,11 @@ class ReviewTile extends React.Component{
 
     //check if the current product is recommended, set to true if recommended
     if(this.props.reviewData.recommend) {
-      console.log('is this product recommended: ', this.props.reviewData.recommend);
-    }
+      //console.log('is this product recommended: ', this.props.reviewData.recommend);
+      this.setState({
+        recommend: true
+      });
+    };
 
   };
 
@@ -54,7 +57,7 @@ class ReviewTile extends React.Component{
         <div>{this.props.reviewData.reviewer_name}, {moment(this.props.reviewData.date).format('MMM Do YYYY')}</div>
         <div>Review Summary: {this.props.reviewData.summary}</div>
         <div>Review Body: {this.props.reviewData.body}</div>
-        {}
+        {this.state.recommend ? <p><FaCheck/> I recommend this product</p> : null}
         {this.state.responseVisible ? <p>Response: {this.props.reviewData.response}</p> : null}
         <div>Helpful?
           <div onClick={this.helpfulClick}>Yes</div>
