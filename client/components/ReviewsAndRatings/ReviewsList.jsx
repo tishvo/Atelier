@@ -20,7 +20,7 @@ class ReviewList extends React.Component {
     };
     this.handleSortingChange = this.handleSortingChange.bind(this);
     this.currReviewResize = this.currReviewResize.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMoreClick = this.handleMoreClick.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class ReviewList extends React.Component {
   }
 
   //click handler for 'more reviews' button
-  handleClick(event) {
+  handleMoreClick(event) {
     event.preventDefault();
     this.setState({
       visibleReviewVal: this.state.visibleReviewVal += 2,
@@ -58,13 +58,14 @@ class ReviewList extends React.Component {
       <div>
         <div>
           {/* Sorting Dropdown Menu */}
+          <form onChange={this.handleSortingChange}>
           {this.props.numReviews} reviews, sorted by
-          <select onChange={this.handleSortingChange}>
-            <option value='relevant'>Relevant</option>
-            <option value='helpful'>Helpful</option>
-            <option value='newest'>Newest</option>
+          <select >
+            <option>Relevant</option>
+            <option>Helpful</option>
+            <option>Newest</option>
           </select>
-
+          </form>
         </div>
         {this.state.currReviews.map((item, index) => {
           return (
@@ -72,7 +73,7 @@ class ReviewList extends React.Component {
           )
         })}
         <form>
-          <button onClick={this.handleClick}>
+          <button onClick={this.handleMoreClick}>
             More Reviews
           </button>
           <button>
