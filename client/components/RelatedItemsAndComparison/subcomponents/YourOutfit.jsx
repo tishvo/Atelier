@@ -93,7 +93,7 @@ const YourOutfit = (props) => {
   const renderList = () => {
     return (
       state.visibleData.map((product) => {
-        return <YOCard item={JSON.parse(JSON.stringify(product))} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
+        return <YOCard item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
       })
     )
   }
