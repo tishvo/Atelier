@@ -15,11 +15,9 @@ class ReviewsAndRatings extends React.Component {
 
   render() {
 
-
-
     return (
-      <div> Reviews and Ratings
-        <ReviewsList />
+      <div>
+        <ReviewsList stars={this.props.stars} itemId={this.props.itemId} reviewData={this.props.reviewData} numReviews={this.props.numReviews}/>
       </div>
     );
   }

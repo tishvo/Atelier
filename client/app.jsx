@@ -36,7 +36,8 @@ class App extends React.Component {
           .then((response) => {
             console.log('found our reviews data!', response.data.results)
             this.setState({
-              numberOfReviews: response.data.results.length
+              numberOfReviews: response.data.results.length,
+              reviewData: response.data.results
             });
           })
           .catch((error) => {
@@ -66,7 +67,7 @@ class App extends React.Component {
           })
 
           .catch((error) => {
-            console.log('error inside averageStar making: ', error)
+            console.log('error inside reviews meta get: ', error)
           })
       })
 
@@ -78,14 +79,20 @@ class App extends React.Component {
 
   }
 
+
+
   relatedClick(e) {
     console.log('the click worked', e)
     this.setState({
-      currentItem: e
+      currentItem: e,
+      currentItemId: e.id
+
     })
   }
 
   render() {
+    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
   if (this.state.averageStars) {
       return (
         <div>
@@ -93,7 +100,7 @@ class App extends React.Component {
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
           <QandA_app currentItem={this.state.currentItem}/>
-          <ReviewsAndRatings />
+          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews}/>
         </div>
       )
     } else {
