@@ -14,7 +14,7 @@ class RelatedProducts extends React.Component {
       allRelated: [],
       visibleRelated: [],
       firstCard: 0,
-      lastCard: 3,
+      lastCard: 4,
       lastIndex: 0
     };
 
@@ -38,7 +38,7 @@ class RelatedProducts extends React.Component {
           lastIndex: res.data.length,
           currentProduct: this.props.currentItem,
           firstCard: 0,
-          lastCard: 3
+          lastCard: 4
         }, () => {
           // console.log(this.state);
           this.setState({
@@ -83,10 +83,23 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    if (this.state.firstCard === 0) {
+    if (this.state.firstCard === 0 && this.state.lastIndex <= 4) {
       return (
         <div>
-          <h2>Related Products: </h2>
+          <h2>Related Products</h2>
+          <div className='rr-row-container' >
+
+            {this.state.visibleRelated.map( (relatedItem, index) =>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
+            )}
+
+          </div>
+        </div>
+      )
+    } else if (this.state.firstCard === 0) {
+      return (
+        <div>
+          <h2>Related Products</h2>
           <div className='rr-row-container' >
 
             {this.state.visibleRelated.map( (relatedItem, index) =>
@@ -104,7 +117,7 @@ class RelatedProducts extends React.Component {
     } else if (this.state.lastCard === this.state.lastIndex) {
       return (
         <div>
-          <h2>Related Products: </h2>
+          <h2>Related Products</h2>
           <div className='rr-row-container' >
 
             <div className="rr-carousel-arrow" >
@@ -124,7 +137,7 @@ class RelatedProducts extends React.Component {
     }
     return (
       <div>
-        <h2>Related Products: </h2>
+        <h2>Related Products</h2>
         <div className='rr-row-container' >
 
           <div className="rr-carousel-arrow">

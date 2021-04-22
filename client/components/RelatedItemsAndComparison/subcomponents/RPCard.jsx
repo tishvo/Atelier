@@ -18,7 +18,8 @@ class RPCard extends React.Component {
     this.styles = {
       'margins': 'center',
       'borderStyle': 'solid',
-      'width': '30%'
+      'width': '30%',
+      'height': '300px'
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);

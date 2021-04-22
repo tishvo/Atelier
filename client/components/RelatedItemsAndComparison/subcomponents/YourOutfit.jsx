@@ -128,7 +128,7 @@ const YourOutfit = (props) => {
   if (state.firstCard === 0 && state.lastIndex <= 3) {
     return (
       <div>
-        <h2>Your Outfit: </h2>
+        <h2>Your Outfit</h2>
 
         <div className='rr-row-container' >
 
@@ -141,7 +141,7 @@ const YourOutfit = (props) => {
   } else if (state.firstCard === 0) {
     return (
       <div>
-        <h2>Your Outfit: </h2>
+        <h2>Your Outfit</h2>
         <div className='rr-row-container' >
 
           { renderAddButton() }
@@ -160,7 +160,7 @@ const YourOutfit = (props) => {
   } else if (state.lastCard === state.lastIndex) {
     return (
       <div>
-        <h2>Your Outfit: </h2>
+        <h2>Your Outfit</h2>
         <div className='rr-row-container' >
 
           <div className="rr-carousel-arrow">
@@ -179,7 +179,7 @@ const YourOutfit = (props) => {
   } else {
     return (
       <div>
-        <h2>Your Outfit: </h2>
+        <h2>Your Outfit</h2>
         <div className='rr-row-container' >
 
           <div className="rr-carousel-arrow">
