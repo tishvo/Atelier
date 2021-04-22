@@ -43,7 +43,6 @@ const YourOutfit = (props) => {
   const addItem = (data) => {
     // adds item to the localStorage by id
     localStorage.setItem(data.id, JSON.stringify(data));
-    console.log('added to localStorage: ', localStorage);
     // loop through localStorage and refresh state
     const localData = [];
     for (var key in localStorage) {
@@ -78,7 +77,6 @@ const YourOutfit = (props) => {
   const nextSlide = () => {
     // console.log('clicked next slide');
     const lastIndex = state.allData.length > 0 ? state.allData.length - 1 : 0;
-    console.log('this is lastIndex: ', lastIndex);
     if (state.lastCard <= lastIndex) {
       setState({
         allData: state.allData,
@@ -92,8 +90,8 @@ const YourOutfit = (props) => {
 
   const renderList = () => {
     return (
-      state.visibleData.map((product) => {
-        return <YOCard item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
+      state.visibleData.map((product, index) => {
+        return <YOCard key={index} item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
       })
     )
   }

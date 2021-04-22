@@ -10,18 +10,44 @@ class RelatedItemsAndComparison extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      currentItem: ''
+    };
+
+    this._isMounted = false;
   }
+
+  fetchData() {
+    axios.get(`/products/${this.props.currentItem.id}`)
+    .then(res => {
+
+      this._isMounted && this.setState({
+        currentItem: res.data
+      }, () => {
+        console.log(this.state.currentItem)
+      })
+    })
+    .catch(err => {
+      console.log('RELATED PRODUCTS INDEX GET ERROR: ', err)
+    })
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    this._isMounted && this.fetchData();
+  }
+
   componentDidUpdate(prevProps) {
-    if(this.props.currentItem !== prevProps.currentItem) { this.render(); }
+    if(this.props.currentItem !== prevProps.currentItem) { this.fetchData(); this.render(); }
   }
 
   render() {
     return (
       <div>
         <div>
-          <RelatedProducts data={this.props.data} currentItem={this.props.currentItem}
+          <RelatedProducts data={this.props.data} currentItem={this.state.currentItem}
             click={this.props.click}/>
-          <YourOutfit data={this.props.data} currentItem={this.props.currentItem} click={this.props.click}/>
+          <YourOutfit data={this.props.data} currentItem={this.state.currentItem} click={this.props.click}/>
         </div>
       </div>
     )
