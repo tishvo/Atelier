@@ -16,6 +16,12 @@ class QA_search extends React.Component {
     this.setState({
       search: e.target.value
     })
+
+    if (e.target.value.length >= 3) {
+      this.onSubmit()
+    } else if (e.target.value.length === 0) {
+      this.onSubmit()
+    }
   }
 
   onSubmit() {
