@@ -217,7 +217,6 @@
 .qaList {
   height: 250px;
   overflow: scroll;
-  border-style: solid;
 }
 
 .qModal {
