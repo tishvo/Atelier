@@ -23,8 +23,6 @@ class RelatedItemsAndComparison extends React.Component {
 
       this._isMounted && this.setState({
         currentItem: res.data
-      }, () => {
-        console.log(this.state.currentItem)
       })
     })
     .catch(err => {

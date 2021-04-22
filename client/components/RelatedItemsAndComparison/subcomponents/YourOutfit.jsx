@@ -39,22 +39,28 @@ const YourOutfit = (props) => {
     updateState();
   }, [console.log('state after useEffect: ', state)])
 
-  // clickfunction
+  // clickfunction addItem
   const addItem = (data) => {
     // adds item to the localStorage by id
     localStorage.setItem(data.id, JSON.stringify(data));
     // loop through localStorage and refresh state
     const localData = [];
+    const prevLength = state.allData.length;
+    var newLastIndex = state.lastIndex;
     for (var key in localStorage) {
       if (key !== 'length' && localStorage[key].constructor !== Function) {
         localData.push(localStorage[key]);
       }
     }
+    // increment lastIndex ONLY IF new length is different
+    if (localData.length !== prevLength) {
+      newLastIndex ++;
+    }
     setState({
       allData: localData,
       firstCard: state.firstCard,
       lastCard: state.lastCard,
-      lastIndex: state.lastIndex + 1,
+      lastIndex: newLastIndex,
       visibleData: localData.slice(state.firstCard, state.lastCard)
     });
   };
