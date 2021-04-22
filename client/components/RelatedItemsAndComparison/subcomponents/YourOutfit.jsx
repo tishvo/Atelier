@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Arrow from './Arrow.jsx';
 import YOCard from './YOCard.jsx';
@@ -35,7 +35,7 @@ const YourOutfit = (props) => {
     });
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     updateState();
   }, [console.log('state after useEffect: ', state)])
 
