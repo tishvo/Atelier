@@ -8,6 +8,7 @@ import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
 import SizeSelector from './SizeSelector.jsx'
+import Characteristics from './Characteristics.jsx'
 
 
 class Overview extends React.Component {
@@ -32,7 +33,8 @@ class Overview extends React.Component {
       display_right_side: true,
       imgElementId: "af-main-image",
       thumbnailCarouselBoxWidth: { width: '100px' },
-      thumbnailCarouselBoxMiniHeight: { height: '0px' }
+      thumbnailCarouselBoxMiniHeight: { height: '0px' },
+      featuresArray: null
     }
 
     this.changeDisplayImage = this.changeDisplayImage.bind(this);
@@ -44,9 +46,22 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    console.log('this is local storage??? ', localStorage)
 
 
     var itemId = this.props.currentItem['id'];
+
+    axios.get(`/products/${itemId}`)
+    .then((response) => {
+      console.log('here we will have the characteristics', response);
+
+      this.setState ({
+        featuresArray: response.data.features
+      })
+    })
+    .catch ((error) => {
+      console.log('error in getting specific product', error)
+    })
 
     // get the styles by id
     axios.get(`/products/${itemId}/styles`)
@@ -222,7 +237,7 @@ class Overview extends React.Component {
 
   render() {
 
-    if (this.state.stylesArray) {
+    if (this.state.stylesArray && this.state.featuresArray) {
       // if (this.state.display_right_side) {
 
 
@@ -278,32 +293,10 @@ class Overview extends React.Component {
           </div>
           <div id="af-product-description">
             <ProductInfoDescription description={this.props.currentItem.description} />
+            <Characteristics features={this.state.featuresArray}/>
           </div>
         </div>)
-      // } else {
 
-      // return (
-      //   <div id="af-overview-container">
-
-      //     <div id="af-landing-box">
-      //       <ImageGallery
-      //         width={this.state.css_width}
-      //         click={this.expand}
-      //         images={this.state.images}
-      //         currentImage={this.state.currentImage}
-      //         currentIndex={this.state.currentImageIndex}
-      //         next={this.nextImage}
-      //         prev={this.prevImage}
-      //       />
-      //     </div>
-
-      //     <span id="af-product-description">
-      //       <ProductInfoDescription description={this.props.currentItem.description} />
-      //     </span>
-
-      //   </div>)
-
-      // }
     } else {
       return null;
     }

@@ -73,9 +73,18 @@ class SizeSelector extends React.Component {
       size: this.state.currentSize,
       quantity: this.state.currentQuantity
     }
+
+    // let localData = []
     console.log('objToAdd: ', objToAdd)
     this.state.cart.push(objToAdd)
     console.log('this.state.cart: ', this.state.cart)
+
+
+        localStorage['cart'] += (JSON.stringify(objToAdd))
+
+console.log('this is localStorage now: ', localStorage)
+
+   // localStorage.setItem('cart', objToAdd)
 
 
   }
@@ -96,7 +105,7 @@ class SizeSelector extends React.Component {
 
     if (this.state.skusArray) {
       return (
-        <div>
+        <div id="af-user-customization">
           <select id="af-size-selector"
             onChange={() => this.createSizes(event.target.value)}>
             <option hidden="Select Size">Select Size</option>

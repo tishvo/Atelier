@@ -10,11 +10,19 @@ class ImageGallery extends React.Component {
     this.state = {
       widthStyle: { width: '500px' },
       expand_clicked: false,
-      currentSelected: 0
-
+      currentSelected: 0,
+      mouseX: 0,
+      mouseY: 0
     }
+    this.checkMouse = this.checkMouse.bind(this)
   }
 
+  checkMouse(e) {
+    console.log('this is e', e)
+    console.log('this is e.pageX, ', e.pageX)
+    console.log('thi is e.pageY, ', e.pageY)
+
+  }
 
 
 
@@ -22,11 +30,11 @@ class ImageGallery extends React.Component {
 
     if (this.props.currentIndex === 0) {
       return (
-        <div>
+        <div id="af-click-to-check">
 
 
 
-          <div id="af-image-container" style={this.props.width}>
+          <div id="af-image-container" onMouseOver={this.checkMouse} style={this.props.width}>
             <div id="af-image-expand"
               onClick={this.props.shrink}></div>
 

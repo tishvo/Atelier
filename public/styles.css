@@ -66,6 +66,8 @@
 } */
 
 #af-overview-container {
+  height: 500px;
+  Width: 960px;
   /* position: absolute; */
   display: inline;
 
@@ -204,9 +206,12 @@
 }
 
 #af-right-side {
-  width: 300px;
+  /* right: 1000px; */
+  margin-left: 600px;
+  width: 400px;
+  height: 500px;
   /* position: relative; */
-  float: right;
+  float: left;
   /* display: inline-block; */
   /* overflow: hidden; */
   margin-right: 10px;
@@ -249,44 +254,73 @@
 
 /* // */
 
+#af-user-customization {
+  height: 100px;
+  display: grid;
+  width: 100px;
+  grid-gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+  z-index: 1;
+
+}
+
+#af-size-selector {
+  width: 100px;
+  height: 25px;
+}
+
+#af-size-quantity-selector {
+  width: 100px;
+  height: 25px;
+}
+
 #af-product-description {
-  margin-top: 150px;
+  display: flex;
+  margin-top: 25px;
   height: 25px;
   padding: 10px;
+  float: left;
+}
+
+#af-product-info-description {
   border: 1px solid black;
   float: left;
+}
+
+
+
+#af-characteristics {
+  border: 1px solid greenyellow;
+  /* margin-top: 25px; */
+  /* width: 1000px; */
 }
 
 #af-strikethrough {
   text-decoration: line-through;
 }
 
+
 #af-fb-share {
   content: url('./images/facebook-share.png');
-  width: 10%;
-  height: 10%;
+  width: 20%;
+  height: 20%;
 
 }
 
 #af-twitter-share {
   content: url('./images/twitter-share.png');
-  width: 10%;
-  height: 10%;
+  width: 20%;
+  height: 20%;
 
 }
 
 #af-pinterest-share {
   content: url('./images/pinterest-share.png');
-  width: 10%;
-  height: 10%;
+  width: 20%;
+  height: 20%;
 
 }
 
-#app {
-  width: 80%;
-  margin: auto;
-  max-width: 960px;
-}
 #af-stars {
   margin: auto;
   float: left
@@ -323,6 +357,8 @@
   content: url('./images/stars/QuarterStar-01.png')
 
 }
+
+
 
 
 
@@ -452,15 +488,6 @@
 
 .tv_underline {
   text-decoration: underline;
-<<<<<<< HEAD
-=======
-}
-
-#app {
-  width: 80%;
-  margin: auto;
-  max-width: 960px;
->>>>>>> d70516d84e234875be6010d688d0cc613558ae37
 }
 
 
