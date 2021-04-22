@@ -12,11 +12,13 @@ class QandA_app extends React.Component {
       selected: this.props.currentItem,
       questions: [],
       defaultq4: [],
-      addQ: false
+      addQ: false,
+      searched: []
     }
     this.render4Q = this.render4Q.bind(this);
     this.showModal = this.showModal.bind(this);
     this.maqClick = this.maqClick.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
@@ -57,13 +59,32 @@ class QandA_app extends React.Component {
     element.classList.add('maq_hide');
   }
 
+  onSearch(term) {
+    if (term === '') {
+      this.render4Q();
+    } else {
+      var questions = this.state.questions;
+      var searchedQ = [];
+      for (var i = 0; i < questions.length; i++) {
+        var question = questions[i].question_body;
+        if (question.includes(term)) {
+          searchedQ.push(questions[i]);
+        }
+      }
+      this.setState({
+        defaultq4: searchedQ
+      })
+    }
+
+  }
+
 
 
   render() {
     return (
       <div>
         <h1><div>Questions <span>&amp;</span> Answers</div></h1>
-        <div><QA_search /></div>
+        <div><QA_search onSearch={this.onSearch}/></div>
         <div><QA_list qa={this.state.defaultq4} selected={this.state.selected}/></div>
         <div><button id="maq" onClick={this.maqClick}>More Answered Questions</button><button onClick={e => { this.showModal(); }} className="qaModalToggle">Add A Question +</button></div>
         <div><AddQModal show={this.state.addQ} product={this.state.selected} onClose={this.showModal}/></div>

@@ -492,4 +492,11 @@
   text-decoration: underline;
 }
 
+.inputContainer {
+  width: 100%;
+  margin-bottom: 10px;
+}
 
+.icon {
+  text-align: right;
+}
