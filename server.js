@@ -23,7 +23,7 @@ app.get('/products', function (req, res) {
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in initial /products get request, error:')
+      console.log('error in initial /products get request, error:', error)
 
 
     })
