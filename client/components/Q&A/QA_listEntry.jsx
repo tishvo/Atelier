@@ -13,7 +13,9 @@ class QA_listEntry extends React.Component {
       answers: Object.values(this.props.item.answers),
       counter: 0,
       addA: false,
-      selected: this.props.selected
+      selected: this.props.selected,
+      helpfulQ: false,
+      helpfulA: false
     }
     this.lmaClick = this.lmaClick.bind(this);
     this.helpfulQClick = this.helpfulQClick.bind(this);
@@ -40,25 +42,43 @@ class QA_listEntry extends React.Component {
   }
 
   helpfulQClick(e) {
-    var question_id = this.props.item.question_id;
-    axios.put(`/questionshelpful/${question_id}`)
-    .then((response) => {
-      console.log('helpful Q put request successful')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+
+    if (!this.state.helpfulQ) {
+      var question_id = this.props.item.question_id;
+      axios.put(`/questionshelpful/${question_id}`)
+      .then((response) => {
+        console.log('helpful Q put request successful')
+        this.setState({
+          helpfulQ: true
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    } else {
+      console.log('helpful Q has already been clicked')
+    }
+
   }
 
   helpfulAClick(id) {
-    var answer_id = id;
-    axios.put(`/answerhelpful/${answer_id}`)
-    .then((response) => {
-      console.log('helpful A put request successful')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+
+    if (!this.state.helpfulA) {
+      var answer_id = id;
+      axios.put(`/answerhelpful/${answer_id}`)
+      .then((response) => {
+        console.log('helpful A put request successful')
+        this.setState({
+          helpfulA: true
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    } else {
+      console.log('helpful A has already been clicked')
+    }
+
   }
 
   onReportClick(id) {
