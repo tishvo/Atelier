@@ -11,13 +11,17 @@ class RelatedItemsAndComparison extends React.Component {
     super(props);
 
   }
+  componentDidUpdate(prevProps) {
+    if(this.props.currentItem !== prevProps.currentItem) { this.render(); }
+  }
 
   render() {
     return (
       <div>
         <div>
-          <RelatedProducts data={this.props.data} currentItem={this.props.currentItem} click={this.props.click}/>
-          <YourOutfit />
+          <RelatedProducts data={this.props.data} currentItem={this.props.currentItem}
+            click={this.props.click}/>
+          <YourOutfit data={this.props.data} currentItem={this.props.currentItem} click={this.props.click}/>
         </div>
       </div>
     )
