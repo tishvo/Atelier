@@ -15,14 +15,16 @@ class RelatedProducts extends React.Component {
       visibleRelated: [],
       firstCard: 0,
       lastCard: 3,
+      lastIndex: 0
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
   }
-  updatePage(e) {
-    console.log('card was clicked: ', e)
+
+  componentDidUpdate(prevProps) {
+    if(this.props.currentItem !== prevProps.currentItem) { this.componentDidMount(); }
   }
 
   componentDidMount() {
@@ -33,7 +35,10 @@ class RelatedProducts extends React.Component {
 
         this.setState({
           allRelated: res.data,
-          currentProduct: this.props.currentItem
+          lastIndex: res.data.length,
+          currentProduct: this.props.currentItem,
+          firstCard: 0,
+          lastCard: 3
         }, () => {
           // console.log(this.state);
           this.setState({
@@ -53,8 +58,7 @@ class RelatedProducts extends React.Component {
     if (this.state.firstCard > 0) {
       this.setState({
         firstCard: this.state.firstCard -1,
-        lastCard: this.state.lastCard -1,
-        visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
+        lastCard: this.state.lastCard -1
       }, () => {
         this.setState({
           visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
@@ -79,17 +83,54 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
+    if (this.state.firstCard === 0) {
+      return (
+        <div>
+          <h2>Related Products: </h2>
+          <div className='rr-row-container' >
+
+            {this.state.visibleRelated.map( (relatedItem, index) =>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
+            )}
+
+            <Arrow
+              direction="right"
+              clickFunction={ this.nextSlide }
+              glyph="&#9654;" />
+          </div>
+        </div>
+      )
+    } else if (this.state.lastCard === this.state.lastIndex) {
+      return (
+        <div>
+          <h2>Related Products: </h2>
+          <div className='rr-row-container' >
+
+            <Arrow
+              direction="left"
+              clickFunction={ this.previousSlide }
+              glyph="&#9664;" />
+
+            {this.state.visibleRelated.map( (relatedItem, index) =>
+              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
+            )}
+
+          </div>
+        </div>
+      )
+    }
     return (
       <div>
         <h2>Related Products: </h2>
         <div className='rr-row-container' >
+
           <Arrow
             direction="left"
             clickFunction={ this.previousSlide }
             glyph="&#9664;" />
 
           {this.state.visibleRelated.map( (relatedItem, index) =>
-            <RPCard itemId={relatedItem} key={index} click={this.props.click}/>
+            <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
           )}
 
           <Arrow
@@ -98,7 +139,6 @@ class RelatedProducts extends React.Component {
             glyph="&#9654;" />
         </div>
       </div>
-
     )
   }
 }
