@@ -32,7 +32,6 @@ class QA_search extends React.Component {
     return (
       <div>
         <input placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="125"></input>
-        <button onClick={this.onSubmit}>search</button>
       </div>
     )
   }

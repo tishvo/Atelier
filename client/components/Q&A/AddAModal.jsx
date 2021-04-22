@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import PhotoModal from './PhotoModal.jsx';
 
 class AddAModal extends React.Component {
   constructor(props) {
@@ -8,13 +9,15 @@ class AddAModal extends React.Component {
     this.state = {
       answer: '',
       nickname: '',
-      email: ''
+      email: '',
+      photo: false
     }
     this.onClose = this.onClose.bind(this);
     this.onAnswerChange = this.onAnswerChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.answer = this.answer.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   onClose(e) {
@@ -56,6 +59,12 @@ class AddAModal extends React.Component {
     })
   }
 
+  showModal(e) {
+    this.setState({
+      photo: !this.state.photo
+    });
+  }
+
   render() {
     if (!this.props.show) {
       return null;
@@ -69,6 +78,8 @@ class AddAModal extends React.Component {
         <div>For privacy reasons, do not use your full name or email address</div>
         <div>Your email*: <input placeholder="Example: jack@email.com" value={this.state.email} size="50" onChange={this.onEmailChange}></input></div>
         <div>For authentication reasons, you will not be emailed</div>
+        <div className="qaModalToggle"><button className="qaModalToggle" onClick={e => { this.showModal(); }}>Add photos here</button></div>
+        <div><PhotoModal show={this.state.photo} onClose={this.showModal}/></div>
 
         <div className="qaModalToggle"><button className="qaModalToggle" onClick={this.onClose}>Submit</button></div>
       </div>
