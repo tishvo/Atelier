@@ -9,19 +9,31 @@ class QA_search extends React.Component {
       search: ''
     }
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
     this.setState({
       search: e.target.value
     })
+
+    if (e.target.value.length >= 3) {
+      this.onSubmit()
+    } else if (e.target.value.length === 0) {
+      this.onSubmit()
+    }
+  }
+
+  onSubmit() {
+    this.props.onSearch(this.state.search)
   }
 
   render() {
     return (
-      <div>
-        <input placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="125"></input>
-        <button>search</button>
+      <div className="inputContainer">
+
+        <input className="searchField" placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="75" ></input>
+        <i class="fas fa-search"></i>
       </div>
     )
   }

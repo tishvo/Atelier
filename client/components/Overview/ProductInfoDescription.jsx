@@ -6,7 +6,7 @@ class ProductInfoDescription extends React.Component {
   }
 
   render () {
-    return (<div>{this.props.description}</div>)
+    return (<div id="af-product-info-description">{this.props.description}</div>)
   }
 }
 

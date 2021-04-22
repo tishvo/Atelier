@@ -23,7 +23,7 @@ app.get('/products', function (req, res) {
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in initial /products get request, error:')
+      console.log('error in initial /products get request, error:', error)
 
 
     })
@@ -152,8 +152,26 @@ app.post('/qa/ask', function(req, res) {
 
   axios.post(url, data, config)
   .then(response => {
-    console.log(response);
     res.status(202).send('question has been created')
+  })
+  .catch(err => {
+    console.log('/RELATED GET ERROR: ', err)
+  })
+})
+
+//TV POST request to add an answer
+app.post('/qa/answer/:question_id', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.question_id}/answers`;
+  let data = req.body;
+  let config = {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  }
+
+  axios.post(url, data, config)
+  .then(response => {
+    res.status(202).send('answer has been created')
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
