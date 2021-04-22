@@ -20,6 +20,7 @@ class Overview extends React.Component {
       images: null,
       reviewsArray: null,
       currentImageIndex: null,
+      currentSelectedIndex: null,
       styleName: null,
       currentPrice: null,
       currentSalePrice: null,
@@ -129,7 +130,8 @@ class Overview extends React.Component {
   selectImage(index) {
     this.setState({
       currentImage: this.state.images[index]['url'],
-      currentImageIndex: index
+      currentImageIndex: index,
+      currentSelectedIndex: index
     })
 
   }
@@ -137,14 +139,16 @@ class Overview extends React.Component {
   nextImage(index) {
     this.setState({
       currentImage: this.state.images[(index + 1)]['url'],
-      currentImageIndex: (index + 1)
+      currentImageIndex: (index + 1),
+      currentSelectedIndex: (index + 1)
     })
   }
 
   prevImage(index) {
     this.setState({
       currentImage: this.state.images[(index - 1)]['url'],
-      currentImageIndex: (index - 1)
+      currentImageIndex: (index - 1),
+      currentSelectedIndex: (index - 1)
     })
   }
 
@@ -171,7 +175,7 @@ class Overview extends React.Component {
         display_right_side: true,
         imgElementId: "af-main-image-expanded",
         thumbnailCarouselBoxWidth: { width: '00px' },
-        thumbnailCarouselBoxMiniHeight: { height: '25px' }
+        thumbnailCarouselBoxMiniHeight: { height: '100px' }
 
       })
     }
@@ -190,13 +194,14 @@ class Overview extends React.Component {
             <div id="af-landing-box">
               <ImageGallery
                 thumbnailsWidth={this.state.thumbnailCarouselBoxWidth}
-                thumbnailsMiniHeigth={this.state.thumbnailCarouselBoxMiniHeight}
+                thumbnailsMiniHeight={this.state.thumbnailCarouselBoxMiniHeight}
                 imgId={this.state.imgElementId}
                 width={this.state.css_width}
                 click={this.expand}
                 images={this.state.images}
                 currentImage={this.state.currentImage}
                 currentIndex={this.state.currentImageIndex}
+                currentSelected={this.state.currentSelectedIndex}
                 next={this.nextImage}
                 prev={this.prevImage}
                 select={this.selectImage}

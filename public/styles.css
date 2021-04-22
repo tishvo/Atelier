@@ -57,7 +57,7 @@
 } */
 
 /* #af-nameless {
-  justify-content: center
+  display: inline-block
 } */
 
 #af-overview-container {
@@ -102,9 +102,8 @@
   margin-left: 10px;
   margin-top: 10px;
   position: absolute;
-  /* align-items: middle; */
   float: left;
-  width: 100px;
+  /* width: 100px; */
   height: 440px;
   overflow: scroll;
   z-index: 3;
@@ -115,13 +114,19 @@
   width: 0px
 }
 
+#af-thumbnail-carousel-mini-box {
+  margin-left: 250px;
+  margin-top: 450px;
+  position: absolute;
+  width: 500px;
+  height: 0px;
+  overflow: hidden;
+  z-index: 3;
+  transition-duration: 1s;
+}
+
 #af-thumbnail-carousel {
-  /* margin-left: 10px;
-  margin-top: 10px;
-  position: absolute; */
-  /* align-items: middle; */
-  /* float: left; */
-  /* border: 1px solid black; */
+
   display: grid;
   width: 50px;
   grid-gap: 15px;
@@ -129,10 +134,24 @@
   z-index: 1;
 }
 
+#af-thumbnail-carousel-mini {
+
+  display: grid;
+  width: 50px;
+  grid-gap: 15px;
+  grid-template-columns: repeat(100, 1fr);
+  z-index: 1;
+}
+
 #af-thumbnail-carousel-image {
   width: 50px;
   height: 50px;
+}
 
+#af-thumbnail-carousel-mini-image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
 }
 
 #af-thumbnail-carousel-image-box {
@@ -140,6 +159,27 @@
   height: 50px;
   border: 1px solid black;
 }
+
+    #af-thumbnail-carousel-image-box-selected {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      border-bottom: 5px solid red;
+    }
+
+#af-thumbnail-carousel-mini-image-box {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+    #af-thumbnail-carousel-mini-image-box-selected {
+      width: 25px;
+      height: 25px;
+      border: 2px solid red;
+      border-radius: 50%;
+    }
 
 #af-thumbnail-arrow-down {
   width: 15px;
@@ -177,9 +217,6 @@
     width:30px;
     height:30px;
     cursor: default;
-
-
-
 }
 
 #af-image-next {
@@ -207,8 +244,9 @@
 /* // */
 
 #af-product-description {
+  margin-top: 150px;
   height: 25px;
-  padding: 100px;
+  padding: 10px;
   border: 1px solid black;
   float: left;
 }

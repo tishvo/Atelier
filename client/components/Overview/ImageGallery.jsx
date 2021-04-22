@@ -1,6 +1,7 @@
 import React from 'react';
 import StyleSelector from './StyleSelector.jsx'
 import ThumbnailCarousel from './ThumbnailCarousel.jsx'
+import ThumbnailCarouselMini from './ThumbnailCarouselMini.jsx'
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -9,15 +10,12 @@ class ImageGallery extends React.Component {
     this.state = {
       widthStyle: { width: '500px' },
       expand_clicked: false,
+      currentSelected: 0
 
     }
   }
 
-  changeThumbnails() {
-    this.setState({
 
-    })
-  }
 
 
   render() {
@@ -43,7 +41,8 @@ class ImageGallery extends React.Component {
         </div>
 
           </div>
-          <ThumbnailCarousel width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
+          <ThumbnailCarousel currentSelected={this.props.currentSelected} width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
+          <ThumbnailCarouselMini currentSelected={this.props.currentSelected} height={this.props.thumbnailsMiniHeight} images={this.props.images} select={this.props.select}/>
         </div>)
     }
     if (this.props.currentIndex === this.props.images.length - 1) {
@@ -64,7 +63,8 @@ class ImageGallery extends React.Component {
         <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}>
         </img>
         </div>
-        <ThumbnailCarousel width={this.state.thumbnailCarouselBoxWidth} images={this.props.images} select={this.props.select}/>
+        <ThumbnailCarousel currentSelected={this.props.currentSelected} width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
+        <ThumbnailCarouselMini currentSelected={this.props.currentSelected} height={this.props.thumbnailsMiniHeight} images={this.props.images} select={this.props.select}/>
       </div>)
     }
     return (
@@ -86,7 +86,8 @@ class ImageGallery extends React.Component {
             this.props.next(this.props.currentIndex)
           }></div>
       </div>
-      <ThumbnailCarousel width={this.state.thumbnailCarouselBoxWidth} images={this.props.images} select={this.props.select}/>
+      <ThumbnailCarousel currentSelected={this.props.currentSelected} width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
+      <ThumbnailCarouselMini currentSelected={this.props.currentSelected} height={this.props.thumbnailsMiniHeight} images={this.props.images} select={this.props.select}/>
       </div>)
 
   }
