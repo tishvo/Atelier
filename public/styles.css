@@ -15,6 +15,7 @@
 #af-style-selector {
   display: grid;
   width: 50px;
+  padding-top: 20px;
   grid-gap: 10px;
   grid-template-columns: repeat(4, 1fr);
 }

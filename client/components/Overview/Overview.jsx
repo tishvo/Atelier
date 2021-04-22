@@ -46,14 +46,14 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this is local storage??? ', localStorage)
+    // console.log('this is local storage??? ', localStorage)
 
 
     var itemId = this.props.currentItem['id'];
 
     axios.get(`/products/${itemId}`)
     .then((response) => {
-      console.log('here we will have the characteristics', response);
+      // console.log('here we will have the characteristics', response);
 
       this.setState ({
         featuresArray: response.data.features
@@ -95,7 +95,7 @@ class Overview extends React.Component {
       this.componentDidMount()
       axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
         .then((response) => {
-          console.log('response ratings', response.data.ratings);
+          // console.log('response ratings', response.data.ratings);
 
           var rateObj = response.data.ratings;
           var result = 0;
@@ -107,15 +107,15 @@ class Overview extends React.Component {
             result = result + Number(key) * Number(rateObj[key]);
             numRating = numRating + Number(rateObj[key]);
           }
-          console.log('result: ', result);
-          console.log('numRating: ', numRating);
+          // console.log('result: ', result);
+          // console.log('numRating: ', numRating);
           var currRating = result / numRating;
 
           this.setState({
             averageStars: currRating
           })
           this.props.stars = currRating
-          console.log('state check of averageStars: ', this.state.averageStars)
+          // console.log('state check of averageStars: ', this.state.averageStars)
         })
 
         .catch((error) => {
@@ -170,7 +170,7 @@ class Overview extends React.Component {
   }
 
   expand() {
-    console.log('expand clicked')
+    // console.log('expand clicked')
     if (this.state.expand_clicked) {
       if (this.state.imgSize === 'expanded') {
 
@@ -211,7 +211,7 @@ class Overview extends React.Component {
   }
 
   shrink() {
-    console.log('shrink clicked')
+    // console.log('shrink clicked')
     if (this.state.imgSize === 'default') {
       this.setState({
         css_width: { width: '960px', height: '500px' },
@@ -272,7 +272,7 @@ class Overview extends React.Component {
                   slogan={this.props.currentItem.slogan}
                   price={this.state.currentPrice}
                   salePrice={this.state.currentSalePrice}
-                /><br />
+                />
 
                 <StyleSelector
 

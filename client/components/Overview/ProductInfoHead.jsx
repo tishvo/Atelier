@@ -54,11 +54,11 @@ class ProductInfoHead extends React.Component {
               }
             })
             }
-          </span><br/>
+          </span>
           <h3>{this.props.name}</h3> <br />
           <h5>{this.props.slogan}</h5>
-          <em id="af-strikethrough">${this.props.price}</em> <br />
-          <em>${this.props.salePrice}</em> <br />
+          <em id="af-strikethrough">${this.props.price}</em> On sale!
+          <em> ${this.props.salePrice}</em> <br />
       Style: {this.props.styleName}
         </div>)
 
@@ -78,7 +78,7 @@ class ProductInfoHead extends React.Component {
               }
             })
             }
-          </span><br/>
+          </span>
           <h3>{this.props.name}</h3> <br />
           <h5>{this.props.slogan}</h5>
           <em>${this.props.price}</em> <br />
@@ -92,8 +92,8 @@ class ProductInfoHead extends React.Component {
           This item has not been rated<br />
           <h3>{this.props.name}</h3> <br />
           <h5>{this.props.slogan}</h5>
-          <em id="af-strikethrough">${this.props.price}</em> <br />
-          <em>${this.props.salePrice}</em> <br />
+          <em id="af-strikethrough">${this.props.price}</em> On Sale!
+          <em> ${this.props.salePrice}</em> <br />
       Style: {this.props.styleName}
         </div>)
       } else {

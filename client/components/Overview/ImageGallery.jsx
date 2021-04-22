@@ -37,7 +37,7 @@ const ImageGallery = (props) => {
   // console.log('mouse is moving:', mousePosition.x)
 
   if (props.imgId === "af-main-image-xl") {
-    console.log('WE ARE XL!')
+
 
     if (props.currentIndex === 0) {
       return (
