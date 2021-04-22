@@ -37,7 +37,7 @@ const YourOutfit = (props) => {
 
   useEffect(() => {
     updateState();
-  }, [console.log('state after useEffect: ', state)])
+  }, [/*console.log('state after useEffect: ', state)*/])
 
   // clickfunction addItem
   const addItem = (data) => {

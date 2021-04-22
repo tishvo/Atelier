@@ -95,7 +95,7 @@ class App extends React.Component {
     console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
   if (this.state.averageStars) {
       return (
-        <div>
+        <div className='rr-column-container'>
           <div>HELLO</div>
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>

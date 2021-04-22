@@ -75,7 +75,6 @@ app.get('/products/:productId/related', function(req, res) {
     }
   })
   .then(response => {
-    console.log('got data in server /related request: ', response.data)
     res.status(202).send(response.data);
   })
   .catch(err => {

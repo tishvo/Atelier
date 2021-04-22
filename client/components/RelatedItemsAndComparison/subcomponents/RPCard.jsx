@@ -40,10 +40,11 @@ class RPCard extends React.Component {
 
     axios.get(`/products/${this.props.itemId}/styles`)
     .then(res => {
-        this._isMounted && this.setState({
-          allStyles: res.data.results,
-          stylePreview: res.data.results[0].photos[0]['thumbnail_url']
-        })
+
+      this._isMounted && this.setState({
+        allStyles: res.data.results,
+        stylePreview: res.data.results[0].photos[0]['thumbnail_url']
+      })
     })
     .catch((error) => {
       console.log('error in RPCARD /styles request, error:', error)
