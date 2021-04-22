@@ -30,8 +30,10 @@ class QA_search extends React.Component {
 
   render() {
     return (
-      <div>
-        <input placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="125"></input>
+      <div className="inputContainer">
+
+        <input className="searchField" placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="75" ></input>
+        <i class="fas fa-search"></i>
       </div>
     )
   }
