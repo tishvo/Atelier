@@ -106,15 +106,15 @@ const YourOutfit = (props) => {
   const renderAddButton = () => {
     return (
       <div
-        className='add-button add-button-text'
+        className='add-button-container rr-column-container'
         onClick={ () => {
         return addItem(props.currentItem) }}>
-          <h1>
-            < IoIosAddCircleOutline />
-          </h1>
-          <h4>
-            Add to Outfit
-          </h4>
+          <div className='rr-add-button' >
+            < IoIosAddCircleOutline size={40}/>
+            <div>
+              Add to Outfit
+            </div>
+          </div>
       </div>
     )
   }

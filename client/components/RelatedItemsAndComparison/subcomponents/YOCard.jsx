@@ -66,7 +66,7 @@ class YOCard extends React.Component {
 
     return (
       <div className='rr-column-container' style={this.styles}>
-        <h2 className='rr-action-button' onClick={e => { this.props.remove(this.state.itemData.id); }} > < TiDelete /> </h2>
+        <div className='rr-action-button' onClick={e => { this.props.remove(this.state.itemData.id); }} > < TiDelete size={30}/> </div>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
         return this.props.click(this.state.itemData) } }></img>
         <span>

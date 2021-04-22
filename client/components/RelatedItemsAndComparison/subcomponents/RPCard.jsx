@@ -74,7 +74,9 @@ class RPCard extends React.Component {
   render() {
     return (
       <div className='rr-column-container' style={this.styles}>
-        <h2 className='rr-action-button' onClick={e => { this.showModal(); }} > < BiStar /> </h2>
+        <div className='rr-action-button' onClick={e => { this.showModal(); }} >
+          < BiStar size={20}/>
+        </div>
         <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={ () => {
           return this.props.currentProduct } }/>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {

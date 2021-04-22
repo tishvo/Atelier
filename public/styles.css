@@ -181,6 +181,8 @@
 .rr-action-button {
   margin-left: auto;
   margin-right: 0;
+  padding-right: 5%;
+  padding-top: 5%;
 }
 
 .rr-carousel-arrow {
@@ -188,20 +190,23 @@
   margin-bottom: auto;
 }
 
-.add-button {
+.add-button-container {
   margin: center;
   border-style: solid;
   width: 30%;
 }
 
-.add-button-text {
+.rr-add-button {
   margin-left: auto;
-  margin-right: 0;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 5%;
 }
 
 .rr-thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 
 }
 
