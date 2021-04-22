@@ -8,6 +8,7 @@ import StyleSelector from './StyleSelector.jsx'
 import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
 import SizeSelector from './SizeSelector.jsx'
+import Characteristics from './Characteristics.jsx'
 
 
 class Overview extends React.Component {
@@ -20,27 +21,47 @@ class Overview extends React.Component {
       images: null,
       reviewsArray: null,
       currentImageIndex: null,
+      currentSelectedIndex: null,
       styleName: null,
       currentPrice: null,
       currentSalePrice: null,
       selectedStyle: null,
       expand_clicked: false,
       css_display: null,
-      css_width: { width: '400px' },
+      css_width: { width: '500px', height: '500px' },
       expand_clicked: false,
-      display_right_side: true
+      display_right_side: true,
+      imgElementId: "af-main-image",
+      thumbnailCarouselBoxWidth: { width: '100px' },
+      thumbnailCarouselBoxMiniHeight: { height: '0px' },
+      featuresArray: null
     }
 
     this.changeDisplayImage = this.changeDisplayImage.bind(this);
     this.nextImage = this.nextImage.bind(this);
     this.prevImage = this.prevImage.bind(this);
     this.expand = this.expand.bind(this);
+    this.selectImage = this.selectImage.bind(this);
+    this.shrink = this.shrink.bind(this);
   }
 
   componentDidMount() {
+    // console.log('this is local storage??? ', localStorage)
 
 
     var itemId = this.props.currentItem['id'];
+
+    axios.get(`/products/${itemId}`)
+    .then((response) => {
+      // console.log('here we will have the characteristics', response);
+
+      this.setState ({
+        featuresArray: response.data.features
+      })
+    })
+    .catch ((error) => {
+      console.log('error in getting specific product', error)
+    })
 
     // get the styles by id
     axios.get(`/products/${itemId}/styles`)
@@ -59,7 +80,8 @@ class Overview extends React.Component {
           currentSalePrice: response.data.results[0].sale_price,
           selectedStyle: 0,
           skusObject: response.data.results[0].skus,
-          numberOfReviews: this.props.numberOfReviews
+          numberOfReviews: this.props.numberOfReviews,
+          imgSize: 'default'
 
         })
       })
@@ -73,7 +95,7 @@ class Overview extends React.Component {
       this.componentDidMount()
       axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
         .then((response) => {
-          console.log('response ratings', response.data.ratings);
+          // console.log('response ratings', response.data.ratings);
 
           var rateObj = response.data.ratings;
           var result = 0;
@@ -85,30 +107,26 @@ class Overview extends React.Component {
             result = result + Number(key) * Number(rateObj[key]);
             numRating = numRating + Number(rateObj[key]);
           }
-          console.log('result: ', result);
-          console.log('numRating: ', numRating);
+          // console.log('result: ', result);
+          // console.log('numRating: ', numRating);
           var currRating = result / numRating;
 
           this.setState({
             averageStars: currRating
           })
           this.props.stars = currRating
-          console.log('state check of averageStars: ', this.state.averageStars)
+          // console.log('state check of averageStars: ', this.state.averageStars)
         })
 
         .catch((error) => {
           console.log('error inside averageStar making: ', error)
         })
     }
-
     if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
       this.setState({
         numberOfReviews: this.props.numberOfReviews
       })
-
     }
-
-
   }
 
   changeDisplayImage(index) {
@@ -126,59 +144,122 @@ class Overview extends React.Component {
     })
   }
 
+  selectImage(index) {
+    this.setState({
+      currentImage: this.state.images[index]['url'],
+      currentImageIndex: index,
+      currentSelectedIndex: index
+    })
+
+  }
+
   nextImage(index) {
     this.setState({
       currentImage: this.state.images[(index + 1)]['url'],
-      currentImageIndex: (index + 1)
+      currentImageIndex: (index + 1),
+      currentSelectedIndex: (index + 1)
     })
   }
 
   prevImage(index) {
     this.setState({
       currentImage: this.state.images[(index - 1)]['url'],
-      currentImageIndex: (index - 1)
+      currentImageIndex: (index - 1),
+      currentSelectedIndex: (index - 1)
     })
   }
 
   expand() {
-    console.log('expanding!')
-    console.log(this.state.expand_clicked)
-
+    // console.log('expand clicked')
     if (this.state.expand_clicked) {
+      if (this.state.imgSize === 'expanded') {
 
-      this.setState({
-        css_width: { width: '400px' },
-        expand_clicked: false,
-        display_right_side: true
-      })
+        this.setState({
+          css_width: { width: '2400px', height: '1250px' },
+          display_right_side: true,
+          imgElementId: "af-main-image-xl",
+          thumbnailCarouselBoxWidth: { width: '0px' },
+          thumbnailCarouselBoxMiniHeight: { height: '0px' },
+          imgSize: 'xl'
+        })
+
+      } else if (this.state.imgSize === 'xl') {
+        this.setState({
+          css_width: { width: '960px', height: '500px' },
+          // expand_clicked: false,
+          display_right_side: true,
+          imgElementId: "af-main-image-expanded",
+          thumbnailCarouselBoxWidth: { width: '0px' },
+          thumbnailCarouselBoxMiniHeight: { height: '100px' },
+          imgSize: 'expanded'
+        })
+      }
+
     } else {
 
       this.setState({
-        css_width: { width: '1200px' },
+        css_width: { width: '960px', height: '500px' },
         expand_clicked: true,
-        display_right_side: false
+        display_right_side: true,
+        imgElementId: "af-main-image-expanded",
+        thumbnailCarouselBoxWidth: { width: '00px' },
+        thumbnailCarouselBoxMiniHeight: { height: '100px' },
+        imgSize: 'expanded'
+
       })
+    }
+  }
+
+  shrink() {
+    // console.log('shrink clicked')
+    if (this.state.imgSize === 'default') {
+      this.setState({
+        css_width: { width: '960px', height: '500px' },
+        expand_clicked: true,
+        imgSize: 'expanded',
+        imgElementId: "af-main-image-expanded",
+        thumbnailCarouselBoxWidth: { width: '0px' },
+        thumbnailCarouselBoxMiniHeight: { height: '100px' },
+
+      })
+    } else {
+      this.setState({
+        css_width: { width: '500px', height: '500px' },
+        expand_clicked: false,
+        imgSize: 'default',
+        imgElementId: "af-main-image",
+        thumbnailCarouselBoxWidth: { width: '100px' },
+        thumbnailCarouselBoxMiniHeight: { height: '0px' },
+      })
+
     }
   }
 
   render() {
 
-    if (this.state.stylesArray) {
-      if (this.state.display_right_side) {
+    if (this.state.stylesArray && this.state.featuresArray) {
+      // if (this.state.display_right_side) {
 
 
-        return (
+      return (
+        <div id="af-nameless">
           <div id="af-overview-container">
 
             <div id="af-landing-box">
               <ImageGallery
+                shrink={this.shrink}
+                thumbnailsWidth={this.state.thumbnailCarouselBoxWidth}
+                thumbnailsMiniHeight={this.state.thumbnailCarouselBoxMiniHeight}
+                imgId={this.state.imgElementId}
                 width={this.state.css_width}
                 click={this.expand}
                 images={this.state.images}
                 currentImage={this.state.currentImage}
                 currentIndex={this.state.currentImageIndex}
+                currentSelected={this.state.currentSelectedIndex}
                 next={this.nextImage}
                 prev={this.prevImage}
+                select={this.selectImage}
               />
 
               <div id="af-right-side"
@@ -191,7 +272,7 @@ class Overview extends React.Component {
                   slogan={this.props.currentItem.slogan}
                   price={this.state.currentPrice}
                   salePrice={this.state.currentSalePrice}
-                /><br />
+                />
 
                 <StyleSelector
 
@@ -208,38 +289,14 @@ class Overview extends React.Component {
                 {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
-
             </div><br />
+          </div>
+          <div id="af-product-description">
+            <ProductInfoDescription description={this.props.currentItem.description} />
+            <Characteristics features={this.state.featuresArray}/>
+          </div>
+        </div>)
 
-            <span id="af-product-description">
-              <ProductInfoDescription description={this.props.currentItem.description} />
-            </span>
-
-          </div>)
-      } else {
-
-        return (
-          <div id="af-overview-container">
-
-            <div id="af-landing-box">
-              <ImageGallery
-                width={this.state.css_width}
-                click={this.expand}
-                images={this.state.images}
-                currentImage={this.state.currentImage}
-                currentIndex={this.state.currentImageIndex}
-                next={this.nextImage}
-                prev={this.prevImage}
-              />
-            </div>
-
-            <span id="af-product-description">
-              <ProductInfoDescription description={this.props.currentItem.description} />
-            </span>
-
-          </div>)
-
-      }
     } else {
       return null;
     }

@@ -120,7 +120,7 @@ class RelatedProducts extends React.Component {
       )
     }
     return (
-      <div>
+      <div id>
         <h2>Related Products: </h2>
         <div className='rr-row-container' >
 
