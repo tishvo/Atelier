@@ -28,9 +28,10 @@ class ImageGallery extends React.Component {
 
           <div id="af-image-container" style={this.props.width}>
             <div id="af-image-expand"
-              onClick={this.props.click}></div>
+              onClick={this.props.shrink}></div>
 
             <img id={this.props.imgId}
+            onClick={this.props.click}
               src={this.props.images[this.props.currentIndex]['url']} >
             </img>
 
@@ -50,17 +51,14 @@ class ImageGallery extends React.Component {
       <div>
         <div id="af-image-container" style={this.props.width}>
         <div id="af-image-expand"
-          onClick={() => {
-            this.props.click()
-            //this.changeThumbnails()
-          }}></div>
+          onClick={this.props.shrink}></div>
 
         <div id="af-image-prev"
           onClick={() =>
             this.props.prev(this.props.currentIndex)
           }></div>
 
-        <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}>
+        <img id={this.props.imgId} onClick={this.props.click} src={this.props.images[this.props.currentIndex]['url']}>
         </img>
         </div>
         <ThumbnailCarousel currentSelected={this.props.currentSelected} width={this.props.thumbnailsWidth} images={this.props.images} select={this.props.select}/>
@@ -71,7 +69,7 @@ class ImageGallery extends React.Component {
       <div>
       <div id="af-image-container" style={this.props.width}>
         <div id="af-image-expand"
-          onClick={this.props.click}
+          onClick={this.props.shrink}
         ></div>
 
         <div id="af-image-prev"
@@ -79,7 +77,9 @@ class ImageGallery extends React.Component {
             this.props.prev(this.props.currentIndex)
           }></div>
 
-        <img id={this.props.imgId} src={this.props.images[this.props.currentIndex]['url']}></img>
+        <img id={this.props.imgId}
+        onClick={this.props.click}
+        src={this.props.images[this.props.currentIndex]['url']}></img>
 
         <div id="af-image-next"
           onClick={() =>

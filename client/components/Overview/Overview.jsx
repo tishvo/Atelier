@@ -27,7 +27,7 @@ class Overview extends React.Component {
       selectedStyle: null,
       expand_clicked: false,
       css_display: null,
-      css_width: { width: '500px' },
+      css_width: { width: '500px', height: '500px' },
       expand_clicked: false,
       display_right_side: true,
       imgElementId: "af-main-image",
@@ -40,6 +40,7 @@ class Overview extends React.Component {
     this.prevImage = this.prevImage.bind(this);
     this.expand = this.expand.bind(this);
     this.selectImage = this.selectImage.bind(this);
+    this.shrink = this.shrink.bind(this);
   }
 
   componentDidMount() {
@@ -64,7 +65,8 @@ class Overview extends React.Component {
           currentSalePrice: response.data.results[0].sale_price,
           selectedStyle: 0,
           skusObject: response.data.results[0].skus,
-          numberOfReviews: this.props.numberOfReviews
+          numberOfReviews: this.props.numberOfReviews,
+          imgSize: 'default'
 
         })
       })
@@ -153,31 +155,68 @@ class Overview extends React.Component {
   }
 
   expand() {
-    console.log('expanding!')
-    console.log(this.state.expand_clicked)
-
-
+    console.log('expand clicked')
     if (this.state.expand_clicked) {
+      if (this.state.imgSize === 'expanded') {
 
-      this.setState({
-        css_width: { width: '500px' },
-        expand_clicked: false,
-        display_right_side: true,
-        imgElementId: "af-main-image",
-        thumbnailCarouselBoxWidth: { width: '100px' },
-        thumbnailCarouselBoxMiniHeight: { height: '0px' }
-      })
+        this.setState({
+          css_width: { width: '2400px', height: '1250px' },
+          display_right_side: true,
+          imgElementId: "af-main-image-xl",
+          thumbnailCarouselBoxWidth: { width: '0px' },
+          thumbnailCarouselBoxMiniHeight: { height: '0px' },
+          imgSize: 'xl'
+        })
+
+      } else if (this.state.imgSize === 'xl') {
+        this.setState({
+          css_width: { width: '960px', height: '500px' },
+          // expand_clicked: false,
+          display_right_side: true,
+          imgElementId: "af-main-image-expanded",
+          thumbnailCarouselBoxWidth: { width: '0px' },
+          thumbnailCarouselBoxMiniHeight: { height: '100px' },
+          imgSize: 'expanded'
+        })
+      }
+
     } else {
 
       this.setState({
-        css_width: { width: '960px' },
+        css_width: { width: '960px', height: '500px' },
         expand_clicked: true,
         display_right_side: true,
         imgElementId: "af-main-image-expanded",
         thumbnailCarouselBoxWidth: { width: '00px' },
-        thumbnailCarouselBoxMiniHeight: { height: '100px' }
+        thumbnailCarouselBoxMiniHeight: { height: '100px' },
+        imgSize: 'expanded'
 
       })
+    }
+  }
+
+  shrink() {
+    console.log('shrink clicked')
+    if (this.state.imgSize === 'default') {
+      this.setState({
+        css_width: { width: '960px', height: '500px' },
+        expand_clicked: true,
+        imgSize: 'expanded',
+        imgElementId: "af-main-image-expanded",
+        thumbnailCarouselBoxWidth: { width: '0px' },
+        thumbnailCarouselBoxMiniHeight: { height: '100px' },
+
+      })
+    } else {
+      this.setState({
+        css_width: { width: '500px', height: '500px' },
+        expand_clicked: false,
+        imgSize: 'default',
+        imgElementId: "af-main-image",
+        thumbnailCarouselBoxWidth: { width: '100px' },
+        thumbnailCarouselBoxMiniHeight: { height: '0px' },
+      })
+
     }
   }
 
@@ -193,6 +232,7 @@ class Overview extends React.Component {
 
             <div id="af-landing-box">
               <ImageGallery
+                shrink={this.shrink}
                 thumbnailsWidth={this.state.thumbnailCarouselBoxWidth}
                 thumbnailsMiniHeight={this.state.thumbnailCarouselBoxMiniHeight}
                 imgId={this.state.imgElementId}

@@ -47,8 +47,13 @@
   height: 100%;
   object-fit: none;
   cursor: crosshair;
+}
 
-
+#af-main-image-xl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-out;
 }
 
 /* #af-main-image-expanded:hover {
@@ -83,8 +88,8 @@
   margin-right: 1px;
   position:absolute;
   /* display:inline; */
-  height: 500px;
-  width: 500px;
+  /* height: 500px;
+  width: 500px; */
   text-align:center;
   border:1px solid black;
   transition-duration: 1s;
@@ -233,6 +238,7 @@
 
 
 #af-image-expand {
+  cursor: default;
   position:absolute;
     top:10px;
     right:10px;
