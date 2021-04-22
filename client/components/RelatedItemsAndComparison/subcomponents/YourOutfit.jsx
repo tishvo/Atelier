@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Arrow from './Arrow.jsx';
 import YOCard from './YOCard.jsx';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 
 const YourOutfit = (props) => {
 
@@ -104,8 +105,17 @@ const YourOutfit = (props) => {
 
   const renderAddButton = () => {
     return (
-      <button styles={'margins:center borderStyle:solid width:30%'} onClick={ () => {
-        return addItem(props.currentItem)} }> &#xFF0B; Add to Outfit </button>
+      <div
+        className='add-button add-button-text'
+        onClick={ () => {
+        return addItem(props.currentItem) }}>
+          <h1>
+            < IoIosAddCircleOutline />
+          </h1>
+          <h4>
+            Add to Outfit
+          </h4>
+      </div>
     )
   }
   const removeFromOutfit = (id) => {
@@ -137,11 +147,13 @@ const YourOutfit = (props) => {
           { renderAddButton() }
           { renderList() }
 
-          <Arrow
-            direction="right"
-            clickFunction={ () => { nextSlide() } }
-            glyph="&#9654;"
-          />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="right"
+              clickFunction={ () => { nextSlide() } }
+            />
+          </div>
+
         </div>
       </div>
     );
@@ -151,11 +163,13 @@ const YourOutfit = (props) => {
         <h2>Your Outfit: </h2>
         <div className='rr-row-container' >
 
-          <Arrow
-            direction="left"
-            clickFunction={ () => { previousSlide() } }
-            glyph="&#9664;"
-          />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="left"
+              clickFunction={ () => { previousSlide() } }
+            />
+          </div>
+
           { renderAddButton() }
           { renderList() }
 
@@ -168,19 +182,22 @@ const YourOutfit = (props) => {
         <h2>Your Outfit: </h2>
         <div className='rr-row-container' >
 
-          <Arrow
-            direction="left"
-            clickFunction={ () => { previousSlide() } }
-            glyph="&#9664;"
-          />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="left"
+              clickFunction={ () => { previousSlide() } }
+            />
+          </div>
+
           { renderAddButton() }
           { renderList() }
 
-          <Arrow
-            direction="right"
-            clickFunction={ () => { nextSlide() } }
-            glyph="&#9654;"
-          />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="right"
+              clickFunction={ () => { nextSlide() } }
+            />
+          </div>
         </div>
       </div>
     );

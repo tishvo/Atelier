@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { BiStar } from 'react-icons/bi';
 import axios from 'axios';
 import ComparisonModal from './ComparisonModal/index.jsx';
 
@@ -73,7 +74,7 @@ class RPCard extends React.Component {
   render() {
     return (
       <div className='rr-column-container' style={this.styles}>
-        <button  onClick={e => { this.showModal(); }} > &#9734; </button>
+        <h2 className='rr-action-button' onClick={e => { this.showModal(); }} > < BiStar /> </h2>
         <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={ () => {
           return this.props.currentProduct } }/>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {

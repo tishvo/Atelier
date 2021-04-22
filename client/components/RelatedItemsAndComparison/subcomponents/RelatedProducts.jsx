@@ -92,11 +92,12 @@ class RelatedProducts extends React.Component {
             {this.state.visibleRelated.map( (relatedItem, index) =>
               <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
             )}
-
-            <Arrow
-              direction="right"
-              clickFunction={ this.nextSlide }
-              glyph="&#9654;" />
+            <div className="rr-carousel-arrow">
+              <Arrow
+                direction="right"
+                clickFunction={ this.nextSlide }
+              />
+            </div>
           </div>
         </div>
       )
@@ -106,10 +107,12 @@ class RelatedProducts extends React.Component {
           <h2>Related Products: </h2>
           <div className='rr-row-container' >
 
-            <Arrow
-              direction="left"
-              clickFunction={ this.previousSlide }
-              glyph="&#9664;" />
+            <div className="rr-carousel-arrow" >
+              <Arrow
+                direction="left"
+                clickFunction={ this.previousSlide }
+              />
+            </div>
 
             {this.state.visibleRelated.map( (relatedItem, index) =>
               <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
@@ -124,19 +127,24 @@ class RelatedProducts extends React.Component {
         <h2>Related Products: </h2>
         <div className='rr-row-container' >
 
-          <Arrow
-            direction="left"
-            clickFunction={ this.previousSlide }
-            glyph="&#9664;" />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="left"
+              clickFunction={ this.previousSlide }
+            />
+          </div>
 
           {this.state.visibleRelated.map( (relatedItem, index) =>
             <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
           )}
 
-          <Arrow
-            direction="right"
-            clickFunction={ this.nextSlide }
-            glyph="&#9654;" />
+          <div className="rr-carousel-arrow">
+            <Arrow
+              direction="right"
+              clickFunction={ this.nextSlide }
+            />
+          </div>
+
         </div>
       </div>
     )

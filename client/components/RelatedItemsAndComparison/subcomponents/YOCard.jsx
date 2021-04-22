@@ -1,4 +1,5 @@
 import React from 'react';
+import { TiDelete } from 'react-icons/ti';
 import axios from 'axios';
 
 class YOCard extends React.Component {
@@ -65,7 +66,7 @@ class YOCard extends React.Component {
 
     return (
       <div className='rr-column-container' style={this.styles}>
-        <button  onClick={e => { this.props.remove(this.state.itemData.id); }} > &#10006; </button>
+        <h2 className='rr-action-button' onClick={e => { this.props.remove(this.state.itemData.id); }} > < TiDelete /> </h2>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
         return this.props.click(this.state.itemData) } }></img>
         <span>
