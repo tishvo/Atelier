@@ -103,10 +103,10 @@ class QA_listEntry extends React.Component {
     if (this.state.answers.length > 2) {
       return (
         <div>
-        <p className="questionBody">Q: {this.props.item.question_body}<span className="tv_anc"> Helpful? </span><span className="tv_anc tv_underline" onClick={this.helpfulQClick}>Yes</span><span className="tv_anc"> {this.props.item.question_helpfulness} </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline qaModalToggle" onClick={e => { this.showModal(); }}>Add Answer</span></p>
+        <p className="questionBody">Q: {this.props.item.question_body}<span className="tv_anc"> Helpful? </span><span className="tv_anc tv_underline" onClick={this.helpfulQClick}>Yes</span><span className="tv_anc"> ({this.props.item.question_helpfulness}) </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline qaModalToggle" onClick={e => { this.showModal(); }}>Add Answer</span></p>
         <div><AddAModal show={this.state.addA} product={this.state.selected} onClose={this.showModal} question={this.props.item}/></div>
         <div>{this.state.answers.slice(this.state.offset, this.state.limit).map(answer =>
-          <div><p>A: {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}  | Helpful? </span><span className="tv_underline" onClick={e => this.helpfulAClick(answer.id)}>Yes</span><span> {answer.helpfulness} </span><span> | </span><span className="tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
+          <div><p>A: {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}  | Helpful? </span><span className="tv_underline" onClick={e => this.helpfulAClick(answer.id)}>Yes</span><span> ({answer.helpfulness}) </span><span> | </span><span className="tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
           )}</div>
         <div className="lma lmalink" onClick={this.lmaClick}>Load More Answers</div>
         </div>
@@ -114,10 +114,10 @@ class QA_listEntry extends React.Component {
     } else {
       return (
         <div>
-        <p className="questionBody">Q: {this.props.item.question_body}<span className="tv_anc"> Helpful? </span><span className="tv_anc tv_underline" onClick={this.helpfulQClick}>Yes</span><span className="tv_anc"> {this.props.item.question_helpfulness} </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline qaModalToggle" onClick={e => { this.showModal(); }}>Add Answer</span></p>
+        <p className="questionBody">Q: {this.props.item.question_body}<span className="tv_anc"> Helpful? </span><span className="tv_anc tv_underline" onClick={this.helpfulQClick}>Yes</span><span className="tv_anc"> ({this.props.item.question_helpfulness}) </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline qaModalToggle" onClick={e => { this.showModal(); }}>Add Answer</span></p>
         <div><AddAModal show={this.state.addA} product={this.state.selected} onClose={this.showModal} question={this.props.item}/></div>
         <div>{this.state.answers.map(answer =>
-          <div><p>A: {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}  | Helpful? </span><span className="tv_underline" onClick={e => this.helpfulAClick(answer.id)}>Yes</span><span> {answer.helpfulness} </span><span> | </span><span className="tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
+          <div><p>A: {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')}  | Helpful? </span><span className="tv_underline" onClick={e => this.helpfulAClick(answer.id)}>Yes</span><span> ({answer.helpfulness}) </span><span> | </span><span className="tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
           )}</div>
         </div>
       )
