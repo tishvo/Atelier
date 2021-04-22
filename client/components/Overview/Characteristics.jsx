@@ -11,7 +11,7 @@ class Characteristics extends React.Component {
       Tested on the cutest animals
       Made with corn
       {this.props.features.map((obj, index) =>
-      <div>{obj.feature}: {obj.value}</div>
+      <div key={index}>{obj.feature}: {obj.value}</div>
 
       )}
 
