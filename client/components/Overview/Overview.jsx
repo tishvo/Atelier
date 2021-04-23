@@ -9,6 +9,7 @@ import ImageGallery from './ImageGallery.jsx'
 import AddToCart from './AddToCart.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Characteristics from './Characteristics.jsx'
+import PrivacyHOC from '../ClickTrackingHOC.js'
 
 
 class Overview extends React.Component {
@@ -43,6 +44,7 @@ class Overview extends React.Component {
     this.expand = this.expand.bind(this);
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   componentDidMount() {
@@ -316,5 +318,5 @@ class Overview extends React.Component {
   }
 }
 
-export default Overview;
+export default PrivacyHOC(Overview);
 
