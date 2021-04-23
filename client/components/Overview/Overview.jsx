@@ -16,7 +16,7 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
-      averageStars: this.props.stars,
+      averageStars: null,
       stylesArray: null,
       images: null,
       reviewsArray: null,
@@ -47,83 +47,98 @@ class Overview extends React.Component {
 
   componentDidMount() {
     // console.log('this is local storage??? ', localStorage)
-
-
     var itemId = this.props.currentItem['id'];
 
+
+    // REQUEST FOR SPECIFIC PRODUCT
     axios.get(`/products/${itemId}`)
       .then((response) => {
-        // console.log('here we will have the characteristics', response);
+        console.log('OVERVIEW specific product:', response);
         this.setState({
           featuresArray: response.data.features
         })
-
-        axios.get(`/products/${itemId}/styles`)
-          .then((response) => {
-            console.log('this is the styles data: ', response.data.results)
-            this.setState({
-              stylesArray: response.data.results,
-              images: response.data.results[0].photos,
-              currentImage: response.data.results[0].photos[0]['url'],
-              currentImageIndex: 0,
-              styleName: response.data.results[0].name,
-              currentPrice: response.data.results[0].original_price,
-              currentSalePrice: response.data.results[0].sale_price,
-              selectedStyle: 0,
-              skusObject: response.data.results[0].skus,
-              numberOfReviews: this.props.numberOfReviews,
-              imgSize: 'default'
-            })
-          })
-          .catch((error) => {
-            console.log('error in OVERVIEW axios get request, error:', error)
-          })
-
       })
       .catch((error) => {
         console.log('error in getting specific product', error)
       })
 
-    // get the styles by id
+    //REQUEST FOR SPECIFIC PRODUCT'S STYLES
+    axios.get(`/products/${itemId}/styles`)
+      .then((response) => {
+        console.log('OVERVIEW styles: ', response.data.results)
+        this.setState({
+          stylesArray: response.data.results,
+          images: response.data.results[0].photos,
+          currentImage: response.data.results[0].photos[0]['url'],
+          currentImageIndex: 0,
+          styleName: response.data.results[0].name,
+          currentPrice: response.data.results[0].original_price,
+          currentSalePrice: response.data.results[0].sale_price,
+          selectedStyle: 0,
+          skusObject: response.data.results[0].skus,
+          numberOfReviews: null,
+          imgSize: 'default'
+        })
+      })
+      .catch((error) => {
+        console.log('error in OVERVIEW axios get request, error:', error)
+      })
+
+    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
+    axios.get(`/reviews/${itemId}`)
+      .then((response) => {
+        console.log('OVERVIEW reviews', response.data.results)
+        this.setState({
+          numberOfReviews: response.data.results.length,
+          // reviewData: response.data.results
+        });
+      })
+      .catch((error) => {
+        console.log('error getting our response from styles get: ', error)
+      })
+
+
+    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
+    axios.get(`/reviews/meta/${this.state.currentItemId}`)
+      .then((response) => {
+        console.log('OVERVIEW ratings', response.data.ratings);
+        var rateObj = response.data.ratings;
+        var result = 0;
+        var numRating = 0;
+        // console.log('result: ', result);
+        // console.log('rateObj: ', this.state.ratingObj);
+        for (var key in rateObj) {
+          // console.log('numKey');
+          result = result + Number(key) * Number(rateObj[key]);
+          numRating = numRating + Number(rateObj[key]);
+        }
+        // console.log('result: ', result);
+        // console.log('numRating: ', numRating);
+        var currRating = result / numRating;
+
+        this.setState({
+          averageStars: currRating
+        })
+        //  console.log('state check of averageStars: ', this.state.averageStars)
+      })
+
+      .catch((error) => {
+        console.log('error inside reviews meta get: ', error)
+      })
+
+
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
       this.componentDidMount()
-      axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
-        .then((response) => {
-          // console.log('response ratings', response.data.ratings);
 
-          var rateObj = response.data.ratings;
-          var result = 0;
-          var numRating = 0;
-          console.log('result: ', result);
-          console.log('rateObj: ', this.state.ratingObj);
-          for (var key in rateObj) {
-            console.log('numKey');
-            result = result + Number(key) * Number(rateObj[key]);
-            numRating = numRating + Number(rateObj[key]);
-          }
-          // console.log('result: ', result);
-          // console.log('numRating: ', numRating);
-          var currRating = result / numRating;
-
-          this.setState({
-            averageStars: currRating
-          })
-          this.props.stars = currRating
-          // console.log('state check of averageStars: ', this.state.averageStars)
-        })
-
-        .catch((error) => {
-          console.log('error inside averageStar making: ', error)
-        })
     }
-    if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
-      this.setState({
-        numberOfReviews: this.props.numberOfReviews
-      })
-    }
+    // if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
+    //   this.setState({
+    //     numberOfReviews: this.props.numberOfReviews
+    //   })
+    // }
   }
 
   changeDisplayImage(index) {
@@ -234,7 +249,7 @@ class Overview extends React.Component {
 
   render() {
 
-    if (this.state.stylesArray && this.state.featuresArray) {
+    if (this.state.stylesArray && this.state.featuresArray && this.state.numberOfReviews && this.state.averageStars) {
       // if (this.state.display_right_side) {
 
 
