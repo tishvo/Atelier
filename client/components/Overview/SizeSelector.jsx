@@ -66,6 +66,12 @@ class SizeSelector extends React.Component {
 
   }
 
+  componentDidMount() {
+    if (!localStorage['cart']) {
+      localStorage['cart'] = '['
+    }
+  }
+
   addToCart() {
     let objToAdd = {
       product: this.props.productName,
@@ -80,7 +86,7 @@ class SizeSelector extends React.Component {
     console.log('this.state.cart: ', this.state.cart)
 
 
-        localStorage['cart'] += (JSON.stringify(objToAdd))
+        localStorage['cart'] = localStorage['cart'].slice(-1) + ', ' + (JSON.stringify(objToAdd)) + ']'
 
 console.log('this is localStorage now: ', localStorage)
 

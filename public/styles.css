@@ -59,6 +59,9 @@
   cursor: zoom-out;
 }
 
+#af-main-image-xl::-webkit-scrollbar {
+  width: 0px
+}
 /* #af-main-image-expanded:hover {
   transform: translateX(10%) translateY(10%);
   transition-duration: 1s
