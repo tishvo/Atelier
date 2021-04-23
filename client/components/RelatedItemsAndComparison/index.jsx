@@ -50,7 +50,7 @@ class RelatedItemsAndComparison extends React.Component {
     return (
       <div>
         <div>
-          <RelatedProducts data={this.props.data} currentItem={this.state.currentItem}
+          <RelatedProducts currentItem={this.state.currentItem}
             click={this.props.click}/>
           <YourOutfit data={this.props.data} currentItem={this.state.currentItem} click={this.props.click}/>
         </div>

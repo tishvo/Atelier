@@ -38,6 +38,8 @@ class RPCard extends React.Component {
 
       this._isMounted && this.setState({
         itemData: res.data
+      }, () => {
+        console.log('itemData in RPCard', this.state.itemData);
       })
     })
     .catch(err => {
@@ -83,7 +85,8 @@ class RPCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.itemId !== prevProps.itemId) { this.fetchData(); }
+    this._isMounted = true;
+    if (this.props.itemId !== prevProps.itemId) { this._isMounted && this.fetchData(); }
   }
 
   componentWillUnmount() {

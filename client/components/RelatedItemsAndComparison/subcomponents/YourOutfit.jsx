@@ -38,7 +38,7 @@ const YourOutfit = (props) => {
 
   useEffect(() => {
     updateState();
-  }, [/*console.log('state after useEffect: ', state)*/])
+  }, [])
 
   // clickfunction addItem
   const addItem = (data) => {
@@ -119,8 +119,6 @@ const YourOutfit = (props) => {
     )
   }
   const removeFromOutfit = (id) => {
-    console.log(id ,' was clicked!!');
-    console.log('localStorage before delete: ', localStorage);
     localStorage.removeItem(id);
     updateState();
   }

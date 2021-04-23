@@ -113,7 +113,8 @@ class YOCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.item.id !== prevProps.item.id) { this.fetchData(); }
+    this._isMounted = true;
+    if (this.props.item.id !== prevProps.item.id) { this._isMounted && this.fetchData(); }
   }
 
   componentWillUnmount() {
