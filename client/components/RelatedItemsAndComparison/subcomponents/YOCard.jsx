@@ -10,6 +10,7 @@ class YOCard extends React.Component {
       itemData: {},
       allStyles: [],
       stylePreview: '',
+      averageStars: undefined
     }
 
     this.styles = {
@@ -22,11 +23,13 @@ class YOCard extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this.renderStars = this.renderStars.bind(this);
 
     this._isMounted = false;
   }
 
   fetchData() {
+    // get product info
     axios.get(`/products/${this.props.item.id}`)
     .then(res => {
 
@@ -37,7 +40,7 @@ class YOCard extends React.Component {
     .catch(err => {
       console.log('RP CARD DATA GET ERROR: ', err)
     })
-
+    // get images
     axios.get(`/products/${this.props.item.id}/styles`)
     .then(res => {
         this._isMounted && this.setState({
@@ -48,6 +51,60 @@ class YOCard extends React.Component {
     .catch((error) => {
       console.log('error in RPCARD /styles request, error:', error)
     })
+    // get review stars
+    axios.get(`/reviews/meta/${this.props.item.id}`)
+    .then((response) => {
+      var rateObj = response.data.ratings;
+      var result = 0;
+      var numRating = 0;
+      for (var key in rateObj) {
+        result = result + Number(key) * Number(rateObj[key]);
+        numRating = numRating + Number(rateObj[key]);
+      }
+      var currRating;
+      if (numRating === 0) {
+        currRating = 'Not yet rated';
+      } else {
+        currRating = (result / numRating);
+      }
+      this.setState({
+        averageStars: currRating
+      })
+    })
+  }
+
+  renderStars() {
+    var numArray = [];
+    var newNum = this.state.averageStars;
+    for (var i = 1; i < this.state.averageStars; i++) {
+      numArray.push(1);
+      newNum--;
+    }
+    numArray.push(newNum);
+    if (numArray[0] === "Not yet rated") {
+      return (
+        <span>
+          {numArray[0]}
+        </span>
+      );
+    } else {
+      return (
+        <span id="af=stars">
+          {numArray.map((num, index) => {
+            if (num === 1 || num > 0.872) {
+              return <div id="af-full-star" key={index}>1</div>
+            } else if (num >= 0.63 && num <= 0.872) {
+              return <div id="af-three-quarter-star" key={index}>0.75</div>
+            } else if (num > 0.38 && num <= 0.62) {
+              return <div id="af-half-star" key={index}>0.5</div>
+            } else if (num >= 0.12 && num <= 0.38) {
+              return <div id="af-quarter-star" key={index}>0.25</div>
+            }
+          })
+          }
+        </span>
+      );
+    }
   }
 
   componentDidMount() {
@@ -80,9 +137,7 @@ class YOCard extends React.Component {
         <span>
           {this.state.itemData.default_price}
         </span>
-        <div>
-          star rating
-        </div>
+        { this.renderStars() }
       </div>
     )
   }
