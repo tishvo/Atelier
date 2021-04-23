@@ -50,7 +50,7 @@ const ImageGallery = (props) => {
               onClick={props.shrink}></div>
 
             <img
-              style={{marginLeft: -mousePosition.x, marginTop: -mousePosition.y}}
+              style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
               id={props.imgId}
               onClick={props.click}
               src={props.images[props.currentIndex]['url']} >

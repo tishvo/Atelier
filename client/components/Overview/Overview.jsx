@@ -52,42 +52,39 @@ class Overview extends React.Component {
     var itemId = this.props.currentItem['id'];
 
     axios.get(`/products/${itemId}`)
-    .then((response) => {
-      // console.log('here we will have the characteristics', response);
-
-      this.setState ({
-        featuresArray: response.data.features
-      })
-    })
-    .catch ((error) => {
-      console.log('error in getting specific product', error)
-    })
-
-    // get the styles by id
-    axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('this is the styles data: ', response.data.results)
-
-
-
+        // console.log('here we will have the characteristics', response);
         this.setState({
-          stylesArray: response.data.results,
-          images: response.data.results[0].photos,
-          currentImage: response.data.results[0].photos[0]['url'],
-          currentImageIndex: 0,
-          styleName: response.data.results[0].name,
-          currentPrice: response.data.results[0].original_price,
-          currentSalePrice: response.data.results[0].sale_price,
-          selectedStyle: 0,
-          skusObject: response.data.results[0].skus,
-          numberOfReviews: this.props.numberOfReviews,
-          imgSize: 'default'
-
+          featuresArray: response.data.features
         })
+
+        axios.get(`/products/${itemId}/styles`)
+          .then((response) => {
+            console.log('this is the styles data: ', response.data.results)
+            this.setState({
+              stylesArray: response.data.results,
+              images: response.data.results[0].photos,
+              currentImage: response.data.results[0].photos[0]['url'],
+              currentImageIndex: 0,
+              styleName: response.data.results[0].name,
+              currentPrice: response.data.results[0].original_price,
+              currentSalePrice: response.data.results[0].sale_price,
+              selectedStyle: 0,
+              skusObject: response.data.results[0].skus,
+              numberOfReviews: this.props.numberOfReviews,
+              imgSize: 'default'
+            })
+          })
+          .catch((error) => {
+            console.log('error in OVERVIEW axios get request, error:', error)
+          })
+
       })
       .catch((error) => {
-        console.log('error in OVERVIEW axios get request, error:', error)
+        console.log('error in getting specific product', error)
       })
+
+    // get the styles by id
   }
 
   componentDidUpdate(prevProps) {
@@ -241,6 +238,7 @@ class Overview extends React.Component {
       // if (this.state.display_right_side) {
 
 
+
       return (
         <div id="af-nameless">
           <div id="af-overview-container">
@@ -293,7 +291,7 @@ class Overview extends React.Component {
           </div>
           <div id="af-product-description">
             <ProductInfoDescription description={this.props.currentItem.description} />
-            <Characteristics features={this.state.featuresArray}/>
+            <Characteristics features={this.state.featuresArray} />
           </div>
         </div>)
 
