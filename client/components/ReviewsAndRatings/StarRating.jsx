@@ -5,7 +5,8 @@ import { FaStarHalf } from "react-icons/fa";
 
 const StarRating = (props) => {
   //console.log('StarRating rating props: ', props.stars);
-  var strStars = '' + props.stars;
+  var roundDown = Math.floor(props.stars);
+  var strStars = '' + roundDown;
   //console.log('string stars: ', strStars);
   var starObj = {
     '1': <div><FaStar /><FaRegStar /><FaRegStar /><FaRegStar /><FaRegStar /></div>,

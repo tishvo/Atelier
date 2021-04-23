@@ -32,7 +32,7 @@ class App extends React.Component {
         })
       })
       .then(() => {
-        axios.get(`/reviews/${this.state.currentItemId}`)
+        axios.get(`/reviews/${this.state.currentItemId}&count=1000`)
           .then((response) => {
             console.log('found our reviews data!', response.data.results)
             this.setState({
@@ -74,25 +74,29 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
+  }
 
-
+  componentDidUpdate() {
+    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
 
   }
 
 
 
   relatedClick(e) {
-    console.log('the click worked', e)
+    console.log('the click worked', e, e.id)
     this.setState({
       currentItem: e,
       currentItemId: e.id
-
     })
   }
 
   render() {
-    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
-    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
+    //console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    //console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
+    //console.log('checking on averageStars in app.jsx PAY ATTENTION TO MEEEEE: ', this.state.averageStars);
+    //console.log('checking on number of reviews: ', this.state.numberOfReviews);
+
   if (this.state.averageStars) {
       return (
         <div>
@@ -100,7 +104,7 @@ class App extends React.Component {
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
           <QandA_app currentItem={this.state.currentItem}/>
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews}/>
+          <ReviewsAndRatings itemId={this.state.currentItemId}/>
         </div>
       )
     } else {

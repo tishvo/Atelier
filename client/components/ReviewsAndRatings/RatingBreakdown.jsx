@@ -17,7 +17,15 @@ class RatingBreakdown extends React.Component {
   componentDidMount() {
     this.averageRecommends(this.props.metaData.recommended);
     this.arrayFromRatings(this.props.metaData.ratings)
-    console.log('checking a percentage %%%%%%%', this.percentageOfVotesTotal(this.props.metaData.ratings, 5));
+    //console.log('checking a percentage %%%%%%%', this.percentageOfVotesTotal(this.props.metaData.ratings, 5));
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('ratingBreakdown prop stuff: ', this.props.metaData.product_id, prevProps.metaData.product_id)
+    if (this.props.metaData.product_id !== prevProps.metaData.product_id) {
+      this.averageRecommends(this.props.metaData.recommended);
+      this.arrayFromRatings(this.props.metaData.ratings);
+    }
   }
 
   //average the recommendations for a percentage
@@ -51,8 +59,9 @@ class RatingBreakdown extends React.Component {
 
   /* *********this is render zone********** */
   render() {
-    console.log(this.props.metaData.ratings);
-    console.log('THIS IS AN ARRAY OF vals FROM THIS ITEM', this.state.ratingsArray)
+    //console.log(this.props.metaData.ratings);
+    //console.log('THIS IS AN ARRAY OF vals FROM THIS ITEM', this.state.ratingsArray)
+    console.log("STARS", this.props.stars);
     return (
       <div>
         {this.props.stars.toFixed(2)}<StarRating stars={this.props.stars} />
@@ -60,7 +69,7 @@ class RatingBreakdown extends React.Component {
         {this.state.ratingsArray.map((char, index) => {
           return (
             //console.log('this is a bunch of % ', this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0])))
-            <div>{char[0]}<RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0]))}/></div>
+            <div key={index}>{char[0]}<RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0]))}/></div>
           )
         })}
 

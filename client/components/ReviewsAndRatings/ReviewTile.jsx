@@ -11,7 +11,8 @@ class ReviewTile extends React.Component {
       helpfulYes: this.props.reviewData.helpfulness,
       helpfulHasBeenClicked: false,
       recommend: false,
-      arrayOfPhotos: []
+      arrayOfPhotos: [],
+      currentReviewId: ''
     };
     this.helpfulClick = this.helpfulClick.bind(this);
   }
@@ -30,7 +31,6 @@ class ReviewTile extends React.Component {
 
     //check if the current product is recommended, set to true if recommended
     if (this.props.reviewData.recommend) {
-      //console.log('is this product recommended: ', this.props.reviewData.recommend);
       this.setState({
         recommend: true
       });
@@ -42,7 +42,29 @@ class ReviewTile extends React.Component {
         arrayOfPhotos: this.props.reviewData.photos
       });
     }
+
+    //change value for update
+    // if (this.state.currentReviewId !== this.props.itemId) {
+    //   this.setState({
+    //     currentReviewId: this.props.itemId
+    //   })
+    // }
   }
+
+  // componentDidUpdate(prevProps) {
+  //   console.log('new props: ', this.props.itemId);
+  //   console.log('old props: ', prevProps.itemId);
+  //   console.log('prevProps: ', prevProps);
+
+  //   if (this.state.currenReviewId !== prevProps.itemId) {
+  //     this.componentDidMount();
+  //   }
+  // }
+
+  /*
+  FUNCTIONS
+  */
+
 
   //only allows for one yes click, adds one to helpful
   helpfulClick(event) {
@@ -55,9 +77,9 @@ class ReviewTile extends React.Component {
     }
   }
 
-
-
   render() {
+    // console.log('this is reviewtile props reviewData: ', this.props.reviewData);
+    // console.log('inside review data: ', this.props.reviewData.body);
 
     return (
       <div>
@@ -67,7 +89,7 @@ class ReviewTile extends React.Component {
 
           this.state.arrayOfPhotos.map((photos, items) => {
             return (
-                <img src={photos.url}></img>
+                <img src={photos.url} key={items}></img>
             )
           })
 
