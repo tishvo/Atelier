@@ -13,7 +13,11 @@ class App extends React.Component {
     this.state = {
       data: null,
       currentItem: null,
-      currentRatingMeta: {}
+      currentRatingMeta: {},
+      widget1: 'overview',
+      widget2: 'related items and comparison',
+      widget3: 'questions and answers',
+      widget4: 'reviews and ratings'
 
     }
     this.relatedClick = this.relatedClick.bind(this);
@@ -97,10 +101,10 @@ class App extends React.Component {
       return (
         <div className="rr-column-container">
           <div>HELLO</div>
-          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} />
-          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} />
-          <QandA_app currentItem={this.state.currentItem} />
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} />
+          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget={this.state.widget1}/>
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} widget={this.state.widget2}/>
+          <QandA_app currentItem={this.state.currentItem} widget={this.state.widget3}/>
+          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} widget={this.state.widget4}/>
         </div>
       )
     } else {
