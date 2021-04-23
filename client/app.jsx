@@ -31,7 +31,7 @@ class App extends React.Component {
         })
       })
       .then(() => {
-        axios.get(`/reviews/${this.state.currentItemId}`)
+        axios.get(`/reviews/${this.state.currentItemId}&count=1000`)
           .then((response) => {
             console.log('found our reviews data!', response.data.results)
             this.setState({
@@ -73,19 +73,20 @@ class App extends React.Component {
       .catch((error) => {
         console.log('error in app.jsx axios get request, error:', error)
       })
+  }
 
-
+  componentDidUpdate() {
+    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
 
   }
 
 
 
   relatedClick(e) {
-    console.log('the click worked', e)
+    console.log('the click worked', e, e.id)
     this.setState({
       currentItem: e,
       currentItemId: e.id
-
     })
   }
 
@@ -99,7 +100,7 @@ class App extends React.Component {
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget='Overview'/>
           <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons'/>
           <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers'/>
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} widget='Reviews and Ratings'/>
+          <ReviewsAndRatings itemId={this.state.currentItemId}/>
         </div>
       )
     } else {
