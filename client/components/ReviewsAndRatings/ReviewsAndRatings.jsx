@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
+import PrivacyHOC from '../ClickTrackingHOC.js';
 
 
 
@@ -20,6 +21,7 @@ class ReviewsAndRatings extends React.Component {
     };
     this.getReviewsForItem = this.getReviewsForItem.bind(this);
     this.getReviewsForReviewMeta = this.getReviewsForReviewMeta.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +80,7 @@ class ReviewsAndRatings extends React.Component {
       .catch((error) => {
         console.log('error inside reviews meta get: ', error)
       })
+
   }
 
   render() {
@@ -98,7 +101,7 @@ class ReviewsAndRatings extends React.Component {
   }
 }
 
-export default ReviewsAndRatings;
+export default PrivacyHOC(ReviewsAndRatings);
 
 
 // API: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/"

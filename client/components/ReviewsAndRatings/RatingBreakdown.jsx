@@ -66,7 +66,7 @@ class RatingBreakdown extends React.Component {
         {this.props.stars.toFixed(2)}<StarRating stars={this.props.stars} />
         <div>{this.state.recommendPercent}% of reviews recommend this product</div>
         {this.state.ratingsArray.map((char, index) => {
-          console.log('INSIDE THE BELLY OF THE BEAST', char[0])
+          //console.log('INSIDE THE BELLY OF THE BEAST', char[0])
           return (
             //console.log('this is a bunch of % ', this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0])))
             <div key={index}>{char[0]}<RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0]))}/></div>
