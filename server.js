@@ -23,7 +23,7 @@ app.get('/products', function (req, res) {
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in initial /products get request, error:')
+      console.log('error in initial /products get request, error:', error)
 
 
     })
@@ -75,7 +75,6 @@ app.get('/products/:productId/related', function(req, res) {
     }
   })
   .then(response => {
-    console.log('got data in server /related request: ', response.data)
     res.status(202).send(response.data);
   })
   .catch(err => {
