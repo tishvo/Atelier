@@ -44,7 +44,7 @@ class Overview extends React.Component {
     this.expand = this.expand.bind(this);
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
-    this.PrivacyHOC = this.PrivacyHOC.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   componentDidMount() {

@@ -12,7 +12,7 @@ class ReviewsAndRatings extends React.Component {
     this.state = {
 
     };
-    this.PrivacyHOC = this.PrivacyHOC.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   render() {

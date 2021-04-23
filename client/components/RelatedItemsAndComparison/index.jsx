@@ -16,7 +16,7 @@ class RelatedItemsAndComparison extends React.Component {
     };
 
     this._isMounted = false;
-    this.PrivacyHOC = this.PrivacyHOC.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   fetchData() {
