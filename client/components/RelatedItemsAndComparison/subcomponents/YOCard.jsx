@@ -113,6 +113,31 @@ class YOCard extends React.Component {
       );
     }
   }
+  // will render sale price if first display style is on sale
+  renderPrice() {
+    if (this.state.allStyles.length > 0) {
+      if (this.state.allStyles[0].sale_price !== null) {
+        return (
+          <div>
+            <span style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}}>
+              {this.state.itemData.default_price}
+            </span>
+            <span style={{color: 'red'}}>
+              SALE: {this.state.allStyles[0].sale_price}
+            </span>
+          </div>
+)
+      } else {
+        return (
+          <div>
+            <span >
+              {this.state.itemData.default_price}
+            </span>
+          </div>
+        )
+      }
+    }
+  }
 
   componentDidMount() {
     this._isMounted = true;
@@ -142,10 +167,11 @@ class YOCard extends React.Component {
         return this.props.click(this.state.itemData) } }>
           {this.state.itemData.name}
         </h4>
-        <span>
-          {this.state.itemData.default_price}
-        </span>
+
+        { this.renderPrice() }
+
         { this.renderStars() }
+
       </div>
     )
   }
