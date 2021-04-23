@@ -6,8 +6,8 @@ class ProductInfoShare extends React.Component {
   }
 
   render() {
-    return (<div>
-      <span id="af-share-buttons">
+    return (<div id="af-share-buttons">
+      <span>
 
         <div className="af-fb-share" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a id="af-fb-share" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
         {/* <img id="af-fb-share"></img> */}

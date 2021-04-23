@@ -5,7 +5,13 @@ import QA_listEntry from './QA_listEntry.jsx';
 class QA_list extends React.Component {
   constructor(props) {
     super(props);
+  }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.qa !== prevProps.qa) {
+
+      this.render();
+    }
   }
 
   render() {

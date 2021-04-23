@@ -53,12 +53,12 @@ class App extends React.Component {
             // console.log('rateObj: ', this.state.ratingObj);
             for (var key in rateObj) {
               // console.log('numKey');
-              result = result + Number(key)*Number(rateObj[key]);
+              result = result + Number(key) * Number(rateObj[key]);
               numRating = numRating + Number(rateObj[key]);
             }
             // console.log('result: ', result);
             // console.log('numRating: ', numRating);
-            var currRating = result/numRating;
+            var currRating = result / numRating;
 
             this.setState({
               averageStars: currRating
@@ -92,18 +92,15 @@ class App extends React.Component {
   }
 
   render() {
-    //console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
-    //console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
-    //console.log('checking on averageStars in app.jsx PAY ATTENTION TO MEEEEE: ', this.state.averageStars);
-    //console.log('checking on number of reviews: ', this.state.numberOfReviews);
-
-  if (this.state.averageStars) {
+    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
+    if (this.state.averageStars) {
       return (
-        <div>
+        <div className="rr-column-container">
           <div>HELLO</div>
-          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars}/>
-          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={ this.relatedClick }/>
-          <QandA_app currentItem={this.state.currentItem}/>
+          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} />
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} />
+          <QandA_app currentItem={this.state.currentItem} />
           <ReviewsAndRatings itemId={this.state.currentItemId}/>
         </div>
       )

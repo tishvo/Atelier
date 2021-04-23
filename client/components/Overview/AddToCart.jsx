@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AddToCard extends React.Component {
+class AddToCart extends React.Component {
   constructor(props) {
     super(props)
 
@@ -28,4 +28,4 @@ class AddToCard extends React.Component {
   }
 }
 
-export default AddToCard;
+export default AddToCart;
