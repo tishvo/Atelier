@@ -24,6 +24,13 @@ class QA_listEntry extends React.Component {
     this.showModal = this.showModal.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.item.answers !== prevProps.item.answers) {
+      this.setState({
+        answers: Object.values(this.props.item.answers)
+      })
+    }
+  }
 
   lmaClick(e) {
     if (this.state.counter % 2 === 0) {
