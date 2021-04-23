@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { BiStar } from 'react-icons/bi';
 import axios from 'axios';
 import ComparisonModal from './ComparisonModal/index.jsx';
 
@@ -17,18 +18,21 @@ class RPCard extends React.Component {
     this.styles = {
       'margins': 'center',
       'borderStyle': 'solid',
-      'width': '30%'
+      'width': '30%',
+      'height': '300px'
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
+
+    this._isMounted = false;
   }
 
   fetchData() {
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
 
-      this.setState({
+      this._isMounted && this.setState({
         itemData: res.data
       })
     })
@@ -38,10 +42,11 @@ class RPCard extends React.Component {
 
     axios.get(`/products/${this.props.itemId}/styles`)
     .then(res => {
-        this.setState({
-          allStyles: res.data.results,
-          stylePreview: res.data.results[0].photos[0]['thumbnail_url']
-        })
+
+      this._isMounted && this.setState({
+        allStyles: res.data.results,
+        stylePreview: res.data.results[0].photos[0]['thumbnail_url']
+      })
     })
     .catch((error) => {
       console.log('error in RPCARD /styles request, error:', error)
@@ -49,11 +54,16 @@ class RPCard extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this._isMounted = true;
+    this._isMounted && this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.itemId !== prevProps.itemId) { this.fetchData(); }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   showModal() {
@@ -65,7 +75,9 @@ class RPCard extends React.Component {
   render() {
     return (
       <div className='rr-column-container' style={this.styles}>
-        <button  onClick={e => { this.showModal(); }} > &#9734; </button>
+        <div className='rr-action-button' onClick={e => { this.showModal(); }} >
+          < BiStar size={20}/>
+        </div>
         <ComparisonModal close={e => { this.showModal(); }} show={this.state.showModal} comparisonData={this.state.itemData} mainData={ () => {
           return this.props.currentProduct } }/>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {

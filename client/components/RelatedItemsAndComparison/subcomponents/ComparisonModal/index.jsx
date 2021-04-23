@@ -19,12 +19,11 @@ export default class ComparisonModal extends React.Component {
       mainItemData: this.props.mainData(),
       comparisonItemData: this.props.comparisonData
     }, () => {
-      var allFeatures;
       if (this.state.mainItemData.features) {
         var mainFeatures = [];
         // loop through main features and add them to mainFeatures array
         for (var i = 0; i < this.state.mainItemData.features.length; i ++) {
-          mainFeatures.push(this.state.mainItemData.features[i]);
+          mainFeatures.push(this.state.mainItemData.features[i].feature);
         }
       }
 
@@ -32,7 +31,9 @@ export default class ComparisonModal extends React.Component {
         var comparisonFeatures = [];
         // loop through comparison features and add them to mainFeatures array
         for (var j = 0; j < this.state.comparisonItemData.features.length; j ++) {
-          comparisonFeatures.push(this.state.comparisonItemData.features[j]);
+          if (!mainFeatures.includes(this.state.comparisonItemData.features[j].feature)) {
+            comparisonFeatures.push(this.state.comparisonItemData.features[j].feature);
+          }
         }
       }
       // send these to state
@@ -48,16 +49,30 @@ export default class ComparisonModal extends React.Component {
   }
 
   checkMainChars(char) {
-    if (this.state.mainChars.includes(char)) {
-      return <div> &#10003; </div>
+    for (var m = 0; m < this.state.mainItemData.features.length; m ++) {
+
+      if (this.state.mainItemData.features[m].feature === char) {
+        if (this.state.mainItemData.features[m].value === null) {
+          return <div> &#10003; </div>
+        } else {
+          return <div> {this.state.mainItemData.features[m].value} </div>;
+        }
+      }
     }
-    return <div> &#10008; </div>
+    return <div> - </div>
   }
   checkComparisonChars(char) {
-    if (this.state.comparisonChars.includes(char)) {
-      return <div> &#10003; </div>
+    for (var c = 0; c < this.state.comparisonItemData.features.length; c ++) {
+
+      if (this.state.comparisonItemData.features[c].feature === char) {
+        if (this.state.comparisonItemData.features[c].value === null) {
+          return <div> &#10003; </div>
+        } else {
+          return <div> {this.state.comparisonItemData.features[c].value} </div>;
+        }
+      }
     }
-    return <div> &#10008; </div>
+    return <div> - </div>
   }
 
   renderTableRows() {
@@ -78,7 +93,7 @@ export default class ComparisonModal extends React.Component {
             return (
               <tr key={index} >
                 <td>{this.checkMainChars(characteristic)}</td>
-                <td>{characteristic.feature}</td>
+                <td>{characteristic}</td>
                 <td>{this.checkComparisonChars(characteristic)}</td>
               </tr>
             )
@@ -103,13 +118,14 @@ export default class ComparisonModal extends React.Component {
       </div>
     )
   }
+
   render() {
     if(!this.props.show){
       return null;
 
     } else {
       return (
-        <div className='rr-comparison-modal' >
+        <div className='qModal qContent' id='qModal' >
           <div className='qModal qContent' id='qModal'>
             <h2> Comparing </h2>
             { this.renderTable() }

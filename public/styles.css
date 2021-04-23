@@ -76,17 +76,6 @@
 
 }
 
-#af-front-page-container {
-  /* display: inline-block;
-  width: 100%; */
-}
-
- #af-landing-box {
-   /* position: relative;
-   display: inline;
-   width: 500px; */
-}
-
 #af-image-container {
   background-color: grey;
   cursor: zoom-in;
@@ -374,14 +363,41 @@
 }
 
 .rr-column-container {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
+.rr-action-button {
+  margin-left: auto;
+  margin-right: 0;
+  padding-right: 5%;
+  padding-top: 5%;
+}
+
+.rr-carousel-arrow {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.add-button-container {
+  margin: center;
+  border-style: solid;
+  width: 30%;
+  height: 300px;
+}
+
+.rr-add-button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 5%;
+}
+
 .rr-thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 
 }
 

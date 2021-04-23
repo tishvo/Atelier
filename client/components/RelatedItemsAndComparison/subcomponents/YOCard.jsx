@@ -1,4 +1,5 @@
 import React from 'react';
+import { TiDelete } from 'react-icons/ti';
 import axios from 'axios';
 
 class YOCard extends React.Component {
@@ -14,19 +15,22 @@ class YOCard extends React.Component {
     this.styles = {
       'margins': 'center',
       'borderStyle': 'solid',
-      'width': '30%'
+      'width': '30%',
+      'height': '300px'
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
+
+    this._isMounted = false;
   }
 
   fetchData() {
     axios.get(`/products/${this.props.item.id}`)
     .then(res => {
 
-      this.setState({
+      this._isMounted && this.setState({
         itemData: res.data
       })
     })
@@ -36,7 +40,7 @@ class YOCard extends React.Component {
 
     axios.get(`/products/${this.props.item.id}/styles`)
     .then(res => {
-        this.setState({
+        this._isMounted && this.setState({
           allStyles: res.data.results,
           stylePreview: res.data.results[0].photos[0]['thumbnail_url']
         })
@@ -47,18 +51,23 @@ class YOCard extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this._isMounted = true;
+    this._isMounted && this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.item.id !== prevProps.item.id) { this.fetchData(); }
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
 
     return (
       <div className='rr-column-container' style={this.styles}>
-        <button  onClick={e => { this.props.remove(this.state.itemData.id); }} > &#10006; </button>
+        <div className='rr-action-button' onClick={e => { this.props.remove(this.state.itemData.id); }} > < TiDelete size={30}/> </div>
         <img className='rr-thumbnail' src={this.state.stylePreview} alt={'image: ' + `${this.state.itemData.name}`} onClick={ () => {
         return this.props.click(this.state.itemData) } }></img>
         <span>
