@@ -118,6 +118,7 @@ const YourOutfit = (props) => {
       </div>
     )
   }
+
   const removeFromOutfit = (id) => {
     localStorage.removeItem(id);
     updateState();

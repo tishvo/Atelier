@@ -38,8 +38,6 @@ class RPCard extends React.Component {
 
       this._isMounted && this.setState({
         itemData: res.data
-      }, () => {
-        console.log('itemData in RPCard', this.state.itemData);
       })
     })
     .catch(err => {
@@ -100,20 +98,25 @@ class RPCard extends React.Component {
   };
 
   renderStars() {
-    var numArray = [];
-    var newNum = this.state.averageStars;
-    for (var i = 1; i < this.state.averageStars; i++) {
-      numArray.push(1);
-      newNum--;
-    }
-    numArray.push(newNum);
-    if (numArray[0] === "Not yet rated") {
+    if (this.state.averageStars === "Not yet rated") {
       return (
         <span>
-          {numArray[0]}
+          {this.state.averageStars}
         </span>
       );
     } else {
+      var numArray = [];
+      var newNum = this.state.averageStars;
+      for (var i = 1; i <= 5; i++) {
+        if (newNum >= 1) {
+          numArray.push(1);
+        } else if (newNum < 1 && newNum > 0) {
+          numArray.push(newNum);
+        } else {
+          numArray.push(0);
+        }
+        newNum--;
+      }
       return (
         <span id="af=stars">
           {numArray.map((num, index) => {
@@ -125,6 +128,8 @@ class RPCard extends React.Component {
               return <div id="af-half-star" key={index}>0.5</div>
             } else if (num >= 0.12 && num <= 0.38) {
               return <div id="af-quarter-star" key={index}>0.25</div>
+            } else {
+              return <div id="af-empty-star" key={index}>0</div>
             }
           })
           }

@@ -99,8 +99,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
-    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
+    // console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    // console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
     if (this.state.averageStars) {
       return (
         <div className="rr-column-container">
