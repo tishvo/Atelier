@@ -23,6 +23,7 @@ class RPCard extends React.Component {
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
     this.fetchData = this.fetchData.bind(this);
 
     this._isMounted = false;

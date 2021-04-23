@@ -15,6 +15,10 @@ class RelatedItemsAndComparison extends React.Component {
     };
 
     this._isMounted = false;
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   fetchData() {
@@ -37,6 +41,9 @@ class RelatedItemsAndComparison extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.currentItem !== prevProps.currentItem) { this.fetchData(); this.render(); }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
