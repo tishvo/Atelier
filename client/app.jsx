@@ -14,7 +14,6 @@ class App extends React.Component {
       data: null,
       currentItem: null,
       currentRatingMeta: {}
-
     }
     this.relatedClick = this.relatedClick.bind(this);
   }
@@ -97,10 +96,10 @@ class App extends React.Component {
       return (
         <div className="rr-column-container">
           <div>HELLO</div>
-          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} />
-          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} />
-          <QandA_app currentItem={this.state.currentItem} />
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} />
+          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget='Overview'/>
+          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons'/>
+          <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers'/>
+          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} widget='Reviews and Ratings'/>
         </div>
       )
     } else {

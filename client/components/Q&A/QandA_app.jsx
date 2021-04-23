@@ -4,6 +4,7 @@ import axios from 'axios';
 import QA_search from './QA_search.jsx';
 import QA_list from './QA_list.jsx';
 import AddQModal from './AddQModal.jsx';
+import PrivacyHOC from '../ClickTrackingHOC.js';
 
 class QandA_app extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class QandA_app extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.maqClick = this.maqClick.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
+
   }
 
   componentDidMount() {
@@ -82,10 +85,7 @@ class QandA_app extends React.Component {
         defaultq4: searchedQ
       })
     }
-
   }
-
-
 
   render() {
     return (
@@ -100,4 +100,4 @@ class QandA_app extends React.Component {
   }
 }
 
-export default QandA_app;
+export default PrivacyHOC(QandA_app);

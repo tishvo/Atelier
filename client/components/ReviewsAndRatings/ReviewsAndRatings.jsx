@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
+import PrivacyHOC from '../ClickTrackingHOC.js';
 
 
 
@@ -11,6 +12,7 @@ class ReviewsAndRatings extends React.Component {
     this.state = {
 
     };
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   render() {
@@ -23,7 +25,7 @@ class ReviewsAndRatings extends React.Component {
   }
 }
 
-export default ReviewsAndRatings;
+export default PrivacyHOC(ReviewsAndRatings);
 
 
 // API: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/"
