@@ -30,64 +30,25 @@ class App extends React.Component {
           averageStars: null
         })
       })
-      // .then(() => {
-        // axios.get(`/reviews/${this.state.currentItemId}`)
-        //   .then((response) => {
-        //     console.log('found our reviews data!', response.data.results)
-        //     this.setState({
-        //       numberOfReviews: response.data.results.length,
-        //       reviewData: response.data.results
-        //     });
-        //   })
-        //   .catch((error) => {
-        //     console.log('error getting our response from styles get: ', error)
-        //   })
 
-
-      //   axios.get(`/reviews/meta/${this.state.currentItemId}`)
-      //     .then((response) => {
-      //       // console.log('response ratings', response.data.ratings);
-      //       var rateObj = response.data.ratings;
-      //       var result = 0;
-      //       var numRating = 0;
-      //       // console.log('result: ', result);
-      //       // console.log('rateObj: ', this.state.ratingObj);
-      //       for (var key in rateObj) {
-      //         // console.log('numKey');
-      //         result = result + Number(key) * Number(rateObj[key]);
-      //         numRating = numRating + Number(rateObj[key]);
-      //       }
-      //       // console.log('result: ', result);
-      //       // console.log('numRating: ', numRating);
-      //       var currRating = result / numRating;
-
-      //       this.setState({
-      //         averageStars: currRating
-      //       })
-      //       //  console.log('state check of averageStars: ', this.state.averageStars)
-      //     })
-
-      //     .catch((error) => {
-      //       console.log('error inside reviews meta get: ', error)
-      //     })
-      // })
 
       .catch((error) => {
         console.log('ERRORR in app.jsx axios get request, error:', error)
       })
+  }
 
-
+  componentDidUpdate() {
+    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
 
   }
 
 
 
   relatedClick(e) {
-    console.log('the click worked', e)
+    console.log('the click worked', e, e.id)
     this.setState({
       currentItem: e,
       currentItemId: e.id
-
     })
   }
 
