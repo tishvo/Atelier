@@ -112,7 +112,7 @@ class App extends React.Component {
           < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget='Overview'/>
           <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons'/>
           <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers'/>
-          <ReviewsAndRatings itemId={this.state.currentItemId}/>
+          <ReviewsAndRatings itemId={this.state.currentItemId} widget='Reviews and Ratings'/>
         </div>
       )
     } else {
