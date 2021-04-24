@@ -55,7 +55,7 @@ class Overview extends React.Component {
     // REQUEST FOR SPECIFIC PRODUCT
     axios.get(`/products/${itemId}`)
       .then((response) => {
-        console.log('OVERVIEW specific product:', response);
+        console.log('1.) OVERVIEW specific product:', response);
         this.setState({
           featuresArray: response.data.features
         })
@@ -67,7 +67,7 @@ class Overview extends React.Component {
     //REQUEST FOR SPECIFIC PRODUCT'S STYLES
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('OVERVIEW styles: ', response.data.results)
+        console.log('2.) OVERVIEW styles: ', response.data.results)
         this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,
@@ -87,9 +87,9 @@ class Overview extends React.Component {
       })
 
     // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
-    axios.get(`/reviews/${itemId}`)
+    axios.get(`/reviews/${itemId}&count=1000`)
       .then((response) => {
-        console.log('OVERVIEW reviews', response.data.results)
+        console.log('3.) OVERVIEW reviews', response.data.results)
         this.setState({
           numberOfReviews: response.data.results.length,
           // reviewData: response.data.results
@@ -101,9 +101,9 @@ class Overview extends React.Component {
 
 
     // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
-    axios.get(`/reviews/meta/${this.state.currentItemId}`)
+    axios.get(`/reviews/meta/${itemId}`)
       .then((response) => {
-        console.log('OVERVIEW ratings', response.data.ratings);
+        console.log('4.) OVERVIEW ratings', response.data.ratings);
         var rateObj = response.data.ratings;
         var result = 0;
         var numRating = 0;
@@ -251,10 +251,9 @@ class Overview extends React.Component {
 
   render() {
 
+
+
     if (this.state.stylesArray && this.state.featuresArray && this.state.numberOfReviews && this.state.averageStars) {
-      // if (this.state.display_right_side) {
-
-
 
       return (
         <div id="af-nameless">
@@ -300,8 +299,6 @@ class Overview extends React.Component {
                   productName={this.props.currentItem.name}
                   styleName={this.state.styleName}
                 />
-
-                {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
             </div><br />

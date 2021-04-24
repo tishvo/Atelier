@@ -11,9 +11,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      data: null,
       currentItem: null,
-      currentRatingMeta: {}
+      currentItemId: null
     }
     this.relatedClick = this.relatedClick.bind(this);
   }
@@ -24,25 +23,19 @@ class App extends React.Component {
         console.log('this is our initial project data:', response.data)
 
         this.setState({
-          data: response.data,
           currentItem: response.data[0],
           currentItemId: response.data[0].id,
-          averageStars: null
         })
       })
-
-
       .catch((error) => {
         console.log('ERRORR in app.jsx axios get request, error:', error)
       })
   }
 
-  componentDidUpdate() {
-    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+  // componentDidUpdate() {
+  //   //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
 
-  }
-
-
+  // }
 
   relatedClick(e) {
     console.log('the click worked', e, e.id)

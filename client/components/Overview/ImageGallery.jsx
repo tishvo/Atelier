@@ -80,7 +80,7 @@ const ImageGallery = (props) => {
               }></div>
 
             <img
-            style={{left: mousePosition.x, top: mousePosition.y}}
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
             id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
             </img>
           </div>
@@ -101,7 +101,7 @@ const ImageGallery = (props) => {
             }></div>
 
           <img
-            style={{left: mousePosition.x, top: mousePosition.y}}
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
             id={props.imgId}
             onClick={props.click}
             src={props.images[props.currentIndex]['url']}></img>
