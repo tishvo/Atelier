@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import RelatedProducts from './subcomponents/RelatedProducts.jsx'
 import YourOutfit from './subcomponents/YourOutfit.jsx'
+import PrivacyHOC from '../ClickTrackingHOC.js'
 //url for products
 
 
@@ -19,6 +20,7 @@ class RelatedItemsAndComparison extends React.Component {
     this.fetchData = this.fetchData.bind(this);
 
     this._isMounted = false;
+    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   fetchData() {
@@ -59,4 +61,4 @@ class RelatedItemsAndComparison extends React.Component {
   }
 }
 
-export default RelatedItemsAndComparison;
+export default PrivacyHOC(RelatedItemsAndComparison);

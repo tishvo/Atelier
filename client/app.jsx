@@ -14,7 +14,6 @@ class App extends React.Component {
       data: null,
       currentItem: null,
       currentRatingMeta: {}
-
     }
     this.relatedClick = this.relatedClick.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -37,7 +36,7 @@ class App extends React.Component {
         })
       })
       .then(() => {
-        axios.get(`/reviews/${this.state.currentItemId}`)
+        axios.get(`/reviews/${this.state.currentItemId}&count=1000`)
           .then((response) => {
             console.log('found our reviews data!', response.data.results)
             this._isMounted && this.setState({
@@ -81,6 +80,11 @@ class App extends React.Component {
       })
   }
 
+  componentDidUpdate() {
+    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+
+  }
+
   componentDidMount() {
     this._isMounted = true;
     this._isMounted && this.fetchData();
@@ -91,8 +95,8 @@ class App extends React.Component {
   }
 
   relatedClick(e) {
-    this._isMounted = true;
-    this._isMounted && this.setState({
+    console.log('the click worked', e, e.id)
+    this.setState({
       currentItem: e,
       currentItemId: e.id
     })
@@ -105,10 +109,10 @@ class App extends React.Component {
       return (
         <div className="rr-column-container">
           <div>HELLO</div>
-          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} />
-          <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} />
-          <QandA_app currentItem={this.state.currentItem} />
-          <ReviewsAndRatings stars={this.state.averageStars} itemId={this.state.currentItemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} />
+          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget='Overview'/>
+          <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons'/>
+          <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers'/>
+          <ReviewsAndRatings itemId={this.state.currentItemId}/>
         </div>
       )
     } else {
