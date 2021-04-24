@@ -1,8 +1,4 @@
 node_modules
 .env
 public/bundle.js
-<<<<<<< HEAD
 coverage
-=======
-coverage
->>>>>>> 05cd8ad61aa14b5e45df67bedc345d3d1fddb291
