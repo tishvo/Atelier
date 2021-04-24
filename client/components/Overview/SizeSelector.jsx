@@ -58,8 +58,6 @@ class SizeSelector extends React.Component {
   }
 
   createSizes(e, s) {
-    // console.log('this is e in createSizes', e.split(','))
-    // console.log('this is s in createSizes', s)
     var eArray = e.split(',')
     var sizesArray = []
     for (var i = 1; i <= Number(eArray[0]) && i <= 15; i++) {

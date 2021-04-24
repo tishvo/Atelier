@@ -107,21 +107,15 @@ class Overview extends React.Component {
         var rateObj = response.data.ratings;
         var result = 0;
         var numRating = 0;
-        // console.log('result: ', result);
-        // console.log('rateObj: ', this.state.ratingObj);
         for (var key in rateObj) {
-          // console.log('numKey');
           result = result + Number(key) * Number(rateObj[key]);
           numRating = numRating + Number(rateObj[key]);
         }
-        // console.log('result: ', result);
-        // console.log('numRating: ', numRating);
         var currRating = result / numRating;
 
         this.setState({
           averageStars: currRating
         })
-        //  console.log('state check of averageStars: ', this.state.averageStars)
       })
 
       .catch((error) => {
@@ -134,22 +128,14 @@ class Overview extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
       this.componentDidMount()
-
     }
-    // if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
-    //   this.setState({
-    //     numberOfReviews: this.props.numberOfReviews
-    //   })
-    // }
   }
 
   changeDisplayImage(index) {
 
     var styles = this.state.stylesArray;
-    // console.log('this is styles[index] in changeDisplayImage: ', styles[index])
     this.setState({
       images: styles[index].photos,
-      // currentImageIndex: 0,
       styleName: styles[index].name,
       currentPrice: styles[index].original_price,
       currentSalePrice: styles[index].sale_price,
@@ -184,7 +170,6 @@ class Overview extends React.Component {
   }
 
   expand() {
-    // console.log('expand clicked')
     if (this.state.expand_clicked) {
       if (this.state.imgSize === 'expanded') {
 
@@ -200,7 +185,6 @@ class Overview extends React.Component {
       } else if (this.state.imgSize === 'xl') {
         this.setState({
           css_width: { width: '960px', height: '500px' },
-          // expand_clicked: false,
           display_right_side: true,
           imgElementId: "af-main-image-expanded",
           thumbnailCarouselBoxWidth: { width: '0px' },
@@ -225,7 +209,6 @@ class Overview extends React.Component {
   }
 
   shrink() {
-    // console.log('shrink clicked')
     if (this.state.imgSize === 'default') {
       this.setState({
         css_width: { width: '960px', height: '500px' },

@@ -19,15 +19,10 @@ class ProductInfoHead extends React.Component {
   }
 
   render() {
-
-    // console.log('number of stars: ', this.props.stars)
     console.log('Number of reviews: ', this.state.numberOfReviews)
 
 
     if (this.props.stars) {
-      if (this.props.numberOfReviews) {
-        // do something
-      }
 
       var numArray = []
       var newNum = this.props.stars

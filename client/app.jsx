@@ -45,11 +45,6 @@ componentDidMount() {
     })
 }
 
-// componentDidUpdate() {
-//   //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-
-// }
-
 relatedClick(e) {
   console.log('the click worked', e, e.id)
   this.setState({
