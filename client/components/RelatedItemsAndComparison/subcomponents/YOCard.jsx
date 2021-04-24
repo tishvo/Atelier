@@ -120,10 +120,10 @@ class YOCard extends React.Component {
         return (
           <div>
             <span style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}}>
-              {this.state.itemData.default_price}
+              ${this.state.itemData.default_price}
             </span>
             <span style={{color: 'red'}}>
-              SALE: {this.state.allStyles[0].sale_price}
+              SALE: ${this.state.allStyles[0].sale_price}
             </span>
           </div>
 )
@@ -131,7 +131,7 @@ class YOCard extends React.Component {
         return (
           <div>
             <span >
-              {this.state.itemData.default_price}
+              ${this.state.itemData.default_price}
             </span>
           </div>
         )
