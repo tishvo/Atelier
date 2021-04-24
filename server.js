@@ -43,7 +43,7 @@ app.get('/products/:productId/styles', function (req, res) {
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in /products/:productId/styles axios get request, error:')
+      console.log('error in /products/:productId/styles axios get request, error:, ', error)
     })
 
 })
