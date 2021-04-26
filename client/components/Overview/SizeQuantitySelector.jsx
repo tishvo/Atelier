@@ -10,11 +10,6 @@ class SizeQuantitySelector extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.setState ({
-  //     quantities: this.props.quantities
-  //   })
-  // }
   componentDidUpdate(prevProps) {
     if (JSON.stringify(this.props.quantities) !== JSON.stringify(prevProps.quantities)) {
       this.setState ({
@@ -23,7 +18,6 @@ class SizeQuantitySelector extends React.Component {
 
     }
   }
-
 
   render() {
     if (this.state.quantities[0] === '-') {

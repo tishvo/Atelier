@@ -17,7 +17,7 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
-      averageStars: this.props.stars,
+      averageStars: null,
       stylesArray: null,
       images: null,
       reviewsArray: null,
@@ -49,29 +49,25 @@ class Overview extends React.Component {
 
   componentDidMount() {
     // console.log('this is local storage??? ', localStorage)
-
-
     var itemId = this.props.currentItem['id'];
 
+
+    // REQUEST FOR SPECIFIC PRODUCT
     axios.get(`/products/${itemId}`)
-    .then((response) => {
-      // console.log('here we will have the characteristics', response);
-
-      this.setState ({
-        featuresArray: response.data.features
+      .then((response) => {
+        console.log('1.) OVERVIEW specific product:', response);
+        this.setState({
+          featuresArray: response.data.features
+        })
       })
-    })
-    .catch ((error) => {
-      console.log('error in getting specific product', error)
-    })
+      .catch((error) => {
+        console.log('error in getting specific product', error)
+      })
 
-    // get the styles by id
+    //REQUEST FOR SPECIFIC PRODUCT'S STYLES
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('this is the styles data: ', response.data.results)
-
-
-
+        console.log('2.) OVERVIEW styles: ', response.data.results)
         this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,
@@ -82,62 +78,64 @@ class Overview extends React.Component {
           currentSalePrice: response.data.results[0].sale_price,
           selectedStyle: 0,
           skusObject: response.data.results[0].skus,
-          numberOfReviews: this.props.numberOfReviews,
+          numberOfReviews: null,
           imgSize: 'default'
-
         })
       })
       .catch((error) => {
         console.log('error in OVERVIEW axios get request, error:', error)
       })
+
+    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
+    axios.get(`/reviews/${itemId}&count=1000`)
+      .then((response) => {
+        console.log('3.) OVERVIEW reviews', response.data.results)
+        this.setState({
+          numberOfReviews: response.data.results.length,
+          // reviewData: response.data.results
+        });
+      })
+      .catch((error) => {
+        console.log('error getting our response from styles get: ', error)
+      })
+
+
+    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
+    axios.get(`/reviews/meta/${itemId}`)
+      .then((response) => {
+        console.log('4.) OVERVIEW ratings', response.data.ratings);
+        var rateObj = response.data.ratings;
+        var result = 0;
+        var numRating = 0;
+        for (var key in rateObj) {
+          result = result + Number(key) * Number(rateObj[key]);
+          numRating = numRating + Number(rateObj[key]);
+        }
+        var currRating = result / numRating;
+
+        this.setState({
+          averageStars: currRating
+        })
+      })
+
+      .catch((error) => {
+        console.log('error inside reviews meta get: ', error)
+      })
+
+
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
       this.componentDidMount()
-      axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
-        .then((response) => {
-          // console.log('response ratings', response.data.ratings);
-
-          var rateObj = response.data.ratings;
-          var result = 0;
-          var numRating = 0;
-          console.log('result: ', result);
-          console.log('rateObj: ', this.state.ratingObj);
-          for (var key in rateObj) {
-            console.log('numKey');
-            result = result + Number(key) * Number(rateObj[key]);
-            numRating = numRating + Number(rateObj[key]);
-          }
-          // console.log('result: ', result);
-          // console.log('numRating: ', numRating);
-          var currRating = result / numRating;
-
-          this.setState({
-            averageStars: currRating
-          })
-          this.props.stars = currRating
-          // console.log('state check of averageStars: ', this.state.averageStars)
-        })
-
-        .catch((error) => {
-          console.log('error inside averageStar making: ', error)
-        })
-    }
-    if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
-      this.setState({
-        numberOfReviews: this.props.numberOfReviews
-      })
     }
   }
 
   changeDisplayImage(index) {
 
     var styles = this.state.stylesArray;
-    // console.log('this is styles[index] in changeDisplayImage: ', styles[index])
     this.setState({
       images: styles[index].photos,
-      // currentImageIndex: 0,
       styleName: styles[index].name,
       currentPrice: styles[index].original_price,
       currentSalePrice: styles[index].sale_price,
@@ -172,7 +170,6 @@ class Overview extends React.Component {
   }
 
   expand() {
-    // console.log('expand clicked')
     if (this.state.expand_clicked) {
       if (this.state.imgSize === 'expanded') {
 
@@ -188,7 +185,6 @@ class Overview extends React.Component {
       } else if (this.state.imgSize === 'xl') {
         this.setState({
           css_width: { width: '960px', height: '500px' },
-          // expand_clicked: false,
           display_right_side: true,
           imgElementId: "af-main-image-expanded",
           thumbnailCarouselBoxWidth: { width: '0px' },
@@ -213,7 +209,6 @@ class Overview extends React.Component {
   }
 
   shrink() {
-    // console.log('shrink clicked')
     if (this.state.imgSize === 'default') {
       this.setState({
         css_width: { width: '960px', height: '500px' },
@@ -239,9 +234,9 @@ class Overview extends React.Component {
 
   render() {
 
-    if (this.state.stylesArray && this.state.featuresArray) {
-      // if (this.state.display_right_side) {
 
+
+    if (this.state.stylesArray && this.state.featuresArray && this.state.numberOfReviews && this.state.averageStars) {
 
       return (
         <div id="af-nameless">
@@ -287,15 +282,13 @@ class Overview extends React.Component {
                   productName={this.props.currentItem.name}
                   styleName={this.state.styleName}
                 />
-
-                {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
             </div><br />
           </div>
           <div id="af-product-description">
             <ProductInfoDescription description={this.props.currentItem.description} />
-            <Characteristics features={this.state.featuresArray}/>
+            <Characteristics features={this.state.featuresArray} />
           </div>
         </div>)
 

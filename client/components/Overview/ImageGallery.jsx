@@ -11,19 +11,11 @@ const ImageGallery = (props) => {
   })
 
   const handleMouseMove = (e) => {
-    // console.log('in handleMouseMove, event: ', e)
-    // console.log('this is e.pageX, ', e.pageX)
-    // console.log('thi is e.pageY, ', e.pageY)
     setMousePosition({
       x: e.pageX,
       y: e.pageY
     })
   }
-  // checkMouse(e) {
-  //   console.log('this is e', e)
-  //   console.log('this is e.pageX, ', e.pageX)
-  //   console.log('thi is e.pageY, ', e.pageY)
-  // }
 
   React.useEffect(() => {
     window.addEventListener('mousemove', (event) => {
@@ -34,7 +26,6 @@ const ImageGallery = (props) => {
     });
   }, []);
 
-  // console.log('mouse is moving:', mousePosition.x)
 
   if (props.imgId === "af-main-image-xl") {
 
@@ -50,7 +41,7 @@ const ImageGallery = (props) => {
               onClick={props.shrink}></div>
 
             <img
-              style={{marginLeft: -mousePosition.x, marginTop: -mousePosition.y}}
+              style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
               id={props.imgId}
               onClick={props.click}
               src={props.images[props.currentIndex]['url']} >
@@ -80,7 +71,7 @@ const ImageGallery = (props) => {
               }></div>
 
             <img
-            style={{left: mousePosition.x, top: mousePosition.y}}
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
             id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
             </img>
           </div>
@@ -101,7 +92,7 @@ const ImageGallery = (props) => {
             }></div>
 
           <img
-            style={{left: mousePosition.x, top: mousePosition.y}}
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
             id={props.imgId}
             onClick={props.click}
             src={props.images[props.currentIndex]['url']}></img>
