@@ -30,19 +30,12 @@ class WriteReview extends React.Component {
     };
 
     this.onChangeValue = this.onChangeValue.bind(this);
-    this.changeStarsHover = this.changeStarsHover.bind(this);
+    this.onClickStars = this.onClickStars.bind(this);
+    this.selectStars = this.selectStars.bind(this);
   }
 
   componentDidMount() {
-    if (this.state.hoverValue = 1) {
-      this.setState({
-        shownStar: this.state.oneStar
-      })
-    } else {
-      this.setState({
-        shownStar: this.state.noStars
-      })
-    }
+
   }
 
   onChangeValue(event) {
@@ -51,30 +44,29 @@ class WriteReview extends React.Component {
     })
   }
 
-  //change the number of stars shown when hovering, before a selection is made
-  changeStarsHover(event) {
-    // get value of mouseover
-    console.log('mouseover: ', event.target.id);
+  onClickStars(e) {
+    //console.log('star id: ', e.target.id)
     this.setState({
-      hoverValue: event.target.id
-    });
-    console.log('state', this.state.hoverValue);
+      selectedStar: e.target.id
+    })
   }
 
-  //change the state value once a rating is clicked
-  // changeStarsClick(event) {
+  selectStars(str) {
+    //console.log('THIS IS THE STAR DIV TO SHOW', this.state.starObj[str])
+    return this.state.starObj[str]
+  }
 
-  // }
+
 
   render() {
     return (
       <div>
         <form>
 
-          <div onMouseEnter={this.changeStarsHover}>{ this.state.shownStar }</div>
-          <input type='text' placeholder='Username (or nickname)' style={{ width: '12.5%' }}></input>
-          <input type='text' placeholder='What is your email?' style={{ width: '12.5%' }}></input>
-          <div><input type='text' style={{ width: '25%' }} placeholder='(Write your review)' ></input></div>
+          <div onClick={this.onClickStars}>{ this.selectStars(this.onClickStars) }</div>
+          <input type='text' placeholder='Username' style={{ width: '12.5%' }}></input>
+          <input type='text' placeholder='Email' style={{ width: '12%' }}></input>
+          <div><textarea placeholder='THIS IS NOT A TEST'></textarea></div>
           <div>Would you recommend this product to a friend?
             <input type='radio' value='yes' checked={this.state.selectedRecommend === 'yes'} onChange={this.onChangeValue}></input>YES!
             <input type='radio' value='no' checked={this.state.selectedRecommend === 'no'} onChange={this.onChangeValue}></input> NO!

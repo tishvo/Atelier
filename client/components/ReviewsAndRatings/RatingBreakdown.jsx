@@ -38,10 +38,19 @@ class RatingBreakdown extends React.Component {
 
   arrayFromRatings(obj) {
     var arr = [];
+    var newObj = {
+      '1': 0,
+      '2': 0,
+      '3': 0,
+      '4': 0,
+      '5': 0
+    }
     //for each key in the ratings obj
     for (var key in obj) {
-      //make a new div passing the value as props
-      arr.push([key, obj[key]]);
+      newObj[key] = obj[key]
+    }
+    for (var key in newObj) {
+      arr.push([key, newObj[key]]);
     }
     this.setState({
       ratingsArray: arr
@@ -49,27 +58,29 @@ class RatingBreakdown extends React.Component {
   }
 
   //figure out the percentage of the vote a star got
-  percentageOfVotesTotal(obj, val) {
+  percentageOfVotesTotal(arr, val) {
     var totalVotes = 0;
-    for (var key in obj) {
-      totalVotes = totalVotes + Number(obj[key]);
+    for (var i = 0; i < arr.length; i++) {
+      totalVotes = totalVotes + Number(arr[i][1]);
     }
-    return Math.floor((obj[val]/totalVotes) * 100);
+
+    return Math.floor((arr[val - 1][1]/totalVotes) * 100);
   }
 
 
   /* *********this is render zone********** */
   render() {
-    console.log('RATING BREAKDOWN: ', this.props.metaData.ratings)
+    //console.log('RATING BREAKDOWN: ', this.props.metaData.ratings)
     return (
       <div>
-        {this.props.stars.toFixed(2)}<StarRating stars={this.props.stars} />
+        {this.props.stars.toFixed(1)}<StarRating stars={this.props.stars} />
         <div>{this.state.recommendPercent}% of reviews recommend this product</div>
         {this.state.ratingsArray.map((char, index) => {
-          //console.log('INSIDE THE BELLY OF THE BEAST', char[0])
+          //console.log('INSIDE THE BELLY OF THE BEAST', this.state.ratingsArray)
+
           return (
             //console.log('this is a bunch of % ', this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0])))
-            <div key={index}>{char[0]}<RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(this.props.metaData.ratings, Number(char[0]))}/></div>
+            <div key={index}>{char[0]}<RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(this.state.ratingsArray, Number(char[0]))}/></div>
           )
         })}
 

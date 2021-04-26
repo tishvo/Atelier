@@ -75,12 +75,12 @@ class ReviewList extends React.Component {
       <div>
         <div>
           {/* Sorting Dropdown Menu */}
-          <form onChange={this.handleSortingChange}>
+          <form onClick={this.props.sendSort}>
             {this.props.numReviews} reviews, sorted by
           <select >
-              <option>Relevant</option>
-              <option>Helpful</option>
-              <option>Newest</option>
+              <option value='relevant'>Relevant</option>
+              <option value='helpful'>Helpful</option>
+              <option value='newest'>Newest</option>
             </select>
           </form>
         </div>
