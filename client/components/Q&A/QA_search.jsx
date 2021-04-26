@@ -33,7 +33,7 @@ class QA_search extends React.Component {
       <div className="inputContainer">
 
         <input className="searchField" placeholder="Have a question? Search for answers..." value={this.state.search} onChange={this.onChange} size="75" ></input>
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
       </div>
     )
   }

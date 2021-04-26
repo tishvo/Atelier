@@ -82,6 +82,14 @@ class RelatedProducts extends React.Component {
     }
   }
 
+  renderList () {
+    return (
+      this.state.visibleRelated.map( (relatedItem, index) =>
+        <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
+      )
+    )
+  }
+
   render() {
     if (this.state.firstCard === 0 && this.state.lastIndex <= 4) {
       return (
@@ -89,9 +97,7 @@ class RelatedProducts extends React.Component {
           <h2>Related Products</h2>
           <div className='rr-row-container' >
 
-            {this.state.visibleRelated.map( (relatedItem, index) =>
-              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
-            )}
+            { this.renderList() }
 
           </div>
         </div>
@@ -102,9 +108,8 @@ class RelatedProducts extends React.Component {
           <h2>Related Products</h2>
           <div className='rr-row-container' >
 
-            {this.state.visibleRelated.map( (relatedItem, index) =>
-              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
-            )}
+            { this.renderList() }
+
             <div className="rr-carousel-arrow">
               <Arrow
                 direction="right"
@@ -127,9 +132,7 @@ class RelatedProducts extends React.Component {
               />
             </div>
 
-            {this.state.visibleRelated.map( (relatedItem, index) =>
-              <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
-            )}
+            { this.renderList() }
 
           </div>
         </div>
@@ -147,9 +150,7 @@ class RelatedProducts extends React.Component {
             />
           </div>
 
-          {this.state.visibleRelated.map( (relatedItem, index) =>
-            <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct}/>
-          )}
+          { this.renderList() }
 
           <div className="rr-carousel-arrow">
             <Arrow
