@@ -20,7 +20,6 @@ class ThumbnailCarouselPic extends React.Component {
       )
     }
   }
-
 }
 
 export default ThumbnailCarouselPic;

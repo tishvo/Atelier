@@ -5,9 +5,7 @@ import ThumbnailCarouselMiniPic from './ThumbnailCarouselMiniPic.jsx'
 class ThumbnailCarouselMini extends React.Component {
   constructor(props) {
     super(props);
-
   }
-
 
   render() {
     let imageArray = this.props.images;
@@ -20,12 +18,8 @@ class ThumbnailCarouselMini extends React.Component {
           })}
         </div>
       </div>
-
     )
-
-
   }
-
 }
 
 export default ThumbnailCarouselMini;
