@@ -15,8 +15,12 @@ class App extends React.Component {
       currentItemId: null
     }
     this.relatedClick = this.relatedClick.bind(this);
-  }
+    this.fetchData = this.fetchData.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
+    this._isMounted = false;
+  }
 
 
 componentDidMount() {

@@ -355,6 +355,13 @@
 
 }
 
+#af-empty-star {
+  width: 30px;
+  height: 30px;
+  float: left;
+  content: url('./images/stars/EmptyStar.png')
+
+}
 
 
 

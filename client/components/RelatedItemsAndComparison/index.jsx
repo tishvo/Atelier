@@ -15,6 +15,10 @@ class RelatedItemsAndComparison extends React.Component {
       currentItem: ''
     };
 
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+
     this._isMounted = false;
     this.PrivacyHOC = PrivacyHOC.bind(this);
   }
@@ -40,12 +44,15 @@ class RelatedItemsAndComparison extends React.Component {
   componentDidUpdate(prevProps) {
     if(this.props.currentItem !== prevProps.currentItem) { this.fetchData(); this.render(); }
   }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     return (
       <div>
         <div>
-          <RelatedProducts data={this.props.data} currentItem={this.state.currentItem}
+          <RelatedProducts currentItem={this.state.currentItem}
             click={this.props.click}/>
           <YourOutfit data={this.props.data} currentItem={this.state.currentItem} click={this.props.click}/>
         </div>
