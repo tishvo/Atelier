@@ -22,7 +22,7 @@ class PhotoModal extends React.Component {
         <div>3: <input placeholder="enter photo URL here"></input></div>
         <div>4: <input placeholder="enter photo URL here"></input></div>
         <div>5: <input placeholder="enter photo URL here"></input></div>
-        <div className="qaModalToggle"><button className="qaModalToggle" onClick={this.onClose}>Submit</button></div>
+        <div><button onClick={this.onClose}>Submit</button></div>
         </div>
     )
   }

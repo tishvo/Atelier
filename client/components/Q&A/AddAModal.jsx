@@ -21,8 +21,9 @@ class AddAModal extends React.Component {
   }
 
   onClose(e) {
+    e.preventDefault();
     this.props.onClose && this.props.onClose(e);
-    this.answer()
+    this.answer();
   }
 
   onAnswerChange(e) {
@@ -73,6 +74,38 @@ class AddAModal extends React.Component {
       <div className="qModal qContent" id="qModal">
         <h3>Submit Your Answer</h3>
         <h5>About the {this.props.product.name}: {this.props.question.question_body}</h5>
+
+        <form onSubmit={this.onClose}>
+          <label>
+            Your Answer*:
+            <input value={this.state.answer} placeholder="type here" size="50" onChange={this.onAnswerChange} required/>
+          </label>
+          <div>
+            <label>
+              Your Nickname*:
+              <input placeholder="Example: jack543!" value={this.state.nickname} onChange={this.onNameChange} required/>
+            </label>
+          </div>
+          <div>For privacy reasons, do not use your full name or email address</div>
+          <label>
+            Your Email*:
+            <input placeholder="Example: jack@email.com" value={this.state.email} size="50" onChange={this.onEmailChange} required/>
+          </label>
+          <div>For authentication reasons, you will not be emailed</div>
+          <div><button type="button" onClick={e => { this.showModal(); }}>Add photos here</button></div>
+          <div><PhotoModal show={this.state.photo} onClose={this.showModal}/></div>
+          <input type="submit" value="Submit"/>
+        </form>
+      </div>
+    )
+  }
+}
+
+export default AddAModal;
+
+/*
+
+
         <div>Your Answer*: <input value={this.state.answer} placeholder="type here" size="50" onChange={this.onAnswerChange}></input></div>
         <div>What is your nickname*? <input placeholder="Example: jack543!" value={this.state.nickname} onChange={this.onNameChange}></input></div>
         <div>For privacy reasons, do not use your full name or email address</div>
@@ -82,9 +115,4 @@ class AddAModal extends React.Component {
         <div><PhotoModal show={this.state.photo} onClose={this.showModal}/></div>
 
         <div className="qaModalToggle"><button className="qaModalToggle" onClick={this.onClose}>Submit</button></div>
-      </div>
-    )
-  }
-}
-
-export default AddAModal;
+*/

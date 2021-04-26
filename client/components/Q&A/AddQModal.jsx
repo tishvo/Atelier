@@ -18,8 +18,9 @@ class AddQModal extends React.Component {
   }
 
   onClose(e) {
+    e.preventDefault();
     this.props.onClose && this.props.onClose(e);
-    this.askQuestion()
+    this.askQuestion();
   }
 
   askQuestion() {
@@ -65,12 +66,26 @@ class AddQModal extends React.Component {
       <div className="qModal qContent" id="qModal">
         <h3>Ask Your Question</h3>
         <h5>About the {this.props.product.name}</h5>
-        <div>Your Question*: <input value={this.state.question} onChange={this.onQuestionChange} size="50"></input></div>
-        <div>Your Nickname*: <input placeholder="Example: jackson11!" size="50" onChange={this.onNameChange}></input></div>
-        For privacy reasons, do not use your full name or email address
-        <div>Your Email*: <input placeholder="Why did you like the product or not?" size="50" onChange={this.onEmailChange}></input></div>
-        For authentication reasons, you will not be emailed
-        <div className="qaModalToggle"><button onClick={this.onClose}>Submit</button></div>
+
+        <form onSubmit={this.onClose}>
+          <label>
+            Your Question*:
+            <input value={this.state.question} onChange={this.onQuestionChange} size="50" required/>
+          </label>
+          <div>
+          <label>
+            Your Nickname*:
+            <input placeholder="Example: jackson11!" size="50" onChange={this.onNameChange} required/>
+          </label>
+          </div>
+          <div>For privacy reasons, do not use your full name or email address</div>
+          <label>
+            Your Email*:
+            <input placeholder="Why did you like the product or not?" size="50" onChange={this.onEmailChange} required/>
+          </label>
+          <div>For authentication reasons, you will not be emailed</div>
+          <input type="submit" value="Submit"/>
+        </form>
       </div>
     )
   }
