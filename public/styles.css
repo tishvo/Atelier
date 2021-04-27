@@ -444,7 +444,7 @@
 /* // TISH WIDGET STYLINGS// */
 
 .qaList {
-  height: 350px;
+  height: 425px;
   overflow: scroll;
 }
 
@@ -518,7 +518,7 @@
 
 .tv_anc {
   font-weight: normal;
-  font-size: 13px;
+  font-size: 15px;
   vertical-align: baseline;
 }
 
@@ -556,7 +556,26 @@
   margin: 5px;
 }
 
+.tv_modal_fyi {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 13px;
+  color: red;
+}
 
+.tv_modal_field {
+  margin-bottom: 10px;
+}
 
+.tv_input {
+  margin-left: 7px;
+}
 
+.tv_required {
+  font-size: 13px;
+}
 
+.tv_modal_button {
+  padding: 5px 10px;
+  margin: 2.5px;
+}

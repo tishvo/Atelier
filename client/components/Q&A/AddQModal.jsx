@@ -70,21 +70,22 @@ class AddQModal extends React.Component {
         <form onSubmit={this.onClose}>
           <label>
             Your Question*:
-            <input value={this.state.question} onChange={this.onQuestionChange} size="50" required/>
+            <input className="tv_modal_field tv_input" value={this.state.question} onChange={this.onQuestionChange} size="52" required/>
           </label>
           <div>
           <label>
             Your Nickname*:
-            <input placeholder="Example: jackson11!" size="50" onChange={this.onNameChange} required/>
+            <input className="tv_input" placeholder="Example: jackson11!" size="51" onChange={this.onNameChange} required/>
           </label>
           </div>
-          <div>For privacy reasons, do not use your full name or email address</div>
+          <div className="tv_modal_fyi tv_modal_field">For privacy reasons, do not use your full name or email address</div>
           <label>
             Your Email*:
-            <input placeholder="Why did you like the product or not?" size="50" onChange={this.onEmailChange} required/>
+            <input className="tv_input" placeholder="Why did you like the product or not?" size="55" onChange={this.onEmailChange} required/>
           </label>
-          <div>For authentication reasons, you will not be emailed</div>
-          <input type="submit" value="Submit"/>
+          <div className="tv_modal_fyi tv_modal_field">For authentication reasons, you will not be emailed</div>
+          <div className="tv_modal_field tv_required">*Required</div>
+          <input className="tv_modal_button" type="submit" value="Submit"/>
         </form>
       </div>
     )

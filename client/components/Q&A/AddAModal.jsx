@@ -76,25 +76,26 @@ class AddAModal extends React.Component {
         <h5>About the {this.props.product.name}: {this.props.question.question_body}</h5>
 
         <form onSubmit={this.onClose}>
-          <label>
-            Your Answer*:
-            <input value={this.state.answer} placeholder="type here" size="50" onChange={this.onAnswerChange} required/>
+          <label className="tv_modal_field">
+            Answer:*
+            <input className="tv_modal_field tv_input" value={this.state.answer} placeholder="type your answer here" size="55" onChange={this.onAnswerChange} required/>
           </label>
           <div>
-            <label>
-              Your Nickname*:
-              <input placeholder="Example: jack543!" value={this.state.nickname} onChange={this.onNameChange} required/>
+            <label className="tv_modal_field">
+              Nickname:*
+              <input className="tv_input" placeholder="Example: jack543!" value={this.state.nickname} onChange={this.onNameChange} required size="53"/>
             </label>
           </div>
-          <div>For privacy reasons, do not use your full name or email address</div>
-          <label>
-            Your Email*:
-            <input placeholder="Example: jack@email.com" value={this.state.email} size="50" onChange={this.onEmailChange} required/>
+          <div className="tv_modal_fyi tv_modal_field">For privacy reasons, do not use your full name or email address</div>
+          <label className="tv_modal_field">
+            Email:*
+            <input className="tv_input" placeholder="Example: jack@email.com" value={this.state.email} size="57" onChange={this.onEmailChange} required/>
           </label>
-          <div>For authentication reasons, you will not be emailed</div>
-          <div><button type="button" onClick={e => { this.showModal(); }}>Add photos here</button></div>
+          <div className="tv_modal_fyi tv_modal_field">For authentication reasons, you will not be emailed</div>
+          <div className="tv_modal_field tv_required">*Required</div>
+          <div><button className="tv_modal_button" type="button" onClick={e => { this.showModal(); }}>Add photos here</button></div>
           <div><PhotoModal show={this.state.photo} onClose={this.showModal}/></div>
-          <input type="submit" value="Submit"/>
+          <input type="submit" className="tv_modal_button" value="Submit"/>
         </form>
       </div>
     )
