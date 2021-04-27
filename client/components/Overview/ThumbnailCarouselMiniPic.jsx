@@ -15,7 +15,6 @@ class ThumbnailCarouselMiniPic extends React.Component {
         </div>
       )
 
-
     } else {
 
       return (
@@ -25,7 +24,6 @@ class ThumbnailCarouselMiniPic extends React.Component {
       )
     }
   }
-
 }
 
 export default ThumbnailCarouselMiniPic;

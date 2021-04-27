@@ -97,7 +97,6 @@ class ReviewsAndRatings extends React.Component {
         <div>ADD A REVIEW</div>
       )
     }
-
   }
 }
 

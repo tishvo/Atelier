@@ -19,15 +19,10 @@ class ProductInfoHead extends React.Component {
   }
 
   render() {
-
-    // console.log('number of stars: ', this.props.stars)
     console.log('Number of reviews: ', this.state.numberOfReviews)
 
 
     if (this.props.stars) {
-      if (this.props.numberOfReviews) {
-        // do something
-      }
 
       var numArray = []
       var newNum = this.props.stars
@@ -40,7 +35,13 @@ class ProductInfoHead extends React.Component {
       if (this.props.salePrice) {
 
         return (<div>
-         <span> Read all {this.state.numberOfReviews} reviews! </span>
+         <a onClick={ () => {
+           window.scrollTo({
+             top: 2000,
+             left: 0,
+             behavior: 'smooth'
+           });
+         }}> Read all {this.state.numberOfReviews} reviews! </a>
           <span id="af-stars">
             {numArray.map((num, index) => {
               if (num === 1 || num > 0.872) {
@@ -64,7 +65,13 @@ class ProductInfoHead extends React.Component {
 
       } else {
         return (<div>
-          <span> Read all {this.state.numberOfReviews} reviews! </span>
+           <a onClick={ () => {
+           window.scrollTo({
+             top: 1000,
+             left: 1000,
+             behavior: 'smooth'
+           });
+         }}> Read all {this.state.numberOfReviews} reviews! </a>
           <span id="af=stars">
             {numArray.map((num, index) => {
               if (num === 1 || num > 0.872) {

@@ -21,7 +21,13 @@ class SizeSelector extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('this is skus obj', this.props.skus)
+    // delete localStorage['cart'];
+    console.log('this is skus obj', this.props.skus)
+    console.log('this is localStorage: ', localStorage)
+
+    if (!localStorage['cart']) {
+      localStorage['cart'] = '['
+    }
 
     var skusArray = []
     let skus = this.props.skus;
@@ -52,8 +58,6 @@ class SizeSelector extends React.Component {
   }
 
   createSizes(e, s) {
-    // console.log('this is e in createSizes', e.split(','))
-    // console.log('this is s in createSizes', s)
     var eArray = e.split(',')
     var sizesArray = []
     for (var i = 1; i <= Number(eArray[0]) && i <= 15; i++) {
@@ -65,6 +69,8 @@ class SizeSelector extends React.Component {
     })
 
   }
+
+
 
   addToCart() {
     let objToAdd = {
@@ -79,12 +85,16 @@ class SizeSelector extends React.Component {
     this.state.cart.push(objToAdd)
     console.log('this.state.cart: ', this.state.cart)
 
+    if (localStorage['cart'].length === 1) {
+      localStorage['cart'] = localStorage['cart'] + (JSON.stringify(objToAdd)) + ']'
 
-        localStorage['cart'] += (JSON.stringify(objToAdd))
+    } else {
+      localStorage['cart'] = localStorage['cart'].slice(0, -1) + ', ' + (JSON.stringify(objToAdd)) + ']'
+    }
 
-console.log('this is localStorage now: ', localStorage)
+    console.log('this is localStorage now: ', localStorage)
 
-   // localStorage.setItem('cart', objToAdd)
+    // localStorage.setItem('cart', objToAdd)
 
 
   }
@@ -117,7 +127,7 @@ console.log('this is localStorage now: ', localStorage)
 
           <SizeQuantitySelector chooseQuantity={this.chooseQuantity} quantities={this.state.quantitiesArray} />
           <AddToCart click={this.addToCart}
-          quantitiesArray={this.state.quantitiesArray}/>
+            quantitiesArray={this.state.quantitiesArray} />
 
 
         </div>
