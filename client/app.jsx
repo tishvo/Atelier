@@ -16,7 +16,6 @@ class App extends React.Component {
     }
     this.relatedClick = this.relatedClick.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-
     this._isMounted = false;
   }
 

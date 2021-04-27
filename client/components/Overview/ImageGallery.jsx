@@ -11,22 +11,33 @@ const ImageGallery = (props) => {
   })
 
   const handleMouseMove = (e) => {
+    // if (props.imgId === "af-main-image-xl") {
     setMousePosition({
       x: e.pageX,
       y: e.pageY
     })
+  // }
   }
 
-  React.useEffect(() => {
+  // const [state, setState] = useState({
+
+  // })
+
+  useEffect(() => {
     window.addEventListener('mousemove', (event) => {
       handleMouseMove(event)
 
-      window.removeEventListener('mousemove', handleMouseMove)
+     return function cleanup() {window.removeEventListener('mousemove', handleMouseMove)}
 
     });
   }, []);
 
+  // if (props.hasNothing) {
+  //   console.log('nothing!')
+  //   return null;
+  // }
 
+  console.log('something!')
   if (props.imgId === "af-main-image-xl") {
 
 
@@ -34,14 +45,12 @@ const ImageGallery = (props) => {
       return (
         <div id="af-click-to-check">
 
-
-
           <div id="af-image-container" style={props.width}>
             <div id="af-image-expand"
               onClick={props.shrink}></div>
 
             <img
-              style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
+              style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId}
               onClick={props.click}
               src={props.images[props.currentIndex]['url']} >
@@ -71,8 +80,8 @@ const ImageGallery = (props) => {
               }></div>
 
             <img
-            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
-            id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
+              style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
+              id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
             </img>
           </div>
           <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
@@ -92,7 +101,7 @@ const ImageGallery = (props) => {
             }></div>
 
           <img
-            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
+            style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
             id={props.imgId}
             onClick={props.click}
             src={props.images[props.currentIndex]['url']}></img>
