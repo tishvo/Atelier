@@ -8,6 +8,7 @@ class PhotoModal extends React.Component {
   }
 
   onClose(e) {
+    e.preventDefault();
     this.props.onClose && this.props.onClose(e);
   }
 
@@ -17,12 +18,11 @@ class PhotoModal extends React.Component {
     }
     return (
       <div className="qModal qContent" id="qModal">
-        <div>1: <input placeholder="enter photo URL here"></input></div>
-        <div>2: <input placeholder="enter photo URL here"></input></div>
-        <div>3: <input placeholder="enter photo URL here"></input></div>
-        <div>4: <input placeholder="enter photo URL here"></input></div>
-        <div>5: <input placeholder="enter photo URL here"></input></div>
-        <div className="qaModalToggle"><button className="qaModalToggle" onClick={this.onClose}>Submit</button></div>
+        <div className="tv_photo_upload">Upload your photos</div>
+        <form>
+          <input type="file" multiple/>
+        </form>
+        <button className="tv_modal_button" onClick={this.onClose}>Submit</button>
         </div>
     )
   }
