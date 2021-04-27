@@ -578,4 +578,12 @@
 .tv_modal_button {
   padding: 5px 10px;
   margin: 2.5px;
+  border-radius: 100%;
+  margin-top: 10px;
+}
+
+.tv_photo_upload {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
 }

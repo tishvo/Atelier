@@ -73,12 +73,12 @@ class AddAModal extends React.Component {
     return (
       <div className="qModal qContent" id="qModal">
         <h3>Submit Your Answer</h3>
-        <h5>About the {this.props.product.name}: {this.props.question.question_body}</h5>
+        <h5>about the {this.props.product.name}: {this.props.question.question_body}</h5>
 
         <form onSubmit={this.onClose}>
           <label className="tv_modal_field">
             Answer:*
-            <input className="tv_modal_field tv_input" value={this.state.answer} placeholder="type your answer here" size="55" onChange={this.onAnswerChange} required/>
+            <input className="tv_modal_field tv_input" value={this.state.answer} placeholder="Type your answer here" size="55" onChange={this.onAnswerChange} required/>
           </label>
           <div>
             <label className="tv_modal_field">
@@ -93,7 +93,7 @@ class AddAModal extends React.Component {
           </label>
           <div className="tv_modal_fyi tv_modal_field">For authentication reasons, you will not be emailed</div>
           <div className="tv_modal_field tv_required">*Required</div>
-          <div><button className="tv_modal_button" type="button" onClick={e => { this.showModal(); }}>Add photos here</button></div>
+          <div><button className="tv_modal_button" type="button" onClick={e => { this.showModal(); }}>+ photos</button></div>
           <div><PhotoModal show={this.state.photo} onClose={this.showModal}/></div>
           <input type="submit" className="tv_modal_button" value="Submit"/>
         </form>

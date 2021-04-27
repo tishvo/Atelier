@@ -65,12 +65,12 @@ class AddQModal extends React.Component {
     return (
       <div className="qModal qContent" id="qModal">
         <h3>Ask Your Question</h3>
-        <h5>About the {this.props.product.name}</h5>
+        <h5>about the {this.props.product.name}</h5>
 
         <form onSubmit={this.onClose}>
           <label>
             Your Question*:
-            <input className="tv_modal_field tv_input" value={this.state.question} onChange={this.onQuestionChange} size="52" required/>
+            <input className="tv_modal_field tv_input" placeholder="Type your question here" value={this.state.question} onChange={this.onQuestionChange} size="52" required/>
           </label>
           <div>
           <label>
