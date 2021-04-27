@@ -17,7 +17,6 @@ const ImageGallery = (props) => {
     images: props.images
   })
 
-  console.log('state.currentIndex in ImageGallery', state.currentIndex);
 
   const handleMouseMove = (e) => {
     setMousePosition({

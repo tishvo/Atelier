@@ -18,17 +18,14 @@ class RelatedProducts extends React.Component {
       lastIndex: 0
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+
+    this._isMounted = false;
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props.currentItem !== prevProps.currentItem) { this.componentDidMount(); }
-  }
-
-  componentDidMount() {
-    var itemId = this.props.currentItem['id'];
+  fetchData(itemId) {
     // get those items
     axios.get(`/products/${itemId}/related`)
       .then(res => {
@@ -49,6 +46,21 @@ class RelatedProducts extends React.Component {
       .catch(err => {
         console.log('/RELATED GET ERROR: ', err)
       })
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (this.props.currentItem !== prevProps.currentItem) {
+      this._isMounted = true;
+      this._isMounted && this.fetchData();
+    }
+  }
+
+  componentDidMount() {
+
+    this._isMounted = true;
+    var itemId = this.props.currentItem['id'];
+    this._isMounted && itemId && this.fetchData(itemId);
 
   }
   // Arrow Functionality
@@ -84,80 +96,51 @@ class RelatedProducts extends React.Component {
 
   renderList () {
     return (
-      this.state.visibleRelated.map( (relatedItem, index) =>
-        <RPCard itemId={relatedItem} key={index} click={this.props.click} currentProduct={this.state.currentProduct} />
-      )
+      <div className='slide-container'>
+
+        <div className="rr-carousel-arrow">
+          <Arrow
+            direction="left"
+            clickFunction={ this.previousSlide }
+          />
+        </div>
+
+        {this.state.allRelated.length > 0 && (
+          <div className='items-container'>
+            {this.state.allRelated.map((relatedItem, index) => {
+              console.log('item: ', relatedItem);
+              return (
+              <div className='single-item-container'>
+                <RPCard
+                  itemId={relatedItem}
+                  key={index}
+                  click={this.props.click}
+                  currentProduct={this.state.currentProduct}
+                />
+              </div>
+              )
+            })}
+          </div>
+        )}
+
+        <div className="rr-carousel-arrow">
+          <Arrow
+            direction="right"
+            clickFunction={ this.nextSlide }
+          />
+        </div>
+
+      </div>
     )
   }
 
   render() {
-    if (this.state.firstCard === 0 && this.state.lastIndex <= 4) {
-      return (
-        <div>
-          <h2>Related Products</h2>
-          <div className='rr-row-container' >
-
-            { this.renderList() }
-
-          </div>
-        </div>
-      )
-    } else if (this.state.firstCard === 0) {
-      return (
-        <div>
-          <h2>Related Products</h2>
-          <div className='rr-row-container' >
-
-            { this.renderList() }
-
-            <div className="rr-carousel-arrow">
-              <Arrow
-                direction="right"
-                clickFunction={ this.nextSlide }
-              />
-            </div>
-          </div>
-        </div>
-      )
-    } else if (this.state.lastCard === this.state.lastIndex) {
-      return (
-        <div>
-          <h2>Related Products</h2>
-          <div className='rr-row-container' >
-
-            <div className="rr-carousel-arrow" >
-              <Arrow
-                direction="left"
-                clickFunction={ this.previousSlide }
-              />
-            </div>
-
-            { this.renderList() }
-
-          </div>
-        </div>
-      )
-    }
     return (
       <div>
         <h2>Related Products</h2>
-        <div className='rr-row-container' >
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="left"
-              clickFunction={ this.previousSlide }
-            />
-          </div>
+        <div>
 
           { this.renderList() }
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="right"
-              clickFunction={ this.nextSlide }
-            />
-          </div>
 
         </div>
       </div>
