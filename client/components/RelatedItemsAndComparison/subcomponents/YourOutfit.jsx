@@ -8,7 +8,7 @@ const YourOutfit = (props) => {
 
   const localData = [];
   for (var key in localStorage) {
-    if (key !== 'length' && localStorage[key].constructor !== Function) {
+    if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
       localData.push(localStorage[key]);
     }
   }
@@ -23,7 +23,7 @@ const YourOutfit = (props) => {
   const updateState = () => {
     const localData = [];
     for (var key in localStorage) {
-      if (key !== 'length' && localStorage[key].constructor !== Function) {
+      if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
         localData.push(localStorage[key]);
       }
     }
@@ -96,10 +96,11 @@ const YourOutfit = (props) => {
   }
 
   const renderList = () => {
-    console.log(state.visibleData, localStorage);
+    // localStorage.clear();
+    // console.log(state.visibleData, localStorage);
     return (
       state.visibleData.map((product, index) => {
-        return <YOCard key={index} item={JSON.parse(JSON.stringify(product))} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
+        return <YOCard key={index} item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
       })
     )
   }

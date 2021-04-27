@@ -45,6 +45,8 @@ class Overview extends React.Component {
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -127,7 +129,7 @@ class Overview extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
-      this.componentDidMount()
+      this.componentDidMount();
     }
   }
 
