@@ -496,6 +496,7 @@
 
 .questionBody {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .lma {
@@ -512,6 +513,8 @@
 
 .tv_anc {
   font-weight: normal;
+  font-size: 13px;
+  vertical-align: baseline;
 }
 
 .tv_underline {
@@ -538,6 +541,15 @@
   padding-right: 5px;
 }
 
+.tv_bold {
+  font-weight: bold;
+}
+
+.tv_app_btn {
+  padding: 10px 20px;
+  font-size: 15px;
+  margin: 5px;
+}
 
 
 
