@@ -23,10 +23,10 @@ class ReviewList extends React.Component {
     this.handleMoreClick = this.handleMoreClick.bind(this);
     this.handleHideAddClick = this.handleHideAddClick.bind(this);
     this.onlyShowTwo = this.onlyShowTwo.bind(this);
+    this.hideReviews = this.hideReviews.bind(this);
   }
 
   componentDidMount() {
-    //PROBABLY CAN REMOVE THIS, CURRENTLY NOT IN USE
   }
 
   componentDidUpdate(prev) {
@@ -69,36 +69,58 @@ class ReviewList extends React.Component {
     });
   }
 
+  hideReviews(e) {
+    e.preventDefault();
+    this.setState({
+      visibleReviewVal: 2
+    })
+  }
+
   render() {
 
     return (
       <div>
         <div>
           {/* Sorting Dropdown Menu */}
-          <form onChange={this.handleSortingChange}>
+          <form onClick={this.props.sendSort}>
             {this.props.numReviews} reviews, sorted by
           <select >
-              <option>Relevant</option>
-              <option>Helpful</option>
-              <option>Newest</option>
+              <option value='relevant'>Relevant</option>
+              <option value='helpful'>Helpful</option>
+              <option value='newest'>Newest</option>
             </select>
           </form>
         </div>
-        {this.props.reviewData.slice(0, this.state.visibleReviewVal).map((item, index) => {
+        {this.state.visibleReviewVal > 2 ? <div id="mm-makeScroll">
+          {this.props.reviewData.slice(0, this.state.visibleReviewVal).map((item, index) => {
 
-          return (
-            <ReviewTile key={index} stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
-          )
-        })}
+            return (
+              <ReviewTile key={index} stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
+            )
+          })}
+        </div> : <div>
+          {this.props.reviewData.slice(0, this.state.visibleReviewVal).map((item, index) => {
+
+            return (
+              <ReviewTile key={index} stars={this.props.stars} itemId={this.props.itemId} reviewData={item} />
+            )
+          })}
+        </div>}
         <form>
-          <button onClick={this.handleMoreClick}>
-            More Reviews
-          </button>
+          {this.state.visibleReviewVal < this.props.numReviews ?
+            <button onClick={this.handleMoreClick}>
+              More Reviews
+          </button> : null}
+
           <button onClick={this.handleHideAddClick}>
             Add a review +
           </button>
+
+          <button onClick={this.hideReviews}>
+            Less reviews
+          </button>
         </form>
-        {this.state.showWriteReview ? <WriteReview hide={this.handleHideAddClick} /> : null}
+        {this.state.showWriteReview ? <WriteReview hide={this.handleHideAddClick} charData={this.props.charData}/> : null}
       </div>
     );
   }
