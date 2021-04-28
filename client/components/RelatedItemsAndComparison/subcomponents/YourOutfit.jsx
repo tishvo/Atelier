@@ -96,6 +96,7 @@ const YourOutfit = (props) => {
   }
 
   const renderList = () => {
+    localStorage.clear()
     return (
       state.visibleData.map((product, index) => {
         return <YOCard key={index} item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>

@@ -24,7 +24,7 @@ app.get('/products', function (req, res) {
     })
     .catch((error) => {
       console.log('error in initial /products get request, error:', error)
-
+      res.status(404).send(error)
     })
 
 })
@@ -43,6 +43,7 @@ app.get('/products/:productId/styles', function (req, res) {
     })
     .catch((error) => {
       console.log('error in /products/:productId/styles axios get request, error:, ', error)
+      res.status(404).send(error)
     })
 
 })
@@ -61,6 +62,7 @@ app.get('/reviews/:productId', function (req, res) {
     })
     .catch((error) => {
       console.log('error in /products/:productId/revoews axios get request, error:', error)
+      res.status(404).send(error)
     })
 })
 
@@ -79,6 +81,7 @@ app.get('/cart', function (req, res) {
     })
     .catch((error) => {
       console.log('error in /cart axios get request, error:', error)
+      res.status(404).send(error)
     })
 })
 
@@ -102,6 +105,7 @@ app.post('/cart', function (req, res) {
   })
   .catch((error) => {
     console.log('error in our POST to cart')
+    res.status(404).send(error)
 
   })
 
@@ -121,6 +125,7 @@ app.get('/products/:productId/related', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 
 })
@@ -139,6 +144,7 @@ app.get('/questions/:productId', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -152,6 +158,7 @@ app.put('/questionshelpful/:questionId', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 
 })
@@ -166,6 +173,7 @@ app.put('/answerhelpful/:answerId', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -179,6 +187,7 @@ app.put('/answerreport/:answerId', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -198,6 +207,7 @@ app.post('/qa/ask', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -217,6 +227,7 @@ app.post('/qa/answer/:question_id', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -235,6 +246,7 @@ app.get('/products/:productId', function(req, res) {
   })
   .catch((error) => {
     console.log('RR GET error /products/:productId');
+    res.status(404).send(error)
   })
 
 })
@@ -253,6 +265,7 @@ app.get('/reviews/meta/:productId', function(req, res) {
   })
   .catch(err => {
     console.log('RP CARD DATA GET ERROR: ', err)
+    res.status(404).send(err)
   })
 })
 
@@ -270,6 +283,7 @@ app.get('/reviews/:productId',  function(req, res) {
     })
     .catch((error) => {
       console.log('error on /reviews/:productId');
+      res.status(404).send(error)
     })
 })
 
