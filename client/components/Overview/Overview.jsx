@@ -255,9 +255,6 @@ class Overview extends React.Component {
 
   render() {
 
-
-
-
     if (this.state.receivedAllData) {
 
       return (

@@ -1,7 +1,8 @@
 #app {
-  width: 80%;
+  width: 90%;
   margin: auto;
   max-width: 960px;
+  font-family: 'Archivo', sans-serif;
 }
 
 /* // ANTEO // */
@@ -16,9 +17,11 @@
   display: grid;
   width: 50px;
   padding-top: 20px;
-  grid-gap: 10px;
+  grid-gap: 15px;
   grid-template-columns: repeat(4, 1fr);
 }
+
+
 
 #af-style-thumbnail-selected {
   position: absolute;
@@ -73,8 +76,8 @@
 } */
 
 #af-overview-container {
-  height: 500px;
-  Width: 960px;
+  min-height: 500px;
+  min-width: 960px;
   /* position: absolute; */
   display: inline;
 
@@ -161,6 +164,7 @@
   width: 50px;
   height: 50px;
   border: 1px solid black;
+  transition-duration: 0.3;
 }
 
     #af-thumbnail-carousel-image-box-selected {
@@ -168,6 +172,7 @@
       height: 50px;
       border: 1px solid black;
       border-bottom: 5px solid red;
+      transition-duration: 0.3;
     }
 
 #af-thumbnail-carousel-mini-image-box {
@@ -175,6 +180,7 @@
   height: 25px;
   border: 1px solid black;
   border-radius: 50%;
+  transition-duration: 0.3;
 }
 
     #af-thumbnail-carousel-mini-image-box-selected {
@@ -182,6 +188,7 @@
       height: 25px;
       border: 2px solid red;
       border-radius: 50%;
+      transition-duration: 0.3;
     }
 
 #af-thumbnail-arrow-down {
@@ -216,7 +223,7 @@
 }
 
 #af-image-prev {
-  content: url('./images/image-gallery/arrow-thin-left.png');
+  /* content: url('./images/image-gallery/arrow-thin-left.png'); */
   position:absolute;
     bottom:10px;
     left:10px;
@@ -226,7 +233,7 @@
 }
 
 #af-image-next {
-  content: url('./images/image-gallery/arrow-thin-right.png');
+  /* content: url('./images/image-gallery/arrow-thin-right.png'); */
   position:absolute;
     bottom:10px;
     right:10px;
@@ -245,7 +252,7 @@
     right:10px;
     width:30px;
     height:30px;
-    content: url('./images/image-gallery/square-target.png');
+    /* content: url('./images/image-gallery/square-target.png'); */
 }
 
 /* // */
@@ -261,13 +268,27 @@
 }
 
 #af-size-selector {
-  width: 100px;
-  height: 25px;
+  width: 120px;
+  height: 30px;
+  font-family: "Archivo", sans-serif;
+  background-color: white;
+  border-radius: 0%;
 }
 
 #af-size-quantity-selector {
-  width: 100px;
-  height: 25px;
+  width: 120px;
+  height: 30px;
+  font-family: "Archivo", sans-serif;
+  background-color: white;
+  border-radius: 0%;
+}
+
+#af-add-to-cart {
+  width: 120px;
+  height: 30px;
+  font-family: "Archivo", sans-serif;
+  background-color: white;
+  border-radius: 0%;
 }
 
 #af-product-description {
@@ -279,21 +300,23 @@
 }
 
 #af-product-info-description {
-  border: 1px solid black;
-  min-height: 50px;
-  float: left;
+    border-right: 1px solid black;
+    min-height: 50px;
+    padding: 10px;
+    float: left;
 }
 
-
-
 #af-characteristics {
-  border: 1px solid greenyellow;
-  /* margin-top: 25px; */
-  /* width: 1000px; */
+  /* border-left: 1px solid black; */
+  min-height: 50px;
+  margin-left: 10px;
+  padding: 10px;
+  float: left;
 }
 
 #af-strikethrough {
   text-decoration: line-through;
+  color: red;
 }
 
 
@@ -318,52 +341,61 @@
 
 }
 
-#af-stars {
+
+/* #af-stars {
   margin: auto;
-  float: left
-}
+  float: left;
+  width: 100px;
+  height: 25px;
+} */
 
 #af-full-star {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   float: left;
   content: url('./images/stars/FullStar-01.png')
 
 }
 
 #af-three-quarter-star {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   float: left;
   content: url('./images/stars/ThreeQuarterStar-01.png')
 
 }
 
 #af-half-star {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   float: left;
   content: url('./images/stars/HalfStar-01.png')
 
 }
 
 #af-quarter-star {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   float: left;
   content: url('./images/stars/QuarterStar-01.png')
 
 }
 
 #af-empty-star {
-  width: 30px;
-  height: 30px;
+  /* margin-right: 5px; */
+  width: 15px;
+  height: 15px;
   float: left;
   content: url('./images/stars/EmptyStar.png')
 
 }
 
+#af-read-reviews {
+  font-size: 12.5px;
+  margin-left: 5px;
+  text-decoration: underline
 
+}
 
 
 /* // */

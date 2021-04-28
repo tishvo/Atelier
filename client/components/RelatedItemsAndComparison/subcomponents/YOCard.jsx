@@ -94,7 +94,7 @@ class YOCard extends React.Component {
         newNum--;
       }
       return (
-        <span id="af=stars">
+        <span id="af-stars">
           {numArray.map((num, index) => {
             if (num === 1 || num > 0.872) {
               return <div id="af-full-star" key={index}>1</div>
