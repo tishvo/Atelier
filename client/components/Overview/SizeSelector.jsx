@@ -1,6 +1,7 @@
 import React from 'react';
 import SizeQuantitySelector from './SizeQuantitySelector.jsx';
 import AddToCart from './AddToCart.jsx';
+import axios from 'axios';
 
 class SizeSelector extends React.Component {
   constructor(props) {
@@ -11,12 +12,13 @@ class SizeSelector extends React.Component {
       quantitiesArray: ['-'],
       cart: [],
       currentSize: null,
-      currentQuantity: null,
+      currentQuantity: 1,
 
     }
     this.createSizes = this.createSizes.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this)
     this.chooseQuantity = this.chooseQuantity.bind(this)
+    this.addToLocalCart = this.addToLocalCart.bind(this)
     this.addToCart = this.addToCart.bind(this)
   }
 
@@ -31,8 +33,15 @@ class SizeSelector extends React.Component {
 
     var skusArray = []
     let skus = this.props.skus;
+
     for (var key in skus) {
-      skusArray.push(skus[key])
+      let tempObj = {
+        sku_id: key,
+        quantity: skus[key].quantity,
+        size: skus[key].size
+      }
+
+      skusArray.push(tempObj)
     }
 
     this.setState({
@@ -41,49 +50,59 @@ class SizeSelector extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('sizeselector updated!', prevProps.skus)
-    // console.log('current: ', this.props.skus)
     if (JSON.stringify(this.props.skus) !== JSON.stringify(prevProps.skus)) {
-      // var skusArray = []
-      // let skus = this.props.skus;
-      // for (var key in skus) {
-      //   skusArray.push(skus[key])
-      // }
-
-      // this.setState({
-      //   skusArray: skusArray
-      // })
       this.componentDidMount()
     }
   }
 
-  createSizes(e, s) {
+  createSizes(e) {
+    console.log('in createSizes, this is e: ', e)
     var eArray = e.split(',')
     var sizesArray = []
-    for (var i = 1; i <= Number(eArray[0]) && i <= 15; i++) {
+    for (var i = 1; i <= Number(eArray[1]) && i <= 15; i++) {
       sizesArray.push(i.toString());
     }
     this.setState({
       quantitiesArray: sizesArray,
-      currentSize: eArray[1]
+      currentSize: eArray[2],
+      currentSku: eArray[0]
     })
+  }
+
+
+  addToCart() {
+    console.log('in addToCart')
+    let objToAdd = {
+      sku_id: this.state.currentSku,
+      // product: this.props.productName,
+      // style: this.props.styleName,
+      // size: this.state.currentSize,
+      count: this.state.currentQuantity
+    }
+
+    console.log('addToCart objToAdd; ', objToAdd)
+
+      axios.post('/cart', objToAdd)
+      .then((response) => {
+        console.log('successfully added item to cart!')
+      })
+      .catch((error) => {
+        console.log('error in adding to cart! ', error)
+      })
+
 
   }
 
 
+  addToLocalCart() {
 
-  addToCart() {
     let objToAdd = {
+      sku_id: this.state.currentSku,
       product: this.props.productName,
       style: this.props.styleName,
       size: this.state.currentSize,
       quantity: this.state.currentQuantity
     }
-
-    // let localData = []
-    console.log('objToAdd: ', objToAdd)
-    this.state.cart.push(objToAdd)
-    console.log('this.state.cart: ', this.state.cart)
 
     if (localStorage['cart'].length === 1) {
       localStorage['cart'] = localStorage['cart'] + (JSON.stringify(objToAdd)) + ']'
@@ -111,7 +130,7 @@ class SizeSelector extends React.Component {
 
 
   render() {
-    // console.log('this is skusArray: ', this.state.skusArray)
+    console.log('this is skusArray: ', this.state.skusArray)
 
     if (this.state.skusArray) {
       return (
@@ -120,13 +139,13 @@ class SizeSelector extends React.Component {
             onChange={() => this.createSizes(event.target.value)}>
             <option hidden="Select Size">Select Size</option>
             {this.state.skusArray.map((obj, index) => {
-              return <option key={index} value={[obj.quantity, obj.size]} size={obj.size} >{obj.size}</option>
+              return <option key={index} value={[obj.sku_id, obj.quantity, obj.size]} size={obj.size} >{obj.size}</option>
             }
             )}
           </select>
 
           <SizeQuantitySelector chooseQuantity={this.chooseQuantity} quantities={this.state.quantitiesArray} />
-          <AddToCart click={this.addToCart}
+          <AddToCart addToLocalCart={this.addToLocalCart} addToCart={this.addToCart}
             quantitiesArray={this.state.quantitiesArray} />
 
 

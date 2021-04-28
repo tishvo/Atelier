@@ -24,8 +24,7 @@ app.get('/products', function (req, res) {
     })
     .catch((error) => {
       console.log('error in initial /products get request, error:', error)
-      res.status(404).send(error);
-
+      res.status(404).send(error)
     })
 
 })
@@ -44,7 +43,7 @@ app.get('/products/:productId/styles', function (req, res) {
     })
     .catch((error) => {
       console.log('error in /products/:productId/styles axios get request, error:, ', error)
-      res.status(404).send(error);
+      res.status(404).send(error)
     })
 
 })
@@ -63,8 +62,53 @@ app.get('/reviews/:productId', function (req, res) {
     })
     .catch((error) => {
       console.log('error in /products/:productId/revoews axios get request, error:', error)
-      res.status(404).send(error);
+      res.status(404).send(error)
     })
+})
+
+// AF GET request for cart
+app.get('/cart', function (req, res) {
+  let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart';
+
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+    .then((response) => {
+      console.log('got our cart data from API!')
+      res.status(202).send(response.data);
+    })
+    .catch((error) => {
+      console.log('error in /cart axios get request, error:', error)
+      res.status(404).send(error)
+    })
+})
+
+// AF POST request to cart
+app.post('/cart', function (req, res) {
+  console.log('cart POST req.params: ', req.body)
+
+  let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart';
+
+  let data = req.body;
+  let config = {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  }
+
+  axios.post(url, data, config)
+  .then((response) => {
+    console.log('successfully posted to cart')
+
+  })
+  .catch((error) => {
+    console.log('error in our POST to cart')
+    res.status(404).send(error)
+
+  })
+
 })
 
 // RR GET request for related item id's
@@ -183,7 +227,7 @@ app.post('/qa/answer/:question_id', function(req, res) {
   })
   .catch(err => {
     console.log('/RELATED GET ERROR: ', err)
-    res.status(404).send(error);
+    res.status(404).send(err)
   })
 })
 
@@ -201,8 +245,8 @@ app.get('/products/:productId', function(req, res) {
 
   })
   .catch((error) => {
-    console.log(error);
-    res.status(404).send(error);
+    console.log('RR GET error /products/:productId');
+    res.status(404).send(error)
   })
 
 })
@@ -238,8 +282,8 @@ app.get('/reviews/:productId',  function(req, res) {
 
     })
     .catch((error) => {
-      console.log(error);
-      res.status(404).send(error);
+      console.log('error on /reviews/:productId');
+      res.status(404).send(error)
     })
 })
 
