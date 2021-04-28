@@ -22,7 +22,6 @@ class RPCard extends React.Component {
       'height': '300px'
     };
 
-
     this.fetchData = this.fetchData.bind(this);
     this.renderStars = this.renderStars.bind(this);
 
