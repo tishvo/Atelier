@@ -37,6 +37,7 @@ const YourOutfit = (props) => {
   }
 
   useEffect(() => {
+    console.log('props in YourOutfit: ', props)
     updateState();
   }, [])
 

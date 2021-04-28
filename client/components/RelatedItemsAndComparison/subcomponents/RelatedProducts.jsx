@@ -12,7 +12,6 @@ class RelatedProducts extends React.Component {
       currentProduct: {},
 
       allRelated: [],
-      visibleRelated: [],
       firstCard: 0,
       lastCard: 4,
       lastIndex: 0
@@ -22,7 +21,6 @@ class RelatedProducts extends React.Component {
     this.previousSlide = this.previousSlide.bind(this);
     this.fetchData = this.fetchData.bind(this);
 
-    this._isMounted = false;
   }
 
   fetchData(itemId) {
@@ -36,11 +34,6 @@ class RelatedProducts extends React.Component {
           currentProduct: this.props.currentItem,
           firstCard: 0,
           lastCard: 4
-        }, () => {
-          // console.log(this.state);
-          this.setState({
-            visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
-          })
         })
       })
       .catch(err => {
@@ -49,20 +42,18 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-
     if (this.props.currentItem !== prevProps.currentItem) {
-      this._isMounted = true;
-      this._isMounted && this.fetchData();
+      this.fetchData(this.props.currentItem.id);
     }
   }
 
   componentDidMount() {
-
-    this._isMounted = true;
-    var itemId = this.props.currentItem['id'];
-    this._isMounted && itemId && this.fetchData(itemId);
-
+    var itemId = this.props.currentItem.id;
+    if (itemId) {
+      this.fetchData(itemId);
+    }
   }
+
   // Arrow Functionality
   previousSlide () {
     // console.log('clicked previous slide');
@@ -71,10 +62,6 @@ class RelatedProducts extends React.Component {
       this.setState({
         firstCard: this.state.firstCard -1,
         lastCard: this.state.lastCard -1
-      }, () => {
-        this.setState({
-          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
-        });
       });
     }
   }
@@ -86,10 +73,6 @@ class RelatedProducts extends React.Component {
       this.setState({
         firstCard: this.state.firstCard +1,
         lastCard: this.state.lastCard +1,
-      }, () => {
-        this.setState({
-          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard),
-        });
       });
     }
   }
@@ -108,12 +91,10 @@ class RelatedProducts extends React.Component {
         {this.state.allRelated.length > 0 && (
           <div className='items-container'>
             {this.state.allRelated.map((relatedItem, index) => {
-              console.log('item: ', relatedItem);
               return (
-              <div className='single-item-container'>
+              <div key={index} className='single-item-container'>
                 <RPCard
                   itemId={relatedItem}
-                  key={index}
                   click={this.props.click}
                   currentProduct={this.state.currentProduct}
                 />

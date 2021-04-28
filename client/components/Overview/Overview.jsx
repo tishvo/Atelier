@@ -45,11 +45,7 @@ class Overview extends React.Component {
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
-
-    this._isMounted = false;
   }
 
   fetchData() {
@@ -60,7 +56,7 @@ class Overview extends React.Component {
     axios.get(`/products/${itemId}`)
       .then((response) => {
         console.log('1.) OVERVIEW specific product:', response);
-        this._isMounted && this.setState({
+        this.setState({
           featuresArray: response.data.features
         })
       })
@@ -72,7 +68,7 @@ class Overview extends React.Component {
     axios.get(`/products/${itemId}/styles`)
       .then((response) => {
         console.log('2.) OVERVIEW styles: ', response.data.results)
-        this._isMounted && this.setState({
+        this.setState({
           stylesArray: response.data.results,
           images: response.data.results[0].photos,
           currentImage: response.data.results[0].photos[0]['url'],
@@ -94,7 +90,7 @@ class Overview extends React.Component {
     axios.get(`/reviews/${itemId}&count=1000`)
       .then((response) => {
         console.log('3.) OVERVIEW reviews', response.data.results)
-        this._isMounted && this.setState({
+        this.setState({
           numberOfReviews: response.data.results.length,
           // reviewData: response.data.results
         });
@@ -117,7 +113,7 @@ class Overview extends React.Component {
         }
         var currRating = result / numRating;
 
-        this._isMounted && this.setState({
+        this.setState({
           averageStars: currRating
         })
       })
@@ -126,19 +122,13 @@ class Overview extends React.Component {
       })
   }
   componentDidMount() {
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
-      this._isMounted = true;
-      this._isMounted && this.fetchData();
+      this.fetchData();
     }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   changeDisplayImage(index) {

@@ -18,17 +18,14 @@ class RPCard extends React.Component {
     this.styles = {
       'margins': 'center',
       'borderStyle': 'solid',
-      'width': '50',
-      'height': '50'
+      'width': '200px',
+      'height': '300px'
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
     this.fetchData = this.fetchData.bind(this);
     this.renderStars = this.renderStars.bind(this);
 
-    this._isMounted = false;
   }
 
   fetchData() {
@@ -36,7 +33,7 @@ class RPCard extends React.Component {
     axios.get(`/products/${this.props.itemId}`)
     .then(res => {
 
-      this._isMounted && this.setState({
+      this.setState({
         itemData: res.data
       })
     })
@@ -47,7 +44,7 @@ class RPCard extends React.Component {
     axios.get(`/products/${this.props.itemId}/styles`)
     .then(res => {
 
-      this._isMounted && this.setState({
+      this.setState({
         allStyles: res.data.results,
         stylePreview: res.data.results[0].photos[0]['thumbnail_url']
       })
@@ -78,17 +75,11 @@ class RPCard extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
-    this._isMounted = true;
-    if (this.props.itemId !== prevProps.itemId) { this._isMounted && this.fetchData(); }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
+    if (this.props.itemId !== prevProps.itemId) { this.fetchData(); }
   }
 
   showModal() {

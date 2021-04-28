@@ -20,12 +20,8 @@ class YOCard extends React.Component {
       'height': '300px'
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.renderStars = this.renderStars.bind(this);
-
-    this._isMounted = false;
   }
 
   fetchData() {
@@ -33,7 +29,7 @@ class YOCard extends React.Component {
     axios.get(`/products/${this.props.item.id}`)
     .then(res => {
 
-      this._isMounted && this.setState({
+      this.setState({
         itemData: res.data
       })
     })
@@ -43,7 +39,7 @@ class YOCard extends React.Component {
     // get images
     axios.get(`/products/${this.props.item.id}/styles`)
     .then(res => {
-        this._isMounted && this.setState({
+        this.setState({
           allStyles: res.data.results,
           stylePreview: res.data.results[0].photos[0]['thumbnail_url']
         })
@@ -140,17 +136,11 @@ class YOCard extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
-    this._isMounted = true;
-    if (this.props.item.id !== prevProps.item.id) { this._isMounted && this.fetchData(); }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
+    if (this.props.item.id !== prevProps.item.id) { this.fetchData(); }
   }
 
   render() {

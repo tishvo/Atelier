@@ -25,23 +25,23 @@ const ImageGallery = (props) => {
     })
   }
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   setState({
-  //     currentImage: props.currentImage,
-  //     currentIndex: props.currentIndex,
-  //     currentSelected: props.currentSelected,
-  //     imgId: props.imgId,
-  //     images: props.images
-  //   })
+    setState({
+      currentImage: props.currentImage,
+      currentIndex: props.currentIndex,
+      currentSelected: props.currentSelected,
+      imgId: props.imgId,
+      images: props.images
+    })
 
-  //   // window.addEventListener('mousemove', (event) => {
-  //   //   handleMouseMove(event)
+    window.addEventListener('mousemove', (event) => {
+      handleMouseMove(event)
 
-  //   //   window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mousemove', handleMouseMove)
 
-  //   // });
-  // }, []);
+    });
+  }, []);
 
   const updateState = () => {
 
@@ -56,6 +56,7 @@ const ImageGallery = (props) => {
   }
 
   useEffect(() => {
+    console.log('props in imageGallery: ', props)
     updateState();
   }, [])
 
