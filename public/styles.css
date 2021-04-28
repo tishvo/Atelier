@@ -410,7 +410,6 @@
 .rr-thumbnail {
   width: 120px;
   height: 120px;
-
 }
 
 .rr-comparison-modal {
@@ -441,6 +440,31 @@
   width: 80%;
 }
 
+/*----------------- RR CAROUSEL COMPONENT STYLING -----------------*/
+.slide-container {
+  display: flex;
+  align-items: center;
+  max-width: 57rem;
+  overflow-y: auto;
+}
+
+.items-container {
+  display: flex;
+  overflow-y: hidden;
+  justify-content: center;
+  margin: 0px 4px 15px;
+}
+.items-container::-webkit-scrollbar {
+  display: none;
+}
+
+.single-item-container {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 10rem;
+}
+/*------------------------------------------------*/
 /* // TISH WIDGET STYLINGS// */
 
 .qaList {
