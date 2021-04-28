@@ -37,8 +37,8 @@ const ImageGallery = (props) => {
 
      return function cleanup() {window.removeEventListener('mousemove', handleMouseMove)}
 
-  //   // });
-  // }, []);
+    });
+  }, []);
 
   const updateState = () => {
 
@@ -57,7 +57,7 @@ const ImageGallery = (props) => {
   //   return null;
   // }
 
-  console.log('something!')
+  // console.log('something!')
   if (props.imgId === "af-main-image-xl") {
 
 
