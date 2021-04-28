@@ -17,7 +17,8 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
-      averageStars: this.props.stars,
+      receivedAllData: false,
+      averageStars: null,
       stylesArray: null,
       images: null,
       reviewsArray: null,
@@ -45,99 +46,118 @@ class Overview extends React.Component {
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
-  componentDidMount() {
+  getData() {
     // console.log('this is local storage??? ', localStorage)
-
-
     var itemId = this.props.currentItem['id'];
 
+    // REQUEST FOR SPECIFIC PRODUCT
     axios.get(`/products/${itemId}`)
-    .then((response) => {
-      // console.log('here we will have the characteristics', response);
-
-      this.setState ({
-        featuresArray: response.data.features
-      })
-    })
-    .catch ((error) => {
-      console.log('error in getting specific product', error)
-    })
-
-    // get the styles by id
-    axios.get(`/products/${itemId}/styles`)
       .then((response) => {
-        console.log('this is the styles data: ', response.data.results)
+        console.log('1.) OVERVIEW specific product:', response);
+
+        let featuresArray = response.data.features
+
+        //REQUEST FOR SPECIFIC PRODUCT'S STYLES
+        axios.get(`/products/${itemId}/styles`)
+          .then((response) => {
+            console.log('2.) OVERVIEW styles: ', response.data.results)
+
+            let stylesArray = response.data.results
+            let images = response.data.results[0].photos
+            let currentImage = response.data.results[0].photos[0]['url']
+            let currentImageIndex = 0
+            let styleName = response.data.results[0].name
+            let currentPrice = response.data.results[0].original_price
+            let currentSalePrice = response.data.results[0].sale_price
+            let selectedStyle = 0
+            let skusObject = response.data.results[0].skus
+            let imgSize = 'default'
 
 
+            // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
+            axios.get(`/reviews/${itemId}&count=1000`)
+              .then((response) => {
+                console.log('3.) OVERVIEW reviews', response.data.results)
 
-        this.setState({
-          stylesArray: response.data.results,
-          images: response.data.results[0].photos,
-          currentImage: response.data.results[0].photos[0]['url'],
-          currentImageIndex: 0,
-          styleName: response.data.results[0].name,
-          currentPrice: response.data.results[0].original_price,
-          currentSalePrice: response.data.results[0].sale_price,
-          selectedStyle: 0,
-          skusObject: response.data.results[0].skus,
-          numberOfReviews: this.props.numberOfReviews,
-          imgSize: 'default'
+                let numberOfReviews = response.data.results.length
 
-        })
+                // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
+                axios.get(`/reviews/meta/${itemId}`)
+                  .then((response) => {
+                    console.log('4.) OVERVIEW ratings', response.data.ratings);
+                    var rateObj = response.data.ratings;
+                    var result = 0;
+                    var numRating = 0;
+                    for (var key in rateObj) {
+                      result = result + Number(key) * Number(rateObj[key]);
+                      numRating = numRating + Number(rateObj[key]);
+                    }
+                    var currRating = result / numRating;
+
+                    this.setState({
+                      averageStars: currRating,
+                      stylesArray: stylesArray,
+                      images: images,
+                      currentImage: currentImage,
+                      currentImageIndex: 0,
+                      styleName: styleName,
+                      currentPrice: currentPrice,
+                      currentSalePrice: currentSalePrice,
+                      selectedStyle: 0,
+                      skusObject: skusObject,
+                      imgSize: 'default',
+                      featuresArray: featuresArray,
+                      numberOfReviews: numberOfReviews
+
+                    }, () => { this.setState({
+                      receivedAllData: true
+                    })})
+                  })
+
+                  .catch((error) => {
+                    console.log('error inside reviews meta get: ', error)
+                  })
+              })
+              .catch((error) => {
+                console.log('error getting our response from styles get: ', error)
+              })
+          })
+          .catch((error) => {
+            console.log('error in OVERVIEW axios get request, error:', error)
+          })
       })
       .catch((error) => {
-        console.log('error in OVERVIEW axios get request, error:', error)
+        console.log('error in getting specific product', error)
       })
+  }
+
+
+
+  componentDidMount() {
+    // this.clearForRerender()
+    this.getData()
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
-      this.componentDidMount()
-      axios.get(`/reviews/meta/${this.props.currentItem['id']}`)
-        .then((response) => {
-          // console.log('response ratings', response.data.ratings);
 
-          var rateObj = response.data.ratings;
-          var result = 0;
-          var numRating = 0;
-          console.log('result: ', result);
-          console.log('rateObj: ', this.state.ratingObj);
-          for (var key in rateObj) {
-            console.log('numKey');
-            result = result + Number(key) * Number(rateObj[key]);
-            numRating = numRating + Number(rateObj[key]);
-          }
-          // console.log('result: ', result);
-          // console.log('numRating: ', numRating);
-          var currRating = result / numRating;
-
-          this.setState({
-            averageStars: currRating
-          })
-          this.props.stars = currRating
-          // console.log('state check of averageStars: ', this.state.averageStars)
-        })
-
-        .catch((error) => {
-          console.log('error inside averageStar making: ', error)
-        })
-    }
-    if (this.props.numberOfReviews !== prevProps.numberOfReviews) {
       this.setState({
-        numberOfReviews: this.props.numberOfReviews
-      })
+        receivedAllData: false
+      }, this.getData())
+
     }
   }
+
+
 
   changeDisplayImage(index) {
 
     var styles = this.state.stylesArray;
-    // console.log('this is styles[index] in changeDisplayImage: ', styles[index])
     this.setState({
       images: styles[index].photos,
-      // currentImageIndex: 0,
       styleName: styles[index].name,
       currentPrice: styles[index].original_price,
       currentSalePrice: styles[index].sale_price,
@@ -172,7 +192,6 @@ class Overview extends React.Component {
   }
 
   expand() {
-    // console.log('expand clicked')
     if (this.state.expand_clicked) {
       if (this.state.imgSize === 'expanded') {
 
@@ -188,7 +207,6 @@ class Overview extends React.Component {
       } else if (this.state.imgSize === 'xl') {
         this.setState({
           css_width: { width: '960px', height: '500px' },
-          // expand_clicked: false,
           display_right_side: true,
           imgElementId: "af-main-image-expanded",
           thumbnailCarouselBoxWidth: { width: '0px' },
@@ -207,13 +225,11 @@ class Overview extends React.Component {
         thumbnailCarouselBoxWidth: { width: '00px' },
         thumbnailCarouselBoxMiniHeight: { height: '100px' },
         imgSize: 'expanded'
-
       })
     }
   }
 
   shrink() {
-    // console.log('shrink clicked')
     if (this.state.imgSize === 'default') {
       this.setState({
         css_width: { width: '960px', height: '500px' },
@@ -239,9 +255,10 @@ class Overview extends React.Component {
 
   render() {
 
-    if (this.state.stylesArray && this.state.featuresArray) {
-      // if (this.state.display_right_side) {
 
+
+
+    if (this.state.receivedAllData) {
 
       return (
         <div id="af-nameless">
@@ -277,7 +294,6 @@ class Overview extends React.Component {
                 />
 
                 <StyleSelector
-
                   styles={this.state.stylesArray}
                   click={this.changeDisplayImage}
                   selected={this.state.selectedStyle}
@@ -287,15 +303,13 @@ class Overview extends React.Component {
                   productName={this.props.currentItem.name}
                   styleName={this.state.styleName}
                 />
-
-                {/* <AddToCart /><br /> */}
                 <ProductInfoShare />
               </div>
             </div><br />
           </div>
           <div id="af-product-description">
             <ProductInfoDescription description={this.props.currentItem.description} />
-            <Characteristics features={this.state.featuresArray}/>
+            <Characteristics features={this.state.featuresArray} />
           </div>
         </div>)
 

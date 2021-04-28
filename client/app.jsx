@@ -11,80 +11,56 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      data: null,
       currentItem: null,
-      currentRatingMeta: {}
+      currentItemId: null
     }
     this.relatedClick = this.relatedClick.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
+    this._isMounted = false;
+  }
+
+  fetchData() {
+    axios.get('/products')
+    .then((response) => {
+      console.log('this is our initial project data:', response.data)
+
+      this._isMounted && this.setState({
+        currentItem: response.data[0],
+        currentItemId: response.data[0].id,
+      }, () => {
+        console.log('this is the state of app.jsx--> ', this.state)
+      })
+    })
+    .catch((error) => {
+      console.log('ERRORR in app.jsx axios get request, error:', error)
+    })
   }
 
   componentDidMount() {
-    axios.get('/products')
-      .then((response) => {
-        console.log('this is our initial project data:', response.data)
 
-        this.setState({
-          data: response.data,
-          currentItem: response.data[0],
-          currentItemId: response.data[0].id,
-          averageStars: null
-        })
-      })
-      .then(() => {
-        axios.get(`/reviews/${this.state.currentItemId}&count=1000`)
-          .then((response) => {
-            console.log('found our reviews data!', response.data.results)
-            this.setState({
-              numberOfReviews: response.data.results.length,
-              reviewData: response.data.results
-            });
-          })
-          .catch((error) => {
-            console.log('error getting our response from styles get: ', error)
-          })
-        axios.get(`/reviews/meta/${this.state.currentItemId}`)
-          .then((response) => {
-            // console.log('response ratings', response.data.ratings);
-            var rateObj = response.data.ratings;
-            var result = 0;
-            var numRating = 0;
-            // console.log('result: ', result);
-            // console.log('rateObj: ', this.state.ratingObj);
-            for (var key in rateObj) {
-              // console.log('numKey');
-              result = result + Number(key) * Number(rateObj[key]);
-              numRating = numRating + Number(rateObj[key]);
-            }
-            // console.log('result: ', result);
-            // console.log('numRating: ', numRating);
-            var currRating = result / numRating;
+  // if(!localStorage['websiteTraffic']) {
 
-            this.setState({
-              averageStars: currRating
-            })
-            //  console.log('state check of averageStars: ', this.state.averageStars)
-          })
-
-          .catch((error) => {
-            console.log('error inside reviews meta get: ', error)
-          })
-      })
-
-      .catch((error) => {
-        console.log('error in app.jsx axios get request, error:', error)
-      })
+  //   localStorage['websiteTraffic'] = {
+  //     'Overview': '',
+  //     'Related Items And Comparisons': '',
+  //     'Questions and Answers': '',
+  //     'Reviews and Ratings': ''
+  //   }
+  // }
+    this._isMounted = true;
+    this._isMounted && this.fetchData();
   }
-
-  componentDidUpdate() {
-    //console.log('we are checking for updates YOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-
+  componentWillUnmount() {
+    this._isMounted = false;
   }
-
-
 
   relatedClick(e) {
     console.log('the click worked', e, e.id)
-    this.setState({
+    this._isMounted = true;
+    this._isMounted && this.setState({
       currentItem: e,
       currentItemId: e.id
     })
@@ -93,14 +69,14 @@ class App extends React.Component {
   render() {
     console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
     console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
-    if (this.state.averageStars) {
+    if (this.state.currentItem) {
       return (
         <div className="rr-column-container">
           <div>HELLO</div>
-          < Overview numberOfReviews={this.state.numberOfReviews} data={this.state.data} currentItem={this.state.currentItem} stars={this.state.averageStars} widget='Overview'/>
-          <RelatedItemsAndComparison data={this.state.data} currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons'/>
-          <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers'/>
-          <ReviewsAndRatings itemId={this.state.currentItemId}/>
+          < Overview currentItem={this.state.currentItem} widget='Overview' />
+          <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons' />
+          <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers' />
+          <ReviewsAndRatings itemId={this.state.currentItemId} widget='Reviews and Ratings' />
         </div>
       )
     } else {

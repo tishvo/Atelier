@@ -9,9 +9,23 @@ export default function PrivacyHOC(WrappedComponent) {
       }
 
       onClick (e) {
-        console.log('click tracking timestamp: ', new Date())
-        console.log('click tracking element: ', e.target)
-        console.log('click tracking widget: ', this.props.widget)
+        var date = new Date()
+        // console.log('click tracking timestamp: ', date)
+        // console.log('click tracking element: ', e.target)
+        // console.log('click tracking widget: ', this.props.widget)
+
+
+        // if (localStorage.websiteTraffic[this.props.widget][e.target].numClicks) {
+        //   localStorage.websiteTraffic[this.props.widget][e.target].numClicks ++
+
+        // } else {
+        //   localStorage.websiteTraffic[this.props.widget][e.target].numClicks = 1
+        // }
+
+
+        // if(localStorage.websiteTraffic[this.props.widget][e.target].datesClicked)
+
+        // console.log('localStorage updated: ', localStorage)
 
       }
       render() {
@@ -27,3 +41,5 @@ export default function PrivacyHOC(WrappedComponent) {
     }
   )
 };
+
+// localStorage -- websiteTraffic -- widget -- Overview: {<div>Hi</div>: {numClicks: 3, datesClicked: ...}}

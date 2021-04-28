@@ -8,7 +8,7 @@ const YourOutfit = (props) => {
 
   const localData = [];
   for (var key in localStorage) {
-    if (key !== 'length' && localStorage[key].constructor !== Function) {
+    if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
       localData.push(localStorage[key]);
     }
   }
@@ -23,7 +23,7 @@ const YourOutfit = (props) => {
   const updateState = () => {
     const localData = [];
     for (var key in localStorage) {
-      if (key !== 'length' && localStorage[key].constructor !== Function) {
+      if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
         localData.push(localStorage[key]);
       }
     }
@@ -38,7 +38,7 @@ const YourOutfit = (props) => {
 
   useEffect(() => {
     updateState();
-  }, [/*console.log('state after useEffect: ', state)*/])
+  }, [])
 
   // clickfunction addItem
   const addItem = (data) => {
@@ -49,7 +49,7 @@ const YourOutfit = (props) => {
     const prevLength = state.allData.length;
     var newLastIndex = state.lastIndex;
     for (var key in localStorage) {
-      if (key !== 'length' && localStorage[key].constructor !== Function) {
+      if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
         localData.push(localStorage[key]);
       }
     }
@@ -96,6 +96,8 @@ const YourOutfit = (props) => {
   }
 
   const renderList = () => {
+    // localStorage.clear();
+    // console.log(state.visibleData, localStorage);
     return (
       state.visibleData.map((product, index) => {
         return <YOCard key={index} item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
@@ -118,9 +120,8 @@ const YourOutfit = (props) => {
       </div>
     )
   }
+
   const removeFromOutfit = (id) => {
-    console.log(id ,' was clicked!!');
-    console.log('localStorage before delete: ', localStorage);
     localStorage.removeItem(id);
     updateState();
   }
