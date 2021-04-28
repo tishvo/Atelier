@@ -9,7 +9,6 @@ class QA_list extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.qa !== prevProps.qa) {
-
       this.render();
     }
   }
