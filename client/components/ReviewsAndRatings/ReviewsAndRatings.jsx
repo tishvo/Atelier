@@ -27,6 +27,7 @@ class ReviewsAndRatings extends React.Component {
     this.getSortOption = this.getSortOption.bind(this);
     this.getHelpfulReviewsForItem = this.getHelpfulReviewsForItem.bind(this);
     this.getNewestReviewsForItem = this.getNewestReviewsForItem.bind(this);
+    this.handleWriteReviewClick = this.handleWriteReviewClick.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
@@ -50,7 +51,7 @@ class ReviewsAndRatings extends React.Component {
     if (this.state.sort === 'helpful') {
       this.getHelpfulReviewsForItem();
     }
-    if(this.state.sort === 'newest') {
+    if (this.state.sort === 'newest') {
       this.getNewestReviewsForItem();
     }
   }
@@ -137,29 +138,43 @@ class ReviewsAndRatings extends React.Component {
     })
   }
 
+  //will show/hide the review submission form
+  handleWriteReviewClick(event) {
+    event.preventDefault();
+    this.setState({
+      showAdd: !this.state.showAdd
+    });
+  }
+
+
   render() {
-    //console.log('this is the state of sort: ', this.state.sort)
-    //console.log('this is the data: ', this.state.reviewData)
-    //console.log('this is char data: ', this.state.charData);
+
     if (this.state.averageStars) {
+      console.log('metadata: ', this.state.charData)
       return (
-        <div>
-          <h1>Ratings and Reviews</h1>
-          <ReviewsList stars={this.state.averageStars} itemId={this.props.itemId} reviewData={this.state.reviewData} numReviews={this.state.numberOfReviews} sendSort={this.getSortOption}/>
-          <RatingBreakdown stars={this.state.averageStars} metaData={this.state.metaData} />
-          <ProductBreakdownMain charData={this.state.charData} />
+        <div id="mm-ratingsandreviews-overview">
+          <div id="mm-ratingsandreviews-reviewlist">
+            <ReviewsList stars={this.state.averageStars} itemId={this.props.itemId} reviewData={this.state.reviewData}
+            numReviews={this.state.numberOfReviews} sendSort={this.getSortOption} charData={this.state.charData}/>
+          </div>
+          <div id="mm-ratingsandreviews-breakdown">
+            <RatingBreakdown stars={this.state.averageStars} metaData={this.state.metaData} />
+            <ProductBreakdownMain charData={this.state.charData} itemId={this.props.itemId} />
+          </div>
         </div>
       );
     } else {
       return (
         <div>
-          <div>This product doesn't have any reviews yet. Be the first one to write one!</div>
+          <h3>This product doesn't have any reviews yet. Be the first one to write one!</h3>
 
-          <WriteReview />
+          <button onClick={this.handleWriteReviewClick}>
+            Add a review +
+          </button>
+          {this.state.showAdd ? <WriteReview hide={this.handleWriteReviewClick} charData={this.state.charData}/> : null}
         </div>
       )
     }
-
   }
 }
 

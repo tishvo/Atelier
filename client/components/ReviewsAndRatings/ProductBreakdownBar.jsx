@@ -4,8 +4,8 @@ const ProductBreakdownBar = (props) => {
   const { bgcolor, completed } = props;
 
   const containerStyles = {
-    height: 20,
-    width: '15%',
+    height: 10,
+    width: '965%',
     backgroundColor: "#e0e0de",
     borderRadius: 50,
     margin: 5
