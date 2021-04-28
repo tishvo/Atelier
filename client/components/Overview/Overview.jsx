@@ -17,6 +17,7 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
+      receivedAllData: false,
       averageStars: null,
       stylesArray: null,
       images: null,
@@ -45,101 +46,114 @@ class Overview extends React.Component {
     this.selectImage = this.selectImage.bind(this);
     this.shrink = this.shrink.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.fetchData = this.fetchData.bind(this);
-
-    this._isMounted = false;
+    this.getData = this.getData.bind(this);
+    this.clearForRerender = this.clearForRerender.bind(this)
   }
 
-  fetchData() {
-    console.log(this.props.currentItem.id)
-    var itemId = this.props.currentItem.id;
+  getData() {
+    // console.log('this is local storage??? ', localStorage)
+    var itemId = this.props.currentItem['id'];
 
     // REQUEST FOR SPECIFIC PRODUCT
     axios.get(`/products/${itemId}`)
       .then((response) => {
         console.log('1.) OVERVIEW specific product:', response);
-        this._isMounted && this.setState({
-          featuresArray: response.data.features
-        })
+
+        let featuresArray = response.data.features
+
+        //REQUEST FOR SPECIFIC PRODUCT'S STYLES
+        axios.get(`/products/${itemId}/styles`)
+          .then((response) => {
+            console.log('2.) OVERVIEW styles: ', response.data.results)
+
+            let stylesArray = response.data.results
+            let images = response.data.results[0].photos
+            let currentImage = response.data.results[0].photos[0]['url']
+            let currentImageIndex = 0
+            let styleName = response.data.results[0].name
+            let currentPrice = response.data.results[0].original_price
+            let currentSalePrice = response.data.results[0].sale_price
+            let selectedStyle = 0
+            let skusObject = response.data.results[0].skus
+            let imgSize = 'default'
+
+
+            // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
+            axios.get(`/reviews/${itemId}&count=1000`)
+              .then((response) => {
+                console.log('3.) OVERVIEW reviews', response.data.results)
+
+                let numberOfReviews = response.data.results.length
+
+                // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
+                axios.get(`/reviews/meta/${itemId}`)
+                  .then((response) => {
+                    console.log('4.) OVERVIEW ratings', response.data.ratings);
+                    var rateObj = response.data.ratings;
+                    var result = 0;
+                    var numRating = 0;
+                    for (var key in rateObj) {
+                      result = result + Number(key) * Number(rateObj[key]);
+                      numRating = numRating + Number(rateObj[key]);
+                    }
+                    var currRating = result / numRating;
+
+                    this.setState({
+                      averageStars: currRating,
+                      stylesArray: stylesArray,
+                      images: images,
+                      currentImage: currentImage,
+                      currentImageIndex: 0,
+                      styleName: styleName,
+                      currentPrice: currentPrice,
+                      currentSalePrice: currentSalePrice,
+                      selectedStyle: 0,
+                      skusObject: skusObject,
+                      imgSize: 'default',
+                      featuresArray: featuresArray,
+                      numberOfReviews: numberOfReviews
+
+                    }, () => { this.setState({
+                      receivedAllData: true
+                    })})
+                  })
+
+                  .catch((error) => {
+                    console.log('error inside reviews meta get: ', error)
+                  })
+              })
+              .catch((error) => {
+                console.log('error getting our response from styles get: ', error)
+              })
+          })
+          .catch((error) => {
+            console.log('error in OVERVIEW axios get request, error:', error)
+          })
       })
       .catch((error) => {
         console.log('error in getting specific product', error)
       })
-
-    //REQUEST FOR SPECIFIC PRODUCT'S STYLES
-    axios.get(`/products/${itemId}/styles`)
-      .then((response) => {
-        console.log('2.) OVERVIEW styles: ', response.data.results)
-        this._isMounted && this.setState({
-          stylesArray: response.data.results,
-          images: response.data.results[0].photos,
-          currentImage: response.data.results[0].photos[0]['url'],
-          currentImageIndex: 0,
-          styleName: response.data.results[0].name,
-          currentPrice: response.data.results[0].original_price,
-          currentSalePrice: response.data.results[0].sale_price,
-          selectedStyle: 0,
-          skusObject: response.data.results[0].skus,
-          numberOfReviews: null,
-          imgSize: 'default'
-        })
-      })
-      .catch((error) => {
-        console.log('error in OVERVIEW axios get request, error:', error)
-      })
-
-    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS
-    axios.get(`/reviews/${itemId}&count=1000`)
-      .then((response) => {
-        console.log('3.) OVERVIEW reviews', response.data.results)
-        this._isMounted && this.setState({
-          numberOfReviews: response.data.results.length,
-          // reviewData: response.data.results
-        });
-      })
-      .catch((error) => {
-        console.log('error getting our response from styles get: ', error)
-      })
-
-
-    // REQUEST FOR SPECIFIC PRODUCT'S REVIEWS METADATA
-    axios.get(`/reviews/meta/${itemId}`)
-      .then((response) => {
-        console.log('4.) OVERVIEW ratings', response.data.ratings);
-        var rateObj = response.data.ratings;
-        var result = 0;
-        var numRating = 0;
-        for (var key in rateObj) {
-          result = result + Number(key) * Number(rateObj[key]);
-          numRating = numRating + Number(rateObj[key]);
-        }
-        var currRating = result / numRating;
-
-        this._isMounted && this.setState({
-          averageStars: currRating
-        })
-      })
-      .catch((error) => {
-        console.log('error inside reviews meta get: ', error)
-      })
   }
+
+  clearForRerender() {
+    this.setState({
+      receivedAllData: false
+    })
+  }
+
   componentDidMount() {
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.clearForRerender()
+    this.getData()
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
-      this._isMounted = true;
-      this._isMounted && this.fetchData();
+      this.clearForRerender();
+      this.getData()
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+
 
   changeDisplayImage(index) {
 
@@ -213,7 +227,6 @@ class Overview extends React.Component {
         thumbnailCarouselBoxWidth: { width: '00px' },
         thumbnailCarouselBoxMiniHeight: { height: '100px' },
         imgSize: 'expanded'
-
       })
     }
   }
@@ -246,7 +259,8 @@ class Overview extends React.Component {
 
 
 
-    if (this.state.stylesArray && this.state.featuresArray && this.state.numberOfReviews && this.state.averageStars) {
+
+    if (this.state.receivedAllData) {
 
       return (
         <div id="af-nameless">
@@ -282,7 +296,6 @@ class Overview extends React.Component {
                 />
 
                 <StyleSelector
-
                   styles={this.state.stylesArray}
                   click={this.changeDisplayImage}
                   selected={this.state.selectedStyle}
