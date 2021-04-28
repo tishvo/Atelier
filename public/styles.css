@@ -390,6 +390,7 @@
 .rr-carousel-arrow {
   margin-top: auto;
   margin-bottom: auto;
+  color: white;
 }
 
 .add-button-container {
@@ -442,10 +443,12 @@
 
 /*----------------- RR CAROUSEL COMPONENT STYLING -----------------*/
 .slide-container {
+  background-color: grey;
   display: flex;
   align-items: center;
   max-width: 57rem;
   overflow-y: auto;
+  margin: 0px 4px 15px;
 }
 
 .items-container {

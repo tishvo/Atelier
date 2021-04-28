@@ -56,7 +56,6 @@ const ImageGallery = (props) => {
   }
 
   useEffect(() => {
-    console.log('props in imageGallery: ', props)
     updateState();
   }, [])
 

@@ -20,7 +20,6 @@ class RelatedProducts extends React.Component {
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
     this.fetchData = this.fetchData.bind(this);
-
   }
 
   fetchData(itemId) {
