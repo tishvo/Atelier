@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Overview from './components/Overview/Overview.jsx'
+import Topbar from './components/Overview/Topbar.jsx';
+import Overview from './components/Overview/Overview.jsx';
 import QandA_app from './components/Q&A/QandA_app.jsx';
 import ReviewsAndRatings from './components/ReviewsAndRatings/ReviewsAndRatings.jsx';
 import RelatedItemsAndComparison from './components/RelatedItemsAndComparison/index.jsx';
@@ -72,7 +73,7 @@ class App extends React.Component {
     if (this.state.currentItem) {
       return (
         <div className="rr-column-container">
-          <div>HELLO</div>
+          <Topbar/>
           < Overview currentItem={this.state.currentItem} widget='Overview' />
           <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons' />
           <QandA_app currentItem={this.state.currentItem} widget='Questions and Answers' />
