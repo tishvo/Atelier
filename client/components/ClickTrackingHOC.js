@@ -10,9 +10,9 @@ export default function PrivacyHOC(WrappedComponent) {
 
       onClick (e) {
         var date = new Date()
-        console.log('click tracking timestamp: ', date)
-        console.log('click tracking element: ', e.target)
-        console.log('click tracking widget: ', this.props.widget)
+        // console.log('click tracking timestamp: ', date)
+        // console.log('click tracking element: ', e.target)
+        // console.log('click tracking widget: ', this.props.widget)
 
 
         // if (localStorage.websiteTraffic[this.props.widget][e.target].numClicks) {
