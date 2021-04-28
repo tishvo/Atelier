@@ -350,6 +350,7 @@ body {
 #af-product-info-description {
     border-right: 1px solid black;
     min-height: 50px;
+    max-width: 600px;
     padding: 10px;
     float: left;
 }
