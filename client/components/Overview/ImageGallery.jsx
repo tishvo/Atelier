@@ -4,11 +4,19 @@ import ThumbnailCarousel from './ThumbnailCarousel.jsx'
 import ThumbnailCarouselMini from './ThumbnailCarouselMini.jsx'
 
 const ImageGallery = (props) => {
-
   const [mousePosition, setMousePosition] = useState({
     x: null,
     y: null
   })
+
+  const [state, setState] = useState({
+    currentImage: props.currentImage,
+    currentIndex: props.currentIndex,
+    currentSelected: props.currentSelected,
+    imgId: props.imgId,
+    images: props.images
+  })
+
 
   const handleMouseMove = (e) => {
     // if (props.imgId === "af-main-image-xl") {
@@ -19,6 +27,7 @@ const ImageGallery = (props) => {
   // }
   }
 
+<<<<<<< HEAD
   // const [state, setState] = useState({
 
   // })
@@ -28,10 +37,39 @@ const ImageGallery = (props) => {
       handleMouseMove(event)
 
      return function cleanup() {window.removeEventListener('mousemove', handleMouseMove)}
+=======
+  // useEffect(() => {
 
-    });
-  }, []);
+  //   setState({
+  //     currentImage: props.currentImage,
+  //     currentIndex: props.currentIndex,
+  //     currentSelected: props.currentSelected,
+  //     imgId: props.imgId,
+  //     images: props.images
+  //   })
 
+  //   // window.addEventListener('mousemove', (event) => {
+  //   //   handleMouseMove(event)
+
+  //   //   window.removeEventListener('mousemove', handleMouseMove)
+>>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
+
+  //   // });
+  // }, []);
+
+  const updateState = () => {
+
+    setState({
+      currentImage: props.currentImage,
+      currentIndex: props.currentIndex,
+      currentSelected: props.currentSelected,
+      imgId: props.imgId,
+      images: props.images
+
+    })
+  }
+
+<<<<<<< HEAD
   // if (props.hasNothing) {
   //   console.log('nothing!')
   //   return null;
@@ -39,9 +77,16 @@ const ImageGallery = (props) => {
 
   console.log('something!')
   if (props.imgId === "af-main-image-xl") {
+=======
+  useEffect(() => {
+    updateState();
+  }, [])
+
+  if (state.imgId === "af-main-image-xl") {
+>>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
 
 
-    if (props.currentIndex === 0) {
+    if (state.currentIndex === 0) {
       return (
         <div id="af-click-to-check">
 
@@ -50,24 +95,29 @@ const ImageGallery = (props) => {
               onClick={props.shrink}></div>
 
             <img
+<<<<<<< HEAD
               style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId}
+=======
+              style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
+              id={state.imgId}
+>>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
               onClick={props.click}
-              src={props.images[props.currentIndex]['url']} >
+              src={state.images[state.currentIndex]['url']} >
             </img>
 
             <div id="af-image-next"
               onClick={() =>
-                props.next(props.currentIndex)
+                props.next(state.currentIndex)
               }>
             </div>
 
           </div>
-          <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-          <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+          <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+          <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
         </div>)
     }
-    if (props.currentIndex === props.images.length - 1) {
+    if (state.currentIndex === state.images.length - 1) {
       return (
         <div>
           <div id="af-image-container" style={props.width}>
@@ -76,16 +126,21 @@ const ImageGallery = (props) => {
 
             <div id="af-image-prev"
               onClick={() =>
-                props.prev(props.currentIndex)
+                props.prev(state.currentIndex)
               }></div>
 
             <img
+<<<<<<< HEAD
               style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
+=======
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
+            id={state.imgId} onClick={props.click} src={state.images[state.currentIndex]['url']}>
+>>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
             </img>
           </div>
-          <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-          <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+          <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+          <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
         </div>)
     }
     return (
@@ -97,29 +152,34 @@ const ImageGallery = (props) => {
 
           <div id="af-image-prev"
             onClick={() =>
-              props.prev(props.currentIndex)
+              props.prev(state.currentIndex)
             }></div>
 
           <img
+<<<<<<< HEAD
             style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
             id={props.imgId}
+=======
+            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
+            id={state.imgId}
+>>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
             onClick={props.click}
-            src={props.images[props.currentIndex]['url']}></img>
+            src={state.images[state.currentIndex]['url']}></img>
 
           <div id="af-image-next"
             onClick={() =>
-              props.next(props.currentIndex)
+              props.next(state.currentIndex)
             }></div>
         </div>
-        <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-        <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+        <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+        <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
       </div>)
 
 
 
   } else {
 
-    if (props.currentIndex === 0) {
+    if (state.currentIndex === 0) {
       return (
         <div id="af-click-to-check">
 
@@ -130,23 +190,23 @@ const ImageGallery = (props) => {
               onClick={props.shrink}></div>
 
             <img
-              id={props.imgId}
+              id={state.imgId}
               onClick={props.click}
-              src={props.images[props.currentIndex]['url']} >
+              src={state.images[state.currentIndex]['url']} >
             </img>
 
             <div id="af-image-next"
               onClick={() =>
-                props.next(props.currentIndex)
+                props.next(state.currentIndex)
               }>
             </div>
 
           </div>
-          <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-          <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+          <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+          <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
         </div>)
     }
-    if (props.currentIndex === props.images.length - 1) {
+    if (state.currentIndex === state.images.length - 1) {
       return (
         <div>
           <div id="af-image-container" style={props.width}>
@@ -155,14 +215,14 @@ const ImageGallery = (props) => {
 
             <div id="af-image-prev"
               onClick={() =>
-                props.prev(props.currentIndex)
+                props.prev(state.currentIndex)
               }></div>
 
-            <img id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
+            <img id={state.imgId} onClick={props.click} src={state.images[state.currentIndex]['url']}>
             </img>
           </div>
-          <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-          <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+          <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+          <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
         </div>)
     }
     return (
@@ -174,20 +234,20 @@ const ImageGallery = (props) => {
 
           <div id="af-image-prev"
             onClick={() =>
-              props.prev(props.currentIndex)
+              props.prev(state.currentIndex)
             }></div>
 
-          <img id={props.imgId}
+          <img id={state.imgId}
             onClick={props.click}
-            src={props.images[props.currentIndex]['url']}></img>
+            src={state.images[state.currentIndex]['url']}></img>
 
           <div id="af-image-next"
             onClick={() =>
-              props.next(props.currentIndex)
+              props.next(state.currentIndex)
             }></div>
         </div>
-        <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
-        <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
+        <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
+        <ThumbnailCarouselMini currentSelected={state.currentSelected} height={props.thumbnailsMiniHeight} images={state.images} select={props.select} />
       </div>)
   }
 }

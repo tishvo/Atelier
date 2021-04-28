@@ -4,7 +4,6 @@ import axios from 'axios';
 import RelatedProducts from './subcomponents/RelatedProducts.jsx'
 import YourOutfit from './subcomponents/YourOutfit.jsx'
 import PrivacyHOC from '../ClickTrackingHOC.js'
-//url for products
 
 
 class RelatedItemsAndComparison extends React.Component {
@@ -18,9 +17,9 @@ class RelatedItemsAndComparison extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this.PrivacyHOC = PrivacyHOC.bind(this);
 
     this._isMounted = false;
-    this.PrivacyHOC = PrivacyHOC.bind(this);
   }
 
   fetchData() {
@@ -52,9 +51,8 @@ class RelatedItemsAndComparison extends React.Component {
     return (
       <div>
         <div>
-          <RelatedProducts currentItem={this.state.currentItem}
-            click={this.props.click}/>
-          <YourOutfit data={this.props.data} currentItem={this.state.currentItem} click={this.props.click}/>
+          <RelatedProducts currentItem={this.state.currentItem} click={this.props.click}/>
+          <YourOutfit currentItem={this.state.currentItem} click={this.props.click}/>
         </div>
       </div>
     )
