@@ -6,13 +6,13 @@ const Arrow = (props) => {
   if (props.direction === "right") {
     return (
       <h1 onClick={ props.clickFunction }>
-        <FaArrowAltCircleRight />
+        <FaArrowAltCircleRight style={{'cursor': 'pointer'}} />
       </h1>
     )
   } else {
     return (
       <h1 onClick={ props.clickFunction }>
-        <FaArrowAltCircleLeft />
+        <FaArrowAltCircleLeft style={{'cursor': 'pointer'}} />
       </h1>
     )
   }

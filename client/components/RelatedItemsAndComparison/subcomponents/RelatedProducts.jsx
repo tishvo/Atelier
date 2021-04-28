@@ -10,16 +10,14 @@ class RelatedProducts extends React.Component {
 
     this.state = {
       currentProduct: {},
-
       allRelated: [],
-      firstCard: 0,
-      lastCard: 4,
-      lastIndex: 0
     };
 
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
     this.fetchData = this.fetchData.bind(this);
+
+    this.componentRef = React.createRef();
   }
 
   fetchData(itemId) {
@@ -29,10 +27,7 @@ class RelatedProducts extends React.Component {
 
         this.setState({
           allRelated: res.data,
-          lastIndex: res.data.length,
-          currentProduct: this.props.currentItem,
-          firstCard: 0,
-          lastCard: 4
+          currentProduct: this.props.currentItem
         })
       })
       .catch(err => {
@@ -55,24 +50,22 @@ class RelatedProducts extends React.Component {
 
   // Arrow Functionality
   previousSlide () {
-    // console.log('clicked previous slide');
-    const lastIndex = this.state.allRelated.length - 1;
-    if (this.state.firstCard > 0) {
-      this.setState({
-        firstCard: this.state.firstCard -1,
-        lastCard: this.state.lastCard -1
-      });
+    if (this.componentRef.current) {
+      // console.log('clicked previous slide');
+      this.componentRef.current.scrollBy({
+        left: -260,
+        behavior: 'smooth'
+      })
     }
   }
   // Arrow Functionality
   nextSlide () {
-    // console.log('clicked next slide');
-    const lastIndex = this.state.allRelated.length - 1;
-    if (this.state.lastCard <= lastIndex) {
-      this.setState({
-        firstCard: this.state.firstCard +1,
-        lastCard: this.state.lastCard +1,
-      });
+    if (this.componentRef.current) {
+      // console.log('clicked next slide');
+      this.componentRef.current.scrollBy({
+        left: 260,
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -80,15 +73,15 @@ class RelatedProducts extends React.Component {
     return (
       <div className='slide-container'>
 
-        <div className="rr-carousel-arrow">
+        <div
+          className="rr-carousel-arrow">
           <Arrow
             direction="left"
-            clickFunction={ this.previousSlide }
+            clickFunction={ () => { this.previousSlide() } }
           />
         </div>
 
-        {this.state.allRelated.length > 0 && (
-          <div className='items-container'>
+        { <div className='items-container' ref={this.componentRef}>
             {this.state.allRelated.map((relatedItem, index) => {
               return (
               <div key={index} className='single-item-container'>
@@ -101,12 +94,13 @@ class RelatedProducts extends React.Component {
               )
             })}
           </div>
-        )}
+        }
 
-        <div className="rr-carousel-arrow">
+        <div
+          className="rr-carousel-arrow">
           <Arrow
             direction="right"
-            clickFunction={ this.nextSlide }
+            clickFunction={ () => { this.nextSlide() } }
           />
         </div>
 

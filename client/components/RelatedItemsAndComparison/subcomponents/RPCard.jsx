@@ -19,7 +19,8 @@ class RPCard extends React.Component {
       'backgroundColor': 'white',
       'margins': 'center',
       'width': '200px',
-      'height': '300px'
+      'height': '300px',
+      'cursor': 'pointer'
     };
 
     this.fetchData = this.fetchData.bind(this);

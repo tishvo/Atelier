@@ -14,10 +14,11 @@ class YOCard extends React.Component {
     }
 
     this.styles = {
+      'backgroundColor': 'white',
       'margins': 'center',
-      'borderStyle': 'solid',
-      'width': '30%',
-      'height': '300px'
+      'width': '200px',
+      'height': '300px',
+      'cursor': 'pointer'
     };
 
     this.fetchData = this.fetchData.bind(this);
