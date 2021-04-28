@@ -27,7 +27,6 @@ const ImageGallery = (props) => {
   // }
   }
 
-<<<<<<< HEAD
   // const [state, setState] = useState({
 
   // })
@@ -37,22 +36,6 @@ const ImageGallery = (props) => {
       handleMouseMove(event)
 
      return function cleanup() {window.removeEventListener('mousemove', handleMouseMove)}
-=======
-  // useEffect(() => {
-
-  //   setState({
-  //     currentImage: props.currentImage,
-  //     currentIndex: props.currentIndex,
-  //     currentSelected: props.currentSelected,
-  //     imgId: props.imgId,
-  //     images: props.images
-  //   })
-
-  //   // window.addEventListener('mousemove', (event) => {
-  //   //   handleMouseMove(event)
-
-  //   //   window.removeEventListener('mousemove', handleMouseMove)
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
 
   //   // });
   // }, []);
@@ -69,7 +52,6 @@ const ImageGallery = (props) => {
     })
   }
 
-<<<<<<< HEAD
   // if (props.hasNothing) {
   //   console.log('nothing!')
   //   return null;
@@ -77,13 +59,6 @@ const ImageGallery = (props) => {
 
   console.log('something!')
   if (props.imgId === "af-main-image-xl") {
-=======
-  useEffect(() => {
-    updateState();
-  }, [])
-
-  if (state.imgId === "af-main-image-xl") {
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
 
 
     if (state.currentIndex === 0) {
@@ -95,13 +70,8 @@ const ImageGallery = (props) => {
               onClick={props.shrink}></div>
 
             <img
-<<<<<<< HEAD
               style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId}
-=======
-              style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
-              id={state.imgId}
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
               onClick={props.click}
               src={state.images[state.currentIndex]['url']} >
             </img>
@@ -130,13 +100,8 @@ const ImageGallery = (props) => {
               }></div>
 
             <img
-<<<<<<< HEAD
               style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
-=======
-            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
-            id={state.imgId} onClick={props.click} src={state.images[state.currentIndex]['url']}>
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
             </img>
           </div>
           <ThumbnailCarousel currentSelected={state.currentSelected} width={props.thumbnailsWidth} images={state.images} select={props.select} />
@@ -156,13 +121,8 @@ const ImageGallery = (props) => {
             }></div>
 
           <img
-<<<<<<< HEAD
             style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
             id={props.imgId}
-=======
-            style={{marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2}}
-            id={state.imgId}
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
             onClick={props.click}
             src={state.images[state.currentIndex]['url']}></img>
 

@@ -16,12 +16,9 @@ class App extends React.Component {
     }
     this.relatedClick = this.relatedClick.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-<<<<<<< HEAD
-=======
     this.fetchData = this.fetchData.bind(this);
     this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
->>>>>>> 0605038c68a7d5a32c147f06f2310d94ad194910
     this._isMounted = false;
   }
 
