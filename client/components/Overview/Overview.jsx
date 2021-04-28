@@ -30,7 +30,7 @@ class Overview extends React.Component {
       selectedStyle: null,
       expand_clicked: false,
       css_display: null,
-      css_width: { width: '500px', height: '500px' },
+      css_width: { width: '580px', height: '500px' },
       expand_clicked: false,
       display_right_side: true,
       imgElementId: "af-main-image",
@@ -242,7 +242,7 @@ class Overview extends React.Component {
       })
     } else {
       this.setState({
-        css_width: { width: '500px', height: '500px' },
+        css_width: { width: '580px', height: '500px' },
         expand_clicked: false,
         imgSize: 'default',
         imgElementId: "af-main-image",

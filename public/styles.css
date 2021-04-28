@@ -1,16 +1,61 @@
+body {
+  background-color: tan;
+}
+
 #app {
   width: 90%;
   margin: auto;
   max-width: 960px;
   font-family: 'Archivo', sans-serif;
+
 }
 
 /* // ANTEO // */
 
+#af-topbar {
+  /* vertical-align: baseline; */
+
+  background-color: slategrey;
+  display: inline-flex;
+  height: 65px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28)
+}
+
+#af-topbar-title {
+  margin-left: 10px;
+  height: 15px;
+  margin-top: 40px;
+  width: 730px;
+
+}
+
+#af-topbar-search {
+  height: 15px;
+  margin-top: 35px;
+  vertical-align: sub;
+  float: right;
+  margin-right: 0px;
+
+}
+
+#af-topbar-search-box {
+  background-color: slategrey;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#af-topbar-search-box:focus {
+  outline-width: 0;
+}
+
 #af-style-thumbnail {
   width: 50px;
   height: 50px;
-  border-radius:50%
+  border-radius:50%;
+  box-shadow: 0 1px 6px 0;
 }
 
 #af-style-selector {
@@ -75,6 +120,7 @@
   display: inline-block
 } */
 
+
 #af-overview-container {
   min-height: 500px;
   min-width: 960px;
@@ -84,19 +130,20 @@
 }
 
 #af-image-container {
-  background-color: grey;
+  background-color: slategrey;
   cursor: zoom-in;
   margin-right: 1px;
   position:absolute;
   /* display:inline; */
-  /* height: 500px;
+  /* height: 600px;
   width: 500px; */
   text-align:center;
-  border:1px solid black;
-  transition-duration: 1s;
+  /* border:1px solid black; */
+  transition-duration: 0.6s;
   z-index: 2;
   /* overflow: hidden; */
   /* white-space: nowrap; */
+  box-shadow: 0 1px 6px 0
 
 }
 
@@ -128,7 +175,7 @@
   height: 0px;
   overflow: hidden;
   z-index: 3;
-  transition-duration: 1s;
+  transition-duration: 0.4s;
 }
 
 #af-thumbnail-carousel {
@@ -163,14 +210,15 @@
 #af-thumbnail-carousel-image-box {
   width: 50px;
   height: 50px;
-  border: 1px solid black;
+  box-shadow: 0 1px 6px 0;
   transition-duration: 0.3;
 }
 
     #af-thumbnail-carousel-image-box-selected {
       width: 50px;
       height: 50px;
-      border: 1px solid black;
+      /* border: 1px solid black; */
+      box-shadow: 0 1px 6px 0;
       border-bottom: 5px solid red;
       transition-duration: 0.3;
     }
@@ -288,7 +336,7 @@
   height: 30px;
   font-family: "Archivo", sans-serif;
   background-color: white;
-  border-radius: 0%;
+  border: 1px solid black;
 }
 
 #af-product-description {
@@ -319,23 +367,32 @@
   color: red;
 }
 
+#af-share-buttons {
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 200px;
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 
 #af-fb-share {
-  content: url('./images/facebook-share.png');
+  /* content: url('./images/facebook-share.png'); */
   width: 20%;
   height: 20%;
 
 }
 
 #af-twitter-share {
-  content: url('./images/twitter-share.png');
+  /* content: url('./images/twitter-share.png'); */
   width: 20%;
   height: 20%;
 
 }
 
 #af-pinterest-share {
-  content: url('./images/pinterest-share.png');
+  /* content: url('./images/pinterest-share.png'); */
   width: 20%;
   height: 20%;
 
@@ -382,11 +439,10 @@
 }
 
 #af-empty-star {
-  /* margin-right: 5px; */
   width: 15px;
   height: 15px;
   float: left;
-  content: url('./images/stars/EmptyStar.png')
+  content: url('./images/stars/EmptyStarNoBackground2-01.png')
 
 }
 
