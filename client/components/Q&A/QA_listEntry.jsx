@@ -117,8 +117,8 @@ class QA_listEntry extends React.Component {
         <div className="tv_qa_entry">
         <p className="questionBody">Q: {this.props.item.question_body} <span className="tv_anc qaModalToggle tv_underline" onClick={e => { this.showModal(); }}>Add Answer  </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline" onClick={ e => this.helpfulQClick(e, this.props.item.question_helpfulness) }>Yes ({this.props.item.question_helpfulness})</span><span className="tv_anc"> Helpful? </span></p>
         <div><AddAModal show={this.state.addA} product={this.props.selected} onClose={this.showModal} question={this.props.item}/></div>
-        <div>{this.state.answers.slice(this.state.offset, this.state.limit).map(answer =>
-          <div><p><span className="tv_bold"> A: </span> {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')} </span><span className="tv_ans"> | </span> <span className="tv_ans"> Helpful? </span> <span className="tv_underline" onClick={e => this.helpfulAClick(answer.id, answer.helpfulness, e)}> Yes ({answer.helpfulness}) </span><span className="tv_ans"> | </span><span className="tv_ans tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
+        <div>{this.state.answers.slice(this.state.offset, this.state.limit).map((answer, index) =>
+          <div key={index}><p><span className="tv_bold"> A: </span> {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')} </span><span className="tv_ans"> | </span> <span className="tv_ans"> Helpful? </span> <span className="tv_underline" onClick={e => this.helpfulAClick(answer.id, answer.helpfulness, e)}> Yes ({answer.helpfulness}) </span><span className="tv_ans"> | </span><span className="tv_ans tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
           )}</div>
         <div className="lma lmalink" onClick={this.lmaClick}>Load More Answers</div>
         </div>
@@ -128,8 +128,8 @@ class QA_listEntry extends React.Component {
         <div className="tv_qa_entry">
         <p className="questionBody">Q: {this.props.item.question_body} <span className="tv_anc qaModalToggle tv_underline" onClick={e => { this.showModal(); }}>Add Answer  </span><span className="tv_anc"> | </span><span className="tv_anc tv_underline" onClick={ e => this.helpfulQClick(e, this.props.item.question_helpfulness) }>Yes ({this.props.item.question_helpfulness})</span><span className="tv_anc"> Helpful? </span></p>
         <div><AddAModal show={this.state.addA} product={this.props.selected} onClose={this.showModal} question={this.props.item}/></div>
-        <div>{this.state.answers.map(answer =>
-          <div><p><span className="tv_bold"> A: </span> {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')} </span><span className="tv_ans"> | </span> <span className="tv_ans"> Helpful? </span> <span className="tv_underline" onClick={e => this.helpfulAClick(answer.id, answer.helpfulness, e)}> Yes ({answer.helpfulness}) </span><span className="tv_ans"> | </span><span className="tv_ans tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
+        <div>{this.state.answers.map((answer, index) =>
+          <div key={index}><p><span className="tv_bold"> A: </span> {answer.body}</p> <span className="lma">by {answer.answerer_name}, {moment(answer.date).format('MMM Do YYYY')} </span><span className="tv_ans"> | </span> <span className="tv_ans"> Helpful? </span> <span className="tv_underline" onClick={e => this.helpfulAClick(answer.id, answer.helpfulness, e)}> Yes ({answer.helpfulness}) </span><span className="tv_ans"> | </span><span className="tv_ans tv_underline" onClick={(e) => {this.onReportClick(answer.id); e.target.innerText = 'Reported'}}>Report</span></div>
           )}</div>
         </div>
       )

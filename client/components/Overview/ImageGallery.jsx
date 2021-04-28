@@ -56,7 +56,7 @@ const ImageGallery = (props) => {
   //   return null;
   // }
 
-  console.log('something!')
+  // console.log('something!')
   if (props.imgId === "af-main-image-xl") {
 
 
