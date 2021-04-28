@@ -47,7 +47,6 @@ class Overview extends React.Component {
     this.shrink = this.shrink.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
     this.getData = this.getData.bind(this);
-    this.clearForRerender = this.clearForRerender.bind(this)
   }
 
   getData() {
@@ -135,21 +134,20 @@ class Overview extends React.Component {
       })
   }
 
-  clearForRerender() {
-    this.setState({
-      receivedAllData: false
-    })
-  }
+
 
   componentDidMount() {
-    this.clearForRerender()
+    // this.clearForRerender()
     this.getData()
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentItem['id'] !== prevProps.currentItem['id']) {
-      this.clearForRerender();
-      this.getData()
+
+      this.setState({
+        receivedAllData: false
+      }, this.getData())
+
     }
   }
 
