@@ -46,7 +46,7 @@ class ReviewsAndRatings extends React.Component {
       //GET request for Reviews
       this.getReviewsForItem();
       //GET request for Rating Meta data
-      this.getReviewsForReviewMeta();
+
     }
     if (this.state.sort === 'helpful') {
       this.getHelpfulReviewsForItem();
@@ -75,7 +75,7 @@ class ReviewsAndRatings extends React.Component {
   getHelpfulReviewsForItem() {
     axios.get(`/reviews/${this.props.itemId}&count=10000&sort=helpful`)
       .then((response) => {
-        console.log('this is review data changing: ', this.state.reviewData)
+        //console.log('this is review data changing: ', this.state.reviewData)
 
         this.setState({
           numberOfReviews: response.data.results.length,
@@ -95,7 +95,7 @@ class ReviewsAndRatings extends React.Component {
         this.setState({
           numberOfReviews: response.data.results.length,
           reviewData: response.data.results
-        });
+        }, this.getReviewsForReviewMeta());
       })
       .catch((error) => {
         console.log('error getting our response from reviews get: ', error)
@@ -105,7 +105,7 @@ class ReviewsAndRatings extends React.Component {
   getReviewsForReviewMeta() {
     axios.get(`/reviews/meta/${this.props.itemId}`)
       .then((response) => {
-        console.log('response chars: ', response.data.characteristics)
+        //console.log('response chars: ', response.data.characteristics)
         this.setState({
           rateObj: response.data.ratings,
           metaData: response.data,
@@ -132,7 +132,7 @@ class ReviewsAndRatings extends React.Component {
 
   //function to be sent down as props to get the value of the chosen sort option
   getSortOption(event) {
-    console.log('this is the thing handler', event.target.value);
+    //console.log('this is the thing handler', event.target.value);
     this.setState({
       sort: event.target.value
     })
@@ -150,7 +150,7 @@ class ReviewsAndRatings extends React.Component {
   render() {
 
     if (this.state.averageStars) {
-      console.log('metadata: ', this.state.charData)
+      //console.log('metadata: ', this.state.charData)
       return (
         <div id="mm-ratingsandreviews-overview">
           <div id="mm-ratingsandreviews-reviewlist">

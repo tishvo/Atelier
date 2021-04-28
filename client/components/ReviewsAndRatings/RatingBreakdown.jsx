@@ -78,26 +78,34 @@ class RatingBreakdown extends React.Component {
     return (
       <div id="mm-ratingbreakdown-starsandbars">
         <table>
-          <tr>
-            <td>1 star</td>
-            <td>{obj[1]}</td>
-          </tr>
-          <tr>
-            <td>2 star</td>
-            <td>{obj[2]}</td>
-          </tr>
-          <tr>
-            <td>3 star</td>
-            <td>{obj[3]}</td>
-          </tr>
-          <tr>
-            <td>4 star</td>
-            <td>{obj[4]}</td>
-          </tr>
-          <tr>
-            <td>5 star</td>
-            <td>{obj[5]}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>1 star</td>
+              <td>{obj[1]}</td>
+            </tr>
+
+            <tr>
+              <td>2 star</td>
+              <td>{obj[2]}</td>
+            </tr>
+
+            <tr>
+              <td>3 star</td>
+              <td>{obj[3]}</td>
+            </tr>
+
+            <tr>
+              <td>4 star</td>
+              <td>{obj[4]}</td>
+            </tr>
+
+            <tr>
+              <td>5 star</td>
+              <td>{obj[5]}</td>
+            </tr>
+          </tbody>
+
+
         </table>
       </div>
     )

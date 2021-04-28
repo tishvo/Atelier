@@ -25,8 +25,8 @@ class ProductBreakdownMain extends React.Component {
 
   componentDidUpdate(prevProps) {
 
-  /*     console.log('chardata: ', this.props.charData)
-  console.log('data', this.state.dataArr) */
+    /*     console.log('chardata: ', this.props.charData)
+    console.log('data', this.state.dataArr) */
 
   }
 
@@ -35,7 +35,6 @@ class ProductBreakdownMain extends React.Component {
     for (var key in data) {
       arr.push([key, data[key]])
     }
-    console.log('the array of data values: ', arr);
     return arr;
   }
 
@@ -46,18 +45,19 @@ class ProductBreakdownMain extends React.Component {
         newArr.push([arr[i][0], <div><ProductBreakdownBar bgcolor={"grey"}
           completed={arr[i][1].value * 20} /></div>])
       }
-      console.log('hello', newArr)
       return (
         <div>
           <table>
-            {newArr.map((char, index) => {
-              return (
-                <tr key={index}>
-                  <td>{char[0]}</td>
-                  <td>{char[1]}</td>
-                </tr>
-              )
-            })}
+            <tbody>
+              {newArr.map((char, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{char[0]}</td>
+                    <td>{char[1]}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
           </table>
         </div>
       )

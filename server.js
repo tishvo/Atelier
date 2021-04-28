@@ -61,7 +61,7 @@ app.get('/reviews/:productId', function (req, res) {
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in /products/:productId/revoews axios get request, error:', error)
+      console.log('error in /products/:productId/reviews axios get request, error:', error)
       res.status(404).send(error)
     })
 })
