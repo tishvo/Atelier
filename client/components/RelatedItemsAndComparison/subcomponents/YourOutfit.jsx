@@ -103,7 +103,7 @@ const YourOutfit = (props) => {
             {state.allData.map((product, index) => {
               return (
                 <div key={index} className='single-item-container'>
-                  <YOCard item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
+                  <YOCard item={JSON.parse(JSON.stringify(product))} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
                 </div>
               )
             })}
