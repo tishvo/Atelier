@@ -21,7 +21,7 @@ class RPCard extends React.Component {
       'width': '200px',
       'height': '300px',
       'cursor': 'pointer',
-      'box-shadow': '0 1px 6px 0'
+      'box-shadow': '0 6px 12px 0'
     };
 
     this.fetchData = this.fetchData.bind(this);

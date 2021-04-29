@@ -487,20 +487,13 @@ body {
   background-color: white;
 }
 
-.rr-add-button {
-  background-color: white;
-  width: 200px;
-  height: 300px;
-  box-shadow: 0 1px 6px 0;
-}
-
 .rr-card-styles {
   background-color: white;
   width: 200px;
   height: 300px;
   cursor: pointer;
   padding-top: 50px;
-  box-shadow: 0 1px 6px 0;
+  box-shadow: 0 6px 12px 0;
 };
 
 .rr-add-button-items {
