@@ -20,7 +20,8 @@ class RPCard extends React.Component {
       'margins': 'center',
       'width': '200px',
       'height': '300px',
-      'cursor': 'pointer'
+      'cursor': 'pointer',
+      'box-shadow': '0 1px 6px 0'
     };
 
     this.fetchData = this.fetchData.bind(this);
@@ -109,7 +110,7 @@ class RPCard extends React.Component {
         newNum--;
       }
       return (
-        <span id="af=stars">
+        <span id="af-stars">
           {numArray.map((num, index) => {
             if (num === 1 || num > 0.872) {
               return <div id="af-full-star" key={index}>1</div>

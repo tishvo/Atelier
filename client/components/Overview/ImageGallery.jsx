@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import StyleSelector from './StyleSelector.jsx'
 import ThumbnailCarousel from './ThumbnailCarousel.jsx'
 import ThumbnailCarouselMini from './ThumbnailCarouselMini.jsx'
+import { AiOutlineRight, AiOutlineLeft, AiOutlineCompress } from 'react-icons/ai';
 
 const ImageGallery = (props) => {
   const [mousePosition, setMousePosition] = useState({
@@ -40,10 +41,10 @@ const ImageGallery = (props) => {
 
           <div id="af-image-container" style={props.width}>
             <div id="af-image-expand"
-              onClick={props.shrink}></div>
+              onClick={props.shrink}><AiOutlineCompress/></div>
 
             <img
-              style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
+              style={{ marginLeft: ((-mousePosition.x) / 2) - 1000, marginTop: (-mousePosition.y) / 2 }}
               id={props.imgId}
               onClick={props.click}
               src={props.images[props.currentIndex]['url']} >
@@ -52,7 +53,7 @@ const ImageGallery = (props) => {
             <div id="af-image-next"
               onClick={() =>
                 props.next(props.currentIndex)
-              }>
+              }><AiOutlineRight/>
             </div>
 
           </div>
@@ -65,12 +66,12 @@ const ImageGallery = (props) => {
         <div>
           <div id="af-image-container" style={props.width}>
             <div id="af-image-expand"
-              onClick={props.shrink}></div>
+              onClick={props.shrink}><AiOutlineCompress/></div>
 
             <div id="af-image-prev"
               onClick={() =>
                 props.prev(props.currentIndex)
-              }></div>
+              }><AiOutlineLeft/></div>
 
             <img
               style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
@@ -86,12 +87,12 @@ const ImageGallery = (props) => {
         <div id="af-image-container" style={props.width}>
           <div id="af-image-expand"
             onClick={props.shrink}
-          ></div>
+          ><AiOutlineCompress/></div>
 
           <div id="af-image-prev"
             onClick={() =>
               props.prev(props.currentIndex)
-            }></div>
+            }><AiOutlineLeft/></div>
 
           <img
             style={{ marginLeft: (-mousePosition.x) / 2, marginTop: (-mousePosition.y) / 2 }}
@@ -102,7 +103,7 @@ const ImageGallery = (props) => {
           <div id="af-image-next"
             onClick={() =>
               props.next(props.currentIndex)
-            }></div>
+            }><AiOutlineRight/></div>
         </div>
         <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
         <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />
@@ -120,7 +121,7 @@ const ImageGallery = (props) => {
 
           <div id="af-image-container" style={props.width}>
             <div id="af-image-expand"
-              onClick={props.shrink}></div>
+              onClick={props.shrink}><AiOutlineCompress/></div>
 
             <img
               id={props.imgId}
@@ -131,7 +132,7 @@ const ImageGallery = (props) => {
             <div id="af-image-next"
               onClick={() =>
                 props.next(props.currentIndex)
-              }>
+              }><AiOutlineRight/>
             </div>
 
           </div>
@@ -144,12 +145,12 @@ const ImageGallery = (props) => {
         <div>
           <div id="af-image-container" style={props.width}>
             <div id="af-image-expand"
-              onClick={props.shrink}></div>
+              onClick={props.shrink}><AiOutlineCompress/></div>
 
             <div id="af-image-prev"
               onClick={() =>
                 props.prev(props.currentIndex)
-              }></div>
+              }><AiOutlineLeft/></div>
 
             <img id={props.imgId} onClick={props.click} src={props.images[props.currentIndex]['url']}>
             </img>
@@ -163,12 +164,12 @@ const ImageGallery = (props) => {
         <div id="af-image-container" style={props.width}>
           <div id="af-image-expand"
             onClick={props.shrink}
-          ></div>
+          ><AiOutlineCompress/></div>
 
           <div id="af-image-prev"
             onClick={() =>
               props.prev(props.currentIndex)
-            }></div>
+            }><AiOutlineLeft/></div>
 
           <img id={props.imgId}
             onClick={props.click}
@@ -177,7 +178,7 @@ const ImageGallery = (props) => {
           <div id="af-image-next"
             onClick={() =>
               props.next(props.currentIndex)
-            }></div>
+            }><AiOutlineRight/></div>
         </div>
         <ThumbnailCarousel currentSelected={props.currentSelected} width={props.thumbnailsWidth} images={props.images} select={props.select} />
         <ThumbnailCarouselMini currentSelected={props.currentSelected} height={props.thumbnailsMiniHeight} images={props.images} select={props.select} />

@@ -123,20 +123,17 @@ const YourOutfit = (props) => {
 
   const renderAddButton = () => {
     return (
-      <div
-        className='single-item-container'>
-          <div
-            className='rr-add-button'
-            style={{'cursor': 'pointer'}}
-            onClick={ () => { return addItem(props.currentItem) }}>
-              <div className='rr-add-button-items'>
-                < IoIosAddCircleOutline size={40} />
-                <div >
-                  Add to Outfit
-                </div>
+        <div
+          className='single-item-container'
+          style={{'cursor': 'pointer'}}
+          onClick={ () => { return addItem(props.currentItem) }}>
+            <div className='rr-card-styles'>
+              < IoIosAddCircleOutline size={40} />
+              <div >
+                Add to Outfit
               </div>
-          </div>
-      </div>
+            </div>
+        </div>
     )
   }
 

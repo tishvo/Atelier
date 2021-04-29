@@ -7,9 +7,9 @@ class Characteristics extends React.Component {
 
   render() {
     return(<div id="af-characteristics">
-      100% GMO and pesticide free
-      Tested on the cutest animals
-      Made with corn
+      {/* 100% GMO and pesticide free <br/>
+      Tested on the cutest animals <br/>
+      Made with corn <br/> */}
       {this.props.features.map((obj, index) =>
       <div key={index}>{obj.feature}: {obj.value}</div>
 

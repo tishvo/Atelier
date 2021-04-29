@@ -1,11 +1,11 @@
 import React from 'react';
 
-const RatingProgressBar = (props) => {
+const ProductBreakdownBar = (props) => {
   const { bgcolor, completed } = props;
 
   const containerStyles = {
     height: 10,
-    width: '1050%',
+    width: '965%',
     backgroundColor: "#e0e0de",
     borderRadius: 50,
     margin: 5
@@ -25,7 +25,6 @@ const RatingProgressBar = (props) => {
     fontWeight: 'bold'
   }
   return (
-
     <div style={containerStyles}>
       <div style={fillerStyles}>
         <span style={labelStyles}></span>
@@ -34,4 +33,4 @@ const RatingProgressBar = (props) => {
   );
 }
 
-export default RatingProgressBar;
+export default ProductBreakdownBar;

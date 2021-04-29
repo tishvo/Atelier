@@ -57,11 +57,11 @@ app.get('/reviews/:productId', function (req, res) {
     }
   })
     .then((response) => {
-      console.log('got our reviews data from API!')
+      //console.log('got our reviews data from API!')
       res.status(202).send(response.data);
     })
     .catch((error) => {
-      console.log('error in /products/:productId/revoews axios get request, error:', error)
+      console.log('error in /products/:productId/reviews axios get request, error:', error)
       res.status(404).send(error)
     })
 })
@@ -284,6 +284,24 @@ app.get('/reviews/:productId',  function(req, res) {
     .catch((error) => {
       console.log('error on /reviews/:productId');
       res.status(404).send(error)
+    })
+})
+
+app.get('/reviews/:productId:sort',  function(req, res) {
+  console.log('this is the get request WE ARE LOOKING FOR')
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=${req.params.productId}&count=1000${req.params.sort}`
+  console.log('THIS IS US DOING THE THING')
+  axios.get(url, {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  })
+    .then((response) => {
+      res.status(202).send(response.data);
+
+    })
+    .catch((error) => {
+      console.log(error);
     })
 })
 
