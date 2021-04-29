@@ -467,6 +467,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
 }
 
 .rr-action-button {
@@ -479,26 +480,30 @@ body {
 .rr-carousel-arrow {
   margin-top: auto;
   margin-bottom: auto;
+  color: white;
 }
 
 .add-button-container {
-  margin: center;
-  border-style: solid;
-  width: 30%;
-  height: 300px;
+  background-color: white;
 }
 
-.rr-add-button {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-top: 5%;
+.rr-card-styles {
+  background-color: white;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+  padding-top: 50px;
+  box-shadow: 0 6px 12px 0;
+};
+
+.rr-add-button-items {
+  padding-top: 55%;
 }
 
 .rr-thumbnail {
   width: 120px;
   height: 120px;
+  align-self: center;
 }
 
 .rr-comparison-modal {
@@ -531,16 +536,19 @@ body {
 
 /*----------------- RR CAROUSEL COMPONENT STYLING -----------------*/
 .slide-container {
+  background-color: slategrey;
   display: flex;
   align-items: center;
   max-width: 57rem;
-  overflow-y: auto;
+  overflow-y: hidden;
+  margin: 0px 4px 15px;
+  box-shadow: 0 1px 6px 0
 }
 
 .items-container {
   display: flex;
   overflow-y: hidden;
-  justify-content: center;
+  justify-content: left;
   margin: 0px 4px 15px;
 }
 .items-container::-webkit-scrollbar {
@@ -548,9 +556,8 @@ body {
 }
 
 .single-item-container {
-  padding: 10px;
+  padding: 50px;
   text-align: center;
-  cursor: pointer;
   min-width: 10rem;
 }
 /*------------------------------------------------*/

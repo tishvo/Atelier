@@ -14,19 +14,16 @@ class RelatedItemsAndComparison extends React.Component {
       currentItem: ''
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.PrivacyHOC = PrivacyHOC.bind(this);
 
-    this._isMounted = false;
   }
 
   fetchData() {
     axios.get(`/products/${this.props.currentItem.id}`)
     .then(res => {
 
-      this._isMounted && this.setState({
+      this.setState({
         currentItem: res.data
       })
     })
@@ -36,15 +33,11 @@ class RelatedItemsAndComparison extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.currentItem !== prevProps.currentItem) { this.fetchData(); this.render(); }
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
+    if(this.props.currentItem !== prevProps.currentItem) { this.fetchData(); }
   }
 
   render() {

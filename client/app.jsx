@@ -15,12 +15,10 @@ class App extends React.Component {
       currentItem: null,
       currentItemId: null
     }
-    this.relatedClick = this.relatedClick.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.fetchData = this.fetchData.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
-    this._isMounted = false;
+    this.relatedClick = this.relatedClick.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+
   }
 
   fetchData() {
@@ -28,15 +26,13 @@ class App extends React.Component {
     .then((response) => {
       console.log('this is our initial project data:', response.data)
 
-      this._isMounted && this.setState({
+      this.setState({
         currentItem: response.data[0],
         currentItemId: response.data[0].id,
-      }, () => {
-        console.log('this is the state of app.jsx--> ', this.state)
       })
     })
     .catch((error) => {
-      console.log('ERRORR in app.jsx axios get request, error:', error)
+      console.log('ERROR in app.jsx axios get request, error:', error)
     })
   }
 
@@ -51,25 +47,21 @@ class App extends React.Component {
   //     'Reviews and Ratings': ''
   //   }
   // }
-    this._isMounted = true;
-    this._isMounted && this.fetchData();
+    this.fetchData();
   }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+
 
   relatedClick(e) {
     console.log('the click worked', e, e.id)
-    this._isMounted = true;
-    this._isMounted && this.setState({
+    this.setState({
       currentItem: e,
       currentItemId: e.id
     })
   }
 
   render() {
-    console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
-    console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
+    // console.log('checking on currentItem state in app.jsx: ', this.state.currentItem);
+    // console.log('checkig on currentItemId state in app.jsx: ', this.state.currentItemId);
     if (this.state.currentItem) {
       return (
         <div className="rr-column-container">

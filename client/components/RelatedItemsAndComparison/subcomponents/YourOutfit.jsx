@@ -6,19 +6,23 @@ import { IoIosAddCircleOutline } from 'react-icons/io';
 
 const YourOutfit = (props) => {
 
+  // create ref for scrolling
+  const componentRef = React.createRef();
+
+
+
   const localData = [];
   for (var key in localStorage) {
     if (key !== 'length' && key !== 'cart' && localStorage[key].constructor !== Function) {
       localData.push(localStorage[key]);
     }
   }
+
   const [state, setState] = useState({
     allData: localData,
-    firstCard: 0,
-    lastCard: 3,
-    lastIndex: 0,
-    visibleData: localData.slice(0, 3)
   });
+
+
 
   const updateState = () => {
     const localData = [];
@@ -29,14 +33,11 @@ const YourOutfit = (props) => {
     }
     setState({
       allData: localData,
-      firstCard: state.firstCard,
-      lastCard: state.lastCard,
-      lastIndex: localData.length,
-      visibleData: localData.slice(state.firstCard, state.lastCard)
     });
   }
 
   useEffect(() => {
+    console.log('props in YourOutfit: ', props)
     updateState();
   }, [])
 
@@ -59,65 +60,80 @@ const YourOutfit = (props) => {
     }
     setState({
       allData: localData,
-      firstCard: state.firstCard,
-      lastCard: state.lastCard,
-      lastIndex: newLastIndex,
-      visibleData: localData.slice(state.firstCard, state.lastCard)
     });
   };
 
   // Arrow Functionality
   const previousSlide = () => {
-    // console.log('clicked previous slide');
-    const lastIndex = state.allData.length > 0 ? state.allData.length - 1 : 0;
-    if (state.firstCard > 0) {
-      setState({
-        allData: state.allData,
-        firstCard: state.firstCard -1,
-        lastCard: state.lastCard -1,
-        lastIndex: state.lastIndex,
-        visibleData: state.allData.slice(state.firstCard, state.lastCard)
-      });
+    if (componentRef.current) {
+      // console.log('clicked previous slide');
+      componentRef.current.scrollBy({
+        left: -260,
+        behavior: 'smooth'
+      })
     }
   }
   // Arrow Functionality
   const nextSlide = () => {
-    // console.log('clicked next slide');
-    const lastIndex = state.allData.length > 0 ? state.allData.length - 1 : 0;
-    if (state.lastCard <= lastIndex) {
-      setState({
-        allData: state.allData,
-        firstCard: state.firstCard +1,
-        lastCard: state.lastCard +1,
-        lastIndex: state.lastIndex,
-        visibleData: state.allData.slice(state.firstCard, state.lastCard)
-      });
+    if (componentRef.current) {
+      // console.log('clicked next slide');
+      componentRef.current.scrollBy({
+        left: 260,
+        behavior: 'smooth'
+      })
     }
   }
 
+
   const renderList = () => {
     // localStorage.clear();
-    // console.log(state.visibleData, localStorage);
+    // console.log(state.allData, localStorage);
     return (
-      state.visibleData.map((product, index) => {
-        return <YOCard key={index} item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
-      })
+      <div className='slide-container'>
+
+        <div className="rr-carousel-arrow">
+          <Arrow
+            direction="left"
+            clickFunction={ () => { previousSlide() } }
+          />
+        </div>
+
+        { <div className='items-container' id='componentRef' ref={componentRef}>
+            {renderAddButton()}
+            {state.allData.map((product, index) => {
+              return (
+                <div key={index} className='single-item-container'>
+                  <YOCard item={JSON.parse(product)} click={props.click} remove={ (e) => {return removeFromOutfit(e)}}/>
+                </div>
+              )
+            })}
+          </div>
+        }
+
+        <div className="rr-carousel-arrow">
+          <Arrow
+            direction="right"
+            clickFunction={ () => { nextSlide() } }
+          />
+        </div>
+
+      </div>
     )
   }
 
   const renderAddButton = () => {
     return (
-      <div
-        className='add-button-container rr-column-container'
-        onClick={ () => {
-        return addItem(props.currentItem) }}>
-          <div className='rr-add-button' >
-            < IoIosAddCircleOutline size={40}/>
-            <div>
-              Add to Outfit
+        <div
+          className='single-item-container'
+          style={{'cursor': 'pointer'}}
+          onClick={ () => { return addItem(props.currentItem) }}>
+            <div className='rr-card-styles'>
+              < IoIosAddCircleOutline size={40} />
+              <div >
+                Add to Outfit
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
     )
   }
 
@@ -125,84 +141,18 @@ const YourOutfit = (props) => {
     localStorage.removeItem(id);
     updateState();
   }
-  // conditional rendering
-  if (state.firstCard === 0 && state.lastIndex <= 3) {
-    return (
-      <div>
-        <h2>Your Outfit</h2>
 
-        <div className='rr-row-container' >
+  return (
+    <div>
+      <h2>Your Outfit</h2>
 
-          { renderAddButton() }
-          { renderList() }
+      <div className='rr-row-container' >
 
-        </div>
+        { renderList() }
+
       </div>
-    );
-  } else if (state.firstCard === 0) {
-    return (
-      <div>
-        <h2>Your Outfit</h2>
-        <div className='rr-row-container' >
-
-          { renderAddButton() }
-          { renderList() }
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="right"
-              clickFunction={ () => { nextSlide() } }
-            />
-          </div>
-
-        </div>
-      </div>
-    );
-  } else if (state.lastCard === state.lastIndex) {
-    return (
-      <div>
-        <h2>Your Outfit</h2>
-        <div className='rr-row-container' >
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="left"
-              clickFunction={ () => { previousSlide() } }
-            />
-          </div>
-
-          { renderAddButton() }
-          { renderList() }
-
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <h2>Your Outfit</h2>
-        <div className='rr-row-container' >
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="left"
-              clickFunction={ () => { previousSlide() } }
-            />
-          </div>
-
-          { renderAddButton() }
-          { renderList() }
-
-          <div className="rr-carousel-arrow">
-            <Arrow
-              direction="right"
-              clickFunction={ () => { nextSlide() } }
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default YourOutfit;

@@ -10,19 +10,14 @@ class RelatedProducts extends React.Component {
 
     this.state = {
       currentProduct: {},
-
       allRelated: [],
-      visibleRelated: [],
-      firstCard: 0,
-      lastCard: 4,
-      lastIndex: 0
     };
 
     this.nextSlide = this.nextSlide.bind(this);
     this.previousSlide = this.previousSlide.bind(this);
     this.fetchData = this.fetchData.bind(this);
 
-    this._isMounted = false;
+    this.componentRef = React.createRef();
   }
 
   fetchData(itemId) {
@@ -32,15 +27,7 @@ class RelatedProducts extends React.Component {
 
         this.setState({
           allRelated: res.data,
-          lastIndex: res.data.length,
-          currentProduct: this.props.currentItem,
-          firstCard: 0,
-          lastCard: 4
-        }, () => {
-          // console.log(this.state);
-          this.setState({
-            visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
-          })
+          currentProduct: this.props.currentItem
         })
       })
       .catch(err => {
@@ -49,48 +36,36 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-
     if (this.props.currentItem !== prevProps.currentItem) {
-      this._isMounted = true;
-      this._isMounted && this.fetchData();
+      this.fetchData(this.props.currentItem.id);
     }
   }
 
   componentDidMount() {
-
-    this._isMounted = true;
-    var itemId = this.props.currentItem['id'];
-    this._isMounted && itemId && this.fetchData(itemId);
-
+    var itemId = this.props.currentItem.id;
+    if (itemId) {
+      this.fetchData(itemId);
+    }
   }
+
   // Arrow Functionality
   previousSlide () {
-    // console.log('clicked previous slide');
-    const lastIndex = this.state.allRelated.length - 1;
-    if (this.state.firstCard > 0) {
-      this.setState({
-        firstCard: this.state.firstCard -1,
-        lastCard: this.state.lastCard -1
-      }, () => {
-        this.setState({
-          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard)
-        });
-      });
+    if (this.componentRef.current) {
+      // console.log('clicked previous slide');
+      this.componentRef.current.scrollBy({
+        left: -260,
+        behavior: 'smooth'
+      })
     }
   }
   // Arrow Functionality
   nextSlide () {
-    // console.log('clicked next slide');
-    const lastIndex = this.state.allRelated.length - 1;
-    if (this.state.lastCard <= lastIndex) {
-      this.setState({
-        firstCard: this.state.firstCard +1,
-        lastCard: this.state.lastCard +1,
-      }, () => {
-        this.setState({
-          visibleRelated: this.state.allRelated.slice(this.state.firstCard, this.state.lastCard),
-        });
-      });
+    if (this.componentRef.current) {
+      // console.log('clicked next slide');
+      this.componentRef.current.scrollBy({
+        left: 260,
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -98,22 +73,20 @@ class RelatedProducts extends React.Component {
     return (
       <div className='slide-container'>
 
-        <div className="rr-carousel-arrow">
+        <div
+          className="rr-carousel-arrow">
           <Arrow
             direction="left"
-            clickFunction={ this.previousSlide }
+            clickFunction={ () => { this.previousSlide() } }
           />
         </div>
 
-        {this.state.allRelated.length > 0 && (
-          <div className='items-container'>
+        { <div className='items-container' ref={this.componentRef}>
             {this.state.allRelated.map((relatedItem, index) => {
-              console.log('item: ', relatedItem);
               return (
-              <div className='single-item-container'>
+              <div key={index} className='single-item-container'>
                 <RPCard
                   itemId={relatedItem}
-                  key={index}
                   click={this.props.click}
                   currentProduct={this.state.currentProduct}
                 />
@@ -121,12 +94,13 @@ class RelatedProducts extends React.Component {
               )
             })}
           </div>
-        )}
+        }
 
-        <div className="rr-carousel-arrow">
+        <div
+          className="rr-carousel-arrow">
           <Arrow
             direction="right"
-            clickFunction={ this.nextSlide }
+            clickFunction={ () => { this.nextSlide() } }
           />
         </div>
 
