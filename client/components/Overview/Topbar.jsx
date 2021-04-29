@@ -13,7 +13,7 @@ class Topbar extends React.Component {
       <div id="af-topbar">
 
         <div id="af-topbar-title">
-          <span><TiShoppingCart/><TiShoppingCart/><TiShoppingCart/><TiShoppingCart/></span>
+          <span>View Cart <TiShoppingCart/></span>
         </div>
 
         <div id="af-topbar-search">

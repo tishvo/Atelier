@@ -108,15 +108,15 @@ class ReviewList extends React.Component {
         </div>}
         <form>
           {this.state.visibleReviewVal < this.props.numReviews ?
-            <button onClick={this.handleMoreClick}>
+            <button className="tv_app_btn" onClick={this.handleMoreClick}>
               More Reviews
           </button> : null}
 
-          <button onClick={this.handleHideAddClick}>
+          <button className="tv_app_btn" onClick={this.handleHideAddClick}>
             Add a review +
           </button>
 
-          <button onClick={this.hideReviews}>
+          <button className="tv_app_btn" onClick={this.hideReviews}>
             Less reviews
           </button>
         </form>

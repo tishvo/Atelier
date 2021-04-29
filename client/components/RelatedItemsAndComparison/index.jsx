@@ -42,7 +42,7 @@ class RelatedItemsAndComparison extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="rr_rpMain">
         <div>
           <RelatedProducts currentItem={this.state.currentItem} click={this.props.click}/>
           <YourOutfit currentItem={this.state.currentItem} click={this.props.click}/>
