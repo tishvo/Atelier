@@ -154,6 +154,7 @@ class ReviewsAndRatings extends React.Component {
       return (
         <div id="mm-ratingsandreviews-overview">
           <div id="mm-ratingsandreviews-reviewlist">
+            <h2>Reviews and Ratings</h2>
             <ReviewsList stars={this.state.averageStars} itemId={this.props.itemId} reviewData={this.state.reviewData}
             numReviews={this.state.numberOfReviews} sendSort={this.getSortOption} charData={this.state.charData}/>
           </div>
