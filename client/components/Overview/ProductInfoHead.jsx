@@ -95,7 +95,7 @@ class ProductInfoHead extends React.Component {
             })
             }
           </span>
-          <h3>{this.props.name}</h3>
+          <h3 className="af_prodName">{this.props.name}</h3>
           <h5>{this.props.slogan}</h5>
           <em>${this.props.price}</em> <br />
           {this.props.styleName}

@@ -65,6 +65,7 @@ class App extends React.Component {
     if (this.state.currentItem) {
       return (
         <div className="rr-column-container">
+          <h1 className="website_title">The Atelier Clothing Co</h1>
           <Topbar/>
           < Overview currentItem={this.state.currentItem} widget='Overview' />
           <RelatedItemsAndComparison currentItem={this.state.currentItem} click={this.relatedClick} widget='Related Items And Comparisons' />
