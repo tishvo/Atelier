@@ -1,11 +1,12 @@
 import React from 'react';
+import { ImRadioChecked2 } from "react-icons/im";
 
 const ProductBreakdownBar = (props) => {
-  const { bgcolor, completed } = props;
+  const { completed } = props;
 
   const containerStyles = {
     height: 10,
-    width: '965%',
+
     backgroundColor: "#e0e0de",
     borderRadius: 50,
     margin: 5
@@ -14,7 +15,7 @@ const ProductBreakdownBar = (props) => {
   const fillerStyles = {
     height: '100%',
     width: `${completed}%`,
-    backgroundColor: bgcolor,
+    backgroundColor: '#e0e0de',
     borderRadius: 'inherit',
     textAlign: 'right'
   }
@@ -25,10 +26,14 @@ const ProductBreakdownBar = (props) => {
     fontWeight: 'bold'
   }
   return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <span style={labelStyles}></span>
+    <div style={{width: "210px"}}>
+      <div style={containerStyles}>
+        <div style={fillerStyles}> <ImRadioChecked2 />
+
+          <span style={labelStyles}></span>
+        </div>
       </div>
+      <div className="mm-chardesc-container">{props.desc[props.char]}</div>
     </div>
   );
 }

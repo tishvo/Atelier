@@ -731,13 +731,15 @@ body {
 
 #mm-ratingbreakdown-main {
   display: grid;
-  grid-template-columns: 20%, 20%, 20%, 20%, 20%;
-  grid-template-rows: 10%;
+  grid-template-columns: 15%, 20%, 20%, 20%, 20%;
+  grid-template-rows: 28%;
 }
 
 #mm-ratingbreakdown-score {
   grid-row: 1;
   grid-column: 1;
+  font-size: xxx-large;
+  font-weight: bold;
 }
 
 #mm-ratingbreakdown-scoreStars {
@@ -817,6 +819,28 @@ body {
 
 .mm-display-none {
   display: none;
+}
+
+.mm-photo {
+  height: 200px;
+  width: 200px;
+}
+
+.mm-responsiveImage {
+  width: 50px;
+  height: 50px;
+}
+
+.mm-chardesc-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: x-small;
+  width: 100%;
+}
+
+.mm-chardesc-spread {
+  justify-content: space-between;
 }
 
 /* Mark's Test Area */

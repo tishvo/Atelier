@@ -250,7 +250,7 @@ app.get('/products/:productId', function(req, res) {
   })
 
 })
-
+// MM GET request for meta reviews from product id
 app.get('/reviews/meta/:productId', function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta/?product_id=${req.params.productId}`;
 
@@ -269,8 +269,28 @@ app.get('/reviews/meta/:productId', function(req, res) {
   })
 })
 
+//MM post of the new written review
+app.post('/reviews', function(req, res) {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`;
+  let data = req.body;
+  let config = {
+    headers: {
+      'Authorization': process.env.GITHUB_API_KEY
+    }
+  }
 
-app.get('/reviews/:productId',  function(req, res) {
+  axios.post(url, data, config)
+  .then(response => {
+    res.status(202).send('A NEW REVIEW HAS BEEN MADE')
+  })
+  .catch(error => {
+    console.log('REVIEW POST ERR: ', error)
+    res.status(404).send(error);
+  })
+})
+
+
+/* app.get('/reviews/:productId',  function(req, res) {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=${req.params.productId}`
   axios.get(url, {
     headers: {
@@ -279,15 +299,14 @@ app.get('/reviews/:productId',  function(req, res) {
   })
     .then((response) => {
       res.status(202).send(response.data);
-
     })
     .catch((error) => {
       console.log('error on /reviews/:productId');
       res.status(404).send(error)
     })
-})
+}) */
 
-app.get('/reviews/:productId:sort',  function(req, res) {
+/* app.get('/reviews/:productId:sort',  function(req, res) {
   console.log('this is the get request WE ARE LOOKING FOR')
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/?product_id=${req.params.productId}&count=1000${req.params.sort}`
   console.log('THIS IS US DOING THE THING')
@@ -303,7 +322,7 @@ app.get('/reviews/:productId:sort',  function(req, res) {
     .catch((error) => {
       console.log(error);
     })
-})
+}) */
 
 
 let port = 8080

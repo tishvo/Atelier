@@ -24,6 +24,7 @@ class ReviewList extends React.Component {
     this.handleHideAddClick = this.handleHideAddClick.bind(this);
     this.onlyShowTwo = this.onlyShowTwo.bind(this);
     this.hideReviews = this.hideReviews.bind(this);
+    this.handleHideFromBelow = this.handleHideFromBelow.bind(this);
   }
 
   componentDidMount() {
@@ -62,6 +63,12 @@ class ReviewList extends React.Component {
     });
   }
 
+  handleHideFromBelow() {
+    this.setState({
+      showWriteReview: !this.state.showWriteReview
+    });
+  }
+
   //function that will be passed down to SortingOptions that will change sorting order of the currReviews
   handleSortingChange(e) {
     this.setState({
@@ -91,6 +98,7 @@ class ReviewList extends React.Component {
             </select>
           </form>
         </div>
+        {/* If there are more than 2 reviews being shown, will become scrollable */}
         {this.state.visibleReviewVal > 2 ? <div id="mm-makeScroll">
           {this.props.reviewData.slice(0, this.state.visibleReviewVal).map((item, index) => {
 
@@ -120,7 +128,7 @@ class ReviewList extends React.Component {
             Less reviews
           </button>
         </form>
-        {this.state.showWriteReview ? <WriteReview hide={this.handleHideAddClick} charData={this.props.charData}/> : null}
+        {this.state.showWriteReview ? <WriteReview close={this.handleHideFromBelow} hide={this.handleHideAddClick} charData={this.props.charData} itemId={this.props.itemId}/> : null}
       </div>
     );
   }
