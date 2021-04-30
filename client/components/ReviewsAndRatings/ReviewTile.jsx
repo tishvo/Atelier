@@ -18,6 +18,7 @@ class ReviewTile extends React.Component {
   }
 
   componentDidMount() {
+    console.log('THIS IS REVEIW DATA', this.props.reviewData)
     //check if there is a response to a review, set responseVisible to true
     if (this.props.reviewData.response === null) {
       this.setState({
@@ -42,24 +43,9 @@ class ReviewTile extends React.Component {
         arrayOfPhotos: this.props.reviewData.photos
       });
     }
-
-    //change value for update
-    // if (this.state.currentReviewId !== this.props.itemId) {
-    //   this.setState({
-    //     currentReviewId: this.props.itemId
-    //   })
-    // }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   console.log('new props: ', this.props.itemId);
-  //   console.log('old props: ', prevProps.itemId);
-  //   console.log('prevProps: ', prevProps);
 
-  //   if (this.state.currenReviewId !== prevProps.itemId) {
-  //     this.componentDidMount();
-  //   }
-  // }
 
   /*
   FUNCTIONS
@@ -85,11 +71,11 @@ class ReviewTile extends React.Component {
       <div id="this is what you want">
         <StarRating stars={this.props.reviewData.rating} />
         <div>{this.props.reviewData.reviewer_name}, {moment(this.props.reviewData.date).format('MMM Do YYYY')}</div>
-        {this.state.arrayOfPhotos.length > 0 ?
+        {this.props.reviewData.photos.length > 0 ?
 
-          this.state.arrayOfPhotos.map((photos, items) => {
+          this.props.reviewData.photos.map((photos, items) => {
             return (
-                <img src={photos.url} key={items}></img>
+                <img src={photos.url} key={items} className='mm-responsiveImage'></img>
             )
           })
 

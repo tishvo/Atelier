@@ -73,7 +73,7 @@ class RatingBreakdown extends React.Component {
   makeTableObj(arr) {
     var obj = {};
     for (var i = 0; i < arr.length; i++) {
-      obj[i + 1] = <div><RatingProgressBar bgcolor={"grey"} completed={this.percentageOfVotesTotal(arr, i + 1)} /></div>
+      obj[i + 1] = <div><RatingProgressBar bgcolor={"slategrey"} completed={this.percentageOfVotesTotal(arr, i + 1)} /></div>
     }
     return (
       <div id="mm-ratingbreakdown-starsandbars">
@@ -114,6 +114,7 @@ class RatingBreakdown extends React.Component {
 
   /* *********this is render zone********** */
   render() {
+    console.log('this is the ratings array: ', this.state.ratingsArray)
     return (
       <div id="mm-ratingbreakdown-main">
         <div id="mm-ratingbreakdown-score">{this.props.stars.toFixed(1)}</div>

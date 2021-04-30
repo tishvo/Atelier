@@ -6,12 +6,12 @@ class ProductBreakdownMain extends React.Component {
     super(props);
     this.state = {
       charDescriptionObj: {
-        'Size': ['A size too small', 'Perfect', 'A size too wide'],
-        'Width': ['Too Narrow', 'Perfect', 'Too wide'],
-        'Comfort': ['Uncomfortable', 'Ok', 'Perfect'],
-        'Quality': ['Poor', 'What I Expected', 'Perfect'],
-        'Length': ['Runs Short', 'Perfect', 'Runs Long'],
-        'Fit': ['Runs Tight', 'Perfect', 'Runs Long']
+        'Size': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>A size too small</span><span style={{fontSize: "8pt"}}>Perfect</span><span style={{fontSize: "8pt"}}>Perfect</span></div>,
+        'Width': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>Too Narrow</span><span style={{fontSize: "8pt"}}>Perfect</span><span style={{fontSize: "8pt"}}>Too Wide</span></div>,
+        'Comfort': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>Uncomfortable</span><span style={{fontSize: "8pt"}}>Ok</span><span style={{fontSize: "8pt"}}>Perfect</span></div>,
+        'Quality': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>Poor</span><span style={{fontSize: "8pt"}}>What I Expected</span><span style={{fontSize: "8pt"}}>Perfect</span></div>,
+        'Length': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>Runs Short</span><span style={{fontSize: "8pt"}}>Perfect</span><span style={{fontSize: "8pt"}}>Runs Long</span></div>,
+        'Fit': <div className="mm-chardesc-container"><span style={{fontSize: "8pt"}}>Runs Tight</span><span style={{fontSize: "8pt"}}>Perfect</span><span style={{fontSize: "8pt"}}>Runs Long</span></div>
       }
     };
     this.doSomethingWithData = this.doSomethingWithData.bind(this);
@@ -20,13 +20,6 @@ class ProductBreakdownMain extends React.Component {
 
   componentDidMount() {
     this.doSomethingWithData(this.props.charData);
-
-  }
-
-  componentDidUpdate(prevProps) {
-
-    /*     console.log('chardata: ', this.props.charData)
-    console.log('data', this.state.dataArr) */
 
   }
 
@@ -42,8 +35,10 @@ class ProductBreakdownMain extends React.Component {
     if (arr) {
       var newArr = [];
       for (var i = 0; i < arr.length; i++) {
-        newArr.push([arr[i][0], <div><ProductBreakdownBar bgcolor={"grey"}
-          completed={arr[i][1].value * 20} /></div>])
+        newArr.push([arr[i][0], <div ><ProductBreakdownBar char={arr[i][0]} desc={this.state.charDescriptionObj} bgcolor={"slategrey"}
+          completed={arr[i][1].value * 20} /></div>
+
+        ])
       }
       return (
         <div>
