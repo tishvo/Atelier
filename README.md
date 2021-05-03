@@ -11,4 +11,4 @@
 - Run npm install to download project dependencies
 - Run npm run start to initialize the server
 - Navigate to your local host port 8080 to view the application
-- Alternatively, the application is also deployed using AWS EC2 instance. View here: http://54.173.158.212/
+
