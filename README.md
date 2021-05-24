@@ -1,7 +1,7 @@
-# projectCatwalk
+# Atelier
 
 ### Overview
-- This application is a group project during my time at Hack Reactor. I was responsible for the "Questions and Answers" component of the project.
+- This application is a front-end e-commerce application.
 - I collaborated with a team (of 4) to build a single-page consumer e-commerce application using agile best practices, git version control, and RESTful architecture
 - The tech stack includes JS, React, CSS, NodeJS/Express, and Jest
 
